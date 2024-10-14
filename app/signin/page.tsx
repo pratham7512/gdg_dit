@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,12 +14,6 @@ export default function Signin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  useEffect(()=>{
-    if(error){
-      toast.error(error);
-      setError(null);
-    }
-  },[error])
   const handleSignin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -32,9 +25,6 @@ export default function Signin() {
       if (result?.error) {
         setError(result.error);
       } else {
-        toast.success("Login Successful",{
-          duration: 2000,
-        });
         router.push("/");
       }
     } catch (err) {
