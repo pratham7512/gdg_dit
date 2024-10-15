@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import SectionSvg from "../assets/svg/SectionSvg";
+// import SectionSvg from "../assets/svg/SectionSvg";
 
 interface SectionProps {
   className?: string;

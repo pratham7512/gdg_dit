@@ -4,11 +4,10 @@ import { auth } from '@/app/firebase/config'
 import { 
   signInWithEmailAndPassword, 
   UserCredential,
-  signInWithPopup,
-  GoogleAuthProvider
 } from "firebase/auth";
-const googleProvider = new GoogleAuthProvider();
-export const NEXT_AUTH_CONFIG = {
+import { NextAuthOptions } from "next-auth"; 
+
+export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -17,8 +16,8 @@ export const NEXT_AUTH_CONFIG = {
         password: { label: "password", type: "password", placeholder: "" },
       },
       
-      async authorize(credentials: any) {
-        if (!credentials.username || !credentials.password) {
+      async authorize(credentials: Record<"username" | "password", string> | undefined) {
+        if (!credentials || !credentials.username || !credentials.password) {
           return null;
         }
         
@@ -30,7 +29,6 @@ export const NEXT_AUTH_CONFIG = {
             return {
               id: user.uid,
               email: user.email,
-              // Add any additional user info if needed
             };
           } else {
             return null;
@@ -48,20 +46,6 @@ export const NEXT_AUTH_CONFIG = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async jwt({ token, user }: any) {
-      if (user) {
-        token.uid = user.id;
-      }
-      return token;
-    },
-    async session({ session, token }: any) {
-      if (session.user) {
-        session.user.id = token.uid;
-      }
-      return session;
-    },
-  },
   pages: {
     signIn: "/signin",
   },

@@ -13,11 +13,11 @@ import Footer  from "@/components/components/Footer";
 import ButtonGradient from "../components/assets/svg/ButtonGradient";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll();
+      // const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      // const locomotiveScroll = new LocomotiveScroll();
 
       setTimeout(() => {
         setIsLoading(false);

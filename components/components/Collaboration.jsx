@@ -3,17 +3,17 @@ import { collabApps, collabContent, collabText } from "../../constants";
 import Button from "./Button";
 import Section from "./Section";
 import { LeftCurve, RightCurve } from "../design/Collaboration";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion} from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
 const Collaboration = () => {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  // const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
   // Scroll animation transforms
-  const yOffset = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  // const yOffset = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  // const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
   return (
     <Section ref={ref}>

@@ -8,13 +8,11 @@ import loginimage from "@/app/images/loginImage.jpg";
 import { signIn } from "next-auth/react";
 import {useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { auth } from "../firebase/config";
+// import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+// import { auth } from "../firebase/config";
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signinError, setError] = useState<string | null>(null);
-  const [signInWithGoogle, user] = useSignInWithGoogle(auth); 
   const router = useRouter();
   const handleSignin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,12 +23,12 @@ export default function Signin() {
         redirect: false,
       });
       if (result?.error) {
-        setError(result.error);
+        throw(result.error)
       } else {
         router.push("/");
       }
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      console.log(err)
     }
   };
 

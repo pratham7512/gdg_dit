@@ -1,5 +1,4 @@
 "use client"
-import { useRouter } from "next/router";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import Image from "next/image";
 import GDSC from "../assets/GDSC.svg";
@@ -7,24 +6,24 @@ import { navigation } from "../../constants";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu } from "../design/Header";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { signOut } from "next-auth/react";
 
 import { useSession } from "next-auth/react";
 
-function getUser() {
+function useGetUser() {
   const { data: session } = useSession();
   return session;
 }
 
 const Header: React.FC = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-  const session =getUser();
-  useEffect(() => {
-    // Setting isClient to true once the component is mounted on the client
-    setIsClient(true);
-  }, []);
+  // const [isClient, setIsClient] = useState(false);
+  const session =useGetUser();
+  // useEffect(() => {
+  //   // Setting isClient to true once the component is mounted on the client
+  //   setIsClient(true);
+  // }, []);
 
   // Using useRouter only if the component is mounted on the client
   // const { asPath } = isClient ? useRouter() : { asPath: "" };

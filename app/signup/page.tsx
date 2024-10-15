@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from "react"
-import Link from "next/link"
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { auth } from '@/app/firebase/config'
 import { Button } from "@/components/ui/button"
@@ -20,7 +19,7 @@ import { toast } from "@/hooks/use-toast"
 import {useRouter} from "next/navigation"
 
 export default function MultiStepSignUpForm() {
-  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword,loading] = useCreateUserWithEmailAndPassword(auth);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     displayName: '',
@@ -264,7 +263,7 @@ export default function MultiStepSignUpForm() {
             </CardContent>
             <CardFooter className="flex justify-between">
             <Button onClick={handleBack} variant="outline">Back</Button>
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" >
                   {loading ? "Creating Account..." : "Create Account"}
             </Button>
             </CardFooter>
