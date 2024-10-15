@@ -2,18 +2,25 @@
 import { useRouter } from "next/router";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import Image from "next/image";
-
 import GDSC from "../assets/GDSC.svg";
 import { navigation } from "../../constants";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu } from "../design/Header";
 import { useState, useEffect } from "react";
+import { signOut } from "next-auth/react";
+
+import { useSession } from "next-auth/react";
+
+function getUser() {
+  const { data: session } = useSession();
+  return session;
+}
 
 const Header: React.FC = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  
+  const session =getUser();
   useEffect(() => {
     // Setting isClient to true once the component is mounted on the client
     setIsClient(true);
@@ -72,16 +79,24 @@ const Header: React.FC = () => {
 
           <HamburgerMenu />
         </nav>
+        <div>
+          {session ? (
+            <Button className="hidden lg:flex" onClick={async () => await signOut()}>
+            Logout
+            </Button>
+          ) : (<div className="flex justify-between items-center">
+            <a
+              href="/signup"
+              className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
+            >
+              New account
+            </a>
+            <Button className="hidden lg:flex" href="/signin">
+              Sign in
+            </Button>
+          </div>)}
+        </div>
 
-        <a
-          href="#signup"
-          className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
-        >
-          New account
-        </a>
-        <Button className="hidden lg:flex" href="#login">
-          Sign in
-        </Button>
 
         <Button
           className="ml-auto lg:hidden"

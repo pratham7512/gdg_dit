@@ -3,12 +3,11 @@ import GoogleProvider from "next-auth/providers/google";
 import { auth } from '@/app/firebase/config'
 import { 
   signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
   UserCredential,
   signInWithPopup,
   GoogleAuthProvider
 } from "firebase/auth";
-
+const googleProvider = new GoogleAuthProvider();
 export const NEXT_AUTH_CONFIG = {
   providers: [
     CredentialsProvider({
@@ -42,6 +41,7 @@ export const NEXT_AUTH_CONFIG = {
         }
       },
     }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
@@ -49,20 +49,6 @@ export const NEXT_AUTH_CONFIG = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, account, profile }: any) {
-      if (account.provider === "google") {
-        try {
-          // Use Google provider to sign in with Firebase
-          const googleProvider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, googleProvider);
-          user.id = result.user.uid;
-        } catch (error) {
-          console.error("Error signing in with Google:", error);
-          return false;
-        }
-      }
-      return true;
-    },
     async jwt({ token, user }: any) {
       if (user) {
         token.uid = user.id;

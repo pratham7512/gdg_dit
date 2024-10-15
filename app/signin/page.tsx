@@ -6,13 +6,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import loginimage from "@/app/images/loginImage.jpg";
 import { signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { auth } from "../firebase/config";
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [signinError, setError] = useState<string | null>(null);
+  const [signInWithGoogle, user] = useSignInWithGoogle(auth); 
   const router = useRouter();
   const handleSignin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ export default function Signin() {
       setError("An error occurred. Please try again.");
     }
   };
+
   return (
     <div className="w-full lg:grid lg:min-h-[500px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
@@ -78,7 +81,9 @@ export default function Signin() {
               <Button
                 variant="outline"
                 className="w-full"
-                onClick={async () => await signIn("google")}
+                onClick={async () => {
+                  await signIn("google"); 
+                }}
               >
                 Login with Google
               </Button>
