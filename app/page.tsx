@@ -2,6 +2,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from "react";
 import Preloader  from "@/components/Preloader";
+import Chatbot  from "@/components/Chatbot";
 import Benefits  from "@/components/components/Benefits";
 import Services  from "@/components/components/Services";
 import Header  from "@/components/components/Header";
@@ -30,6 +31,9 @@ export default function Home() {
       <AnimatePresence mode='wait'>
           {isLoading && <Preloader />}
       </AnimatePresence>
+      <AnimatePresence mode='wait'>
+          {!isLoading && <Chatbot />}
+        </AnimatePresence>
       <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
         <Header />
         <Hero />
