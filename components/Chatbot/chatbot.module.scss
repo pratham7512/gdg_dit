@@ -1,0 +1,136 @@
+.chatIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: hsl(var(--primary-foreground));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  .iconContent {
+    font-size: 30px;
+    color: hsl(var(--primary));
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    transform: scale(1.1) rotate(15deg);
+    background-color: hsl(var(--chart-3));
+  }
+}
+
+.chatWindow {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 500px;
+  max-height: 80vh;
+  background-color: hsl(var(--card));
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease, height 0.3s ease;
+
+  .chatHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    font-family: var(--font-sora);
+    font-weight: bold;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .closeBtn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: hsl(var(--secondary-foreground));
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      color: hsl(var(--destructive));
+      transform: scale(1.1);
+    }
+  }
+
+  .chatBody {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-code);
+  }
+
+  .chatFooter {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: hsl(var(--popover));
+    border-top: 1px solid hsl(var(--border));
+
+    .inputField {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border-radius: 25px;
+      border: 1px solid hsl(var(--muted));
+      background-color: hsl(var(--input));
+      color: hsl(var(--foreground));
+      outline: none;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: hsl(var(--primary));
+      }
+    }
+
+    .sendBtn {
+      margin-left: 8px;
+      background-color: hsl(var(--primary-foreground));
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+
+      &:hover {
+        background-color: hsl(var(--chart-2));
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .chatWindow {
+    width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+  }
+
+  .chatHeader {
+    padding: 20px;
+    border-radius: 0;
+  }
+
+  .chatFooter .inputField {
+    padding: 8px 10px;
+  }
+}
