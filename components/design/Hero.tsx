@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MouseParallax } from "react-just-parallax";
 import { quote, cloudrepo, codesvg, conversation, medal } from "../assets/index";
 import { motion } from "framer-motion";
-import PlusSvg from "../assets/svg/PlusSvg";
+// import PlusSvg from "../assets/svg/PlusSvg";
 import Image from "next/image";
 
 export const Gradient: React.FC = () => {

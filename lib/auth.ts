@@ -3,13 +3,11 @@ import GoogleProvider from "next-auth/providers/google";
 import { auth } from '@/app/firebase/config'
 import { 
   signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
   UserCredential,
-  signInWithPopup,
-  GoogleAuthProvider
 } from "firebase/auth";
+import { NextAuthOptions } from "next-auth"; 
 
-export const NEXT_AUTH_CONFIG = {
+export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -18,8 +16,8 @@ export const NEXT_AUTH_CONFIG = {
         password: { label: "password", type: "password", placeholder: "" },
       },
       
-      async authorize(credentials: any) {
-        if (!credentials.username || !credentials.password) {
+      async authorize(credentials: Record<"username" | "password", string> | undefined) {
+        if (!credentials || !credentials.username || !credentials.password) {
           return null;
         }
         
@@ -31,7 +29,6 @@ export const NEXT_AUTH_CONFIG = {
             return {
               id: user.uid,
               email: user.email,
-              // Add any additional user info if needed
             };
           } else {
             return null;
@@ -42,40 +39,13 @@ export const NEXT_AUTH_CONFIG = {
         }
       },
     }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async signIn({ user, account, profile }: any) {
-      if (account.provider === "google") {
-        try {
-          // Use Google provider to sign in with Firebase
-          const googleProvider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, googleProvider);
-          user.id = result.user.uid;
-        } catch (error) {
-          console.error("Error signing in with Google:", error);
-          return false;
-        }
-      }
-      return true;
-    },
-    async jwt({ token, user }: any) {
-      if (user) {
-        token.uid = user.id;
-      }
-      return token;
-    },
-    async session({ session, token }: any) {
-      if (session.user) {
-        session.user.id = token.uid;
-      }
-      return session;
-    },
-  },
   pages: {
     signIn: "/signin",
   },

@@ -1,26 +1,19 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import loginimage from "@/app/images/loginImage.jpg";
 import { signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useRouter } from "next/navigation";
-
+// import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+// import { auth } from "../firebase/config";
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  useEffect(()=>{
-    if(error){
-      toast.error(error);
-      setError(null);
-    }
-  },[error])
   const handleSignin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -30,17 +23,15 @@ export default function Signin() {
         redirect: false,
       });
       if (result?.error) {
-        setError(result.error);
+        throw(result.error)
       } else {
-        toast.success("Login Successful",{
-          duration: 2000,
-        });
         router.push("/");
       }
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      console.log(err)
     }
   };
+
   return (
     <div className="w-full lg:grid lg:min-h-[500px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
@@ -88,7 +79,9 @@ export default function Signin() {
               <Button
                 variant="outline"
                 className="w-full"
-                onClick={async () => await signIn("google")}
+                onClick={async () => {
+                  await signIn("google"); 
+                }}
               >
                 Login with Google
               </Button>

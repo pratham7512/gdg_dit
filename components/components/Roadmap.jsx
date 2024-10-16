@@ -15,11 +15,11 @@ const Roadmap = () => {
   const { scrollYProgress } = useScroll({ target: targetRef, offset: ["start end", "end start"] });
 
   // Set up transforms for parallax and fade animations
-  const yTranslate = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const yTranslate2 = useTransform(scrollYProgress, [0, 1], [0, -200]); // Adjust for subtle parallax effect
+  // const yTranslate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  // const yTranslate2 = useTransform(scrollYProgress, [0, 1], [0, -200]); // Adjust for subtle parallax effect
   const opacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 1, 1, 1]); // Fade-in effect
   const smoothOpacity = useSpring(opacity, { damping: 20, stiffness: 100 });
-  const smoothTranslate = useSpring(yTranslate, { damping: 15, stiffness: 80 });
+  // const smoothTranslate = useSpring(yTranslate, { damping: 15, stiffness: 80 });
 
   return (
     <Section className="overflow-hidden" id="roadmap" ref={targetRef}>

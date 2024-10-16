@@ -15,7 +15,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]); // Store chat messages
   const [inputMessage, setInputMessage] = useState(''); // Store user input
   const [isLoading, setIsLoading] = useState(false); // Loading state
-  const [UserMessage, setUserMessage] = useState([]); // Store user messages
+  // const [UserMessage, setUserMessage] = useState([]); // Store user messages
   
   // const { userInterest, setUserInterest } = useUserInterest(); // Use the global context
 
@@ -49,9 +49,9 @@ const Chatbot = () => {
       .map((msg) => `${msg.sender}: ${msg.message}`)
       .join('\n') + `\nYou: ${inputMessage}`;
 
-    const conversationHistory2 = UserMessage
-      .map((msg) => `${msg.sender}: ${msg.message}`)
-      .join('\n') + `\nYou: ${inputMessage}`;
+    // const conversationHistory2 = UserMessage
+    //   .map((msg) => `${msg.sender}: ${msg.message}`)
+    //   .join('\n') + `\nYou: ${inputMessage}`;
 
     try {
       // Call chatbot API
@@ -68,9 +68,9 @@ const Chatbot = () => {
       setMessages((prevMessages) => [...prevMessages, aiResponse]);
 
       // Call API to get user interest
-      const interestResponse = await axios.post('/api/GetInterest', {
-        conversation: conversationHistory2,
-      });
+      // const interestResponse = await axios.post('/api/GetInterest', {
+      //   conversation: conversationHistory2,
+      // });
 
       // Set user interest globally
       // setUserInterest(interestResponse.data.interest);

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from "react"
-import Link from "next/link"
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { auth } from '@/app/firebase/config'
 import { Button } from "@/components/ui/button"
@@ -17,9 +16,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
+import {useRouter} from "next/navigation"
 
 export default function MultiStepSignUpForm() {
-  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword,loading] = useCreateUserWithEmailAndPassword(auth);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     displayName: '',
@@ -33,7 +33,7 @@ export default function MultiStepSignUpForm() {
     portfolio: '',
     techStack: ''
   });
-
+  const router = useRouter();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -70,10 +70,7 @@ export default function MultiStepSignUpForm() {
       if (result) {
         // Here you would typically save the additional user data to your database
         console.log("User created successfully", formData);
-        toast({
-          title: "Account created",
-          description: "Your account has been created successfully.",
-        });
+        router.push('/signin')
       }
     } catch (error) {
       console.error("Error creating user:", error);
@@ -266,7 +263,7 @@ export default function MultiStepSignUpForm() {
             </CardContent>
             <CardFooter className="flex justify-between">
             <Button onClick={handleBack} variant="outline">Back</Button>
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" >
                   {loading ? "Creating Account..." : "Create Account"}
             </Button>
             </CardFooter>

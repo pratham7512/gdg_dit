@@ -1,5 +1,5 @@
 import { loading } from "../assets";
-
+import Image from "next/image";
 const Generating = ({ className }) => {
   return (
     <div
@@ -7,7 +7,7 @@ const Generating = ({ className }) => {
         className || ""
       } text-base`}
     >
-      <img className="w-5 h-5 mr-4" src={loading} alt="Loading" />
+      <Image className="w-5 h-5 mr-4" src={loading} alt="Loading" />
       Future is Calling
     </div>
   );
