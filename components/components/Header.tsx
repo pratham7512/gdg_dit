@@ -51,9 +51,9 @@ const Header: React.FC = () => {
         openNavigation ? "bg-n-8" : "bg-n-8/90 backdrop-blur-sm"
       }`}
     >
-      <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-        <a className="block w-[12rem] xl:mr-8" href="#hero">
-          <Image src={GDSC} width={190} height={40} alt="GDG" />
+      <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2">
+        <a className="block w-[12rem] xl:mr-8" href="/">
+          <Image src={GDSC} width={150} height={40} alt="GDG" />
         </a>
 
         <nav
@@ -69,7 +69,7 @@ const Header: React.FC = () => {
                 onClick={handleClick}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   item.onlyMobile ? "lg:hidden" : ""
-                } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
+                } px-6 py-3 md:py-3 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
               >
                 {item.title}
               </a>

@@ -41,7 +41,7 @@ const Chatbot = () => {
 
     // Add the user's message to the conversation
     setMessages((prevMessages) => [...prevMessages, userMessage]);
-    setUserMessage((prevMessages) => [...prevMessages, userMessage]);
+    
     setInputMessage('');
     setIsLoading(true);
 
@@ -50,7 +50,7 @@ const Chatbot = () => {
       .join('\n') + `\nYou: ${inputMessage}`;
 
     // const conversationHistory2 = UserMessage
-    //   .map((msg) => `${msg.sender}: ${msg.message}`)
+    //   .map((msg) => `${msg.sender}: ${msg.message}`) 
     //   .join('\n') + `\nYou: ${inputMessage}`;
 
     try {
