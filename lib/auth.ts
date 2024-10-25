@@ -1,9 +1,8 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
 import { auth } from '@/app/firebase/config'
 import { 
   signInWithEmailAndPassword, 
-  UserCredential,
+  UserCredential
 } from "firebase/auth";
 import { NextAuthOptions } from "next-auth"; 
 
@@ -39,12 +38,23 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         }
       },
     }),
-
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
   ],
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.uid = user.id;
+        token.userId = user.userId;
+      }
+      return token;
+    },
+    async session({ session, token }: any) {
+      if (session.user) {
+        session.user.id = token.uid;
+        session.user.userId = token.userId;
+      }
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/signin",
