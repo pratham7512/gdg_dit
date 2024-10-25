@@ -25,23 +25,23 @@ const EventContent: EventContentProps = {
   authorAvatar: "/manu.png",
 };
 
-interface TitleComponentProps {
-  title: string;
-  avatar: string;
-}
+// interface TitleComponentProps {
+//   title: string;
+//   avatar: string;
+// }
 
-const TitleComponent: React.FC<TitleComponentProps> = ({ title, avatar }) => (
-  <div className="flex space-x-2 items-center">
-    <Image
-      src={avatar}
-      height={20}
-      width={20}
-      alt="thumbnail"
-      className="rounded-full border-2 border-white"
-    />
-    <p>{title}</p>
-  </div>
-);
+// const TitleComponent: React.FC<TitleComponentProps> = ({ title, avatar }) => (
+//   <div className="flex space-x-2 items-center">
+//     <Image
+//       src={avatar}
+//       height={20}
+//       width={20}
+//       alt="thumbnail"
+//       className="rounded-full border-2 border-white"
+//     />
+//     <p>{title}</p>
+//   </div>
+// );
 
 export function CarouselComponent() {
   return (
