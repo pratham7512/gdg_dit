@@ -15,7 +15,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]); // Store chat messages
   const [inputMessage, setInputMessage] = useState(''); // Store user input
   const [isLoading, setIsLoading] = useState(false); // Loading state
-  const [UserMessage, setUserMessage] = useState([]); // Store user messages
+  // const [UserMessage, setUserMessage] = useState([]); // Store user messages
   
   // const { userInterest, setUserInterest } = useUserInterest(); // Use the global context
 
@@ -41,7 +41,7 @@ const Chatbot = () => {
 
     // Add the user's message to the conversation
     setMessages((prevMessages) => [...prevMessages, userMessage]);
-    setUserMessage((prevMessages) => [...prevMessages, userMessage]);
+    
     setInputMessage('');
     setIsLoading(true);
 

@@ -172,7 +172,7 @@ export const Card = ({
         handleClose();
       }
     }
-
+    console.log(currentIndex);
     if (open) {
       document.body.style.overflow = "hidden";
     } else {

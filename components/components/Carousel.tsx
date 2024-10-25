@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
-import { curve, heroimg2, gradient } from "../assets";
+
+import { heroimg2 } from "../assets";
 
 interface EventContentProps {
   slug: string;

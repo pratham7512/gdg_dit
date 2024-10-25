@@ -8,11 +8,11 @@ import Footer from "@/components/components/Footer";
 import { CarouselEvent } from "@/components/components/CarouselEvent";
 import ButtonGradient from "@/components/assets/svg/ButtonGradient";
 const Events = () => {
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll();
+      // const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      // const locomotiveScroll = new LocomotiveScroll();
 
       setTimeout(() => {
         setIsLoading(false);

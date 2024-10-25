@@ -7,7 +7,7 @@ import Footer from '@/components/components/Footer'
 import Header from '@/components/components/Header'
 import { AnimatePresence } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { curve, heroimg2, gradient, event1, event2 } from "@/components/assets";
+import { heroimg2, event1, event2 } from "@/components/assets";
 
 const events = [
     {
@@ -64,8 +64,8 @@ const EventDetails = ({ params }) => {
 
   useEffect(() => {
     (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll();
+      // const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      // const locomotiveScroll = new LocomotiveScroll();
         console.log(event);
         console.log(params);
       setTimeout(() => {
