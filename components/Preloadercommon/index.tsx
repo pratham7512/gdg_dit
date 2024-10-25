@@ -10,24 +10,24 @@ interface Dimension {
     height: number;
 }
 
+// Union type for the destination prop
+type DestinationType = keyof typeof pageAnimations;
+
 // Variants for different page transitions
 const pageAnimations = {
     home: {
-        opacity: { initial: { opacity: 0 }, animate: { opacity: 1, transition: { duration: 1 ,delay: 0.2 } } },
-       
+        opacity: { initial: { opacity: 0 }, animate: { opacity: 1, transition: { duration: 1, delay: 0.2 } } },
     },
     events: {
-        opacity: { initial: { opacity: 0 }, animate: { opacity: .8, transition: { duration: 1,delay: 0.2  } } },
-        
+        opacity: { initial: { opacity: 0 }, animate: { opacity: 0.8, transition: { duration: 1, delay: 0.2 } } },
     },
     leaderboard: {
         opacity: { initial: { opacity: 0 }, animate: { opacity: 1, transition: { duration: 1, delay: 0.2 } } },
-        
     }
 };
 
 // Main component
-export default function Index({ destination, words }: { destination: string, words: string[] }): JSX.Element {
+export default function Index({ destination, words }: { destination: DestinationType, words: string[] }): JSX.Element {
     const [index, setIndex] = useState<number>(0);
     const [dimension, setDimension] = useState<Dimension>({ width: 0, height: 0 });
 
@@ -61,7 +61,7 @@ export default function Index({ destination, words }: { destination: string, wor
     };
 
     // Choose animations based on the destination prop
-    const animations = pageAnimations[destination] || pageAnimations.home;
+    const animations = pageAnimations[destination];
 
     return (
         <motion.div
