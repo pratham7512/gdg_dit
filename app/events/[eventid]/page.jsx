@@ -19,7 +19,7 @@ const events = [
       date: "March 1-3, 2024",
       location: "Tech Park Auditorium",
       additionalInfo: "Teams will compete for exciting prizes and networking opportunities.",
-      registrationLink: "/register/hackathon-2024",
+      registrationLink: "/",
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ const events = [
       date: "March 10, 2024",
       location: "Room 204, Main Building",
       additionalInfo: "Free for all students. Limited seats available.",
-      registrationLink: "/register/cybersecurity-workshop",
+      registrationLink: "/",
     },
     {
       id: 3,
@@ -41,7 +41,7 @@ const events = [
       date: "March 15-20, 2024",
       location: "Online",
       additionalInfo: "Join our expert sessions and mock interviews.",
-      registrationLink: "/register/placement-preparation",
+      registrationLink: "/",
     },
     {
       id: 4,
@@ -52,7 +52,7 @@ const events = [
       date: "April 1-7, 2024",
       location: "Lab 3, Innovation Center",
       additionalInfo: "Hands-on projects and mentorship included.",
-      registrationLink: "/register/ai-bootcamp",
+      registrationLink: "/",
     },
   ];
 
