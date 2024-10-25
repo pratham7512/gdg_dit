@@ -3,89 +3,81 @@ import Image from "next/image";
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import { curve, heroimg2, gradient } from "../assets";
-export function CarouselComponent() {
-  const cards = data.map((card, index) => (
-    <Card key={card.src} card={card} index={index} layout={true} />
-  ));
 
+interface EventContentProps {
+  slug: string;
+  author: string;
+  date: string;
+  title: string;
+  description: string;
+  image: string;
+  authorAvatar: string;
+}
+
+const EventContent: EventContentProps = {
+  slug: "amazing-tailwindcss-grid-layouts",
+  author: "Manu Arora",
+  date: "28th March, 2023",
+  title: "Amazing Tailwindcss Grid Layout Examples",
+  description:
+    "Grids are cool, but Tailwindcss grids are cooler. In this article, we will learn how to create amazing Grid layouts with Tailwindcs grid and React.",
+  image: heroimg2,
+  authorAvatar: "/manu.png",
+};
+
+interface TitleComponentProps {
+  title: string;
+  avatar: string;
+}
+
+const TitleComponent: React.FC<TitleComponentProps> = ({ title, avatar }) => (
+  <div className="flex space-x-2 items-center">
+    <Image
+      src={avatar}
+      height={20}
+      width={20}
+      alt="thumbnail"
+      className="rounded-full border-2 border-white"
+    />
+    <p>{title}</p>
+  </div>
+);
+
+export function CarouselComponent() {
   return (
-    <div className="w-full h-full py-20">
-      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
-        Get to know your iSad.
+    <div className="w-full h-full md:py-[15%] max-sm:py-[30%]">
+      <h2 className="max-w-7xl text-center pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-300 dark:text-neutral-200 font-sans">
+        Upcoming Events
       </h2>
-      <Carousel items={cards} />
+      
+      <div className="w-80 mx-auto my-10">
+        <div className="relative overflow-hidden h-full rounded-2xl transition duration-200 group bg-white hover:shadow-xl border border-zinc-100">
+          <div className="w-full aspect-w-16 aspect-h-10 bg-gray-100 rounded-tr-lg rounded-tl-lg overflow-hidden xl:aspect-w-16 xl:aspect-h-10 relative">
+                <Image
+                    src={EventContent.image}
+                    alt="thumbnail"
+                    className="group-hover:scale-95 group-hover:rounded-2xl transform object-cover transition duration-200"
+                    sizes="100%"
+                    objectFit="cover"
+                    
+                />
+          </div>
+          <div className="p-4">
+            <h2 className="font-bold my-4 text-lg text-zinc-700">
+              {EventContent.title}
+            </h2>
+            <h2 className="font-normal my-4 text-sm text-zinc-500">
+              {EventContent.description}
+            </h2>
+            <div className="flex flex-row justify-between items-center mt-10">
+              <span className="text-sm text-gray-500">{EventContent.date}</span>
+              <div className="relative z-10 px-6 py-2 bg-black text-white font-bold rounded-xl block text-xs">
+                Read More
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-
-const DummyContent = () => {
-  return (
-    <>
-      {[...new Array(3).fill(1)].map((_, index) => {
-        return (
-          <div
-            key={"dummy-content" + index}
-            className="bg-[#F5F5F7] p-8 md:p-14 rounded-3xl mb-4"
-          >
-            <p className="text-neutral-600 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-              <span className="font-bold text-neutral-700">
-                The first rule of Apple club is that you boast about Apple club.
-              </span>{" "}
-              Keep a journal, quickly jot down a grocery list, and take amazing
-              class notes. Want to convert those notes to text? No problem.
-              Langotiya jeetu ka mara hua yaar is ready to capture every
-              thought.
-            </p>
-            <Image
-              src={heroimg2}
-              alt="Macbook mockup from Aceternity UI"
-              height="500"
-              width="500"
-              className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-            />
-          </div>
-        );
-      })}
-    </>
-  );
-};
-
-const data = [
-  {
-    category: "Artificial Intelligence",
-    title: "You can do more with AI.",
-    src:heroimg2,
-    content: <DummyContent />,
-  },
-  {
-    category: "Productivity",
-    title: "Enhance your productivity.",
-    src:heroimg2,
-    content: <DummyContent />,
-  },
-  {
-    category: "Product",
-    title: "Launching the new Apple Vision Pro.",
-    src:heroimg2,
-    content: <DummyContent />,
-  },
-
-  {
-    category: "Product",
-    title: "Maps for your iPhone 15 Pro Max.",
-    src:heroimg2,
-    content: <DummyContent />,
-  },
-  {
-    category: "iOS",
-    title: "Photography just got better.",
-    src:heroimg2,
-    content: <DummyContent />,
-  },
-  {
-    category: "Hiring",
-    title: "Hiring for a Staff Software Engineer",
-    src:heroimg2,
-    content: <DummyContent />,
-  },
-];

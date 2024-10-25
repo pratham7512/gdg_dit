@@ -15,7 +15,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]); // Store chat messages
   const [inputMessage, setInputMessage] = useState(''); // Store user input
   const [isLoading, setIsLoading] = useState(false); // Loading state
-  // const [UserMessage, setUserMessage] = useState([]); // Store user messages
+  const [UserMessage, setUserMessage] = useState([]); // Store user messages
   
   // const { userInterest, setUserInterest } = useUserInterest(); // Use the global context
 
@@ -50,7 +50,7 @@ const Chatbot = () => {
       .join('\n') + `\nYou: ${inputMessage}`;
 
     // const conversationHistory2 = UserMessage
-    //   .map((msg) => `${msg.sender}: ${msg.message}`)
+    //   .map((msg) => `${msg.sender}: ${msg.message}`) 
     //   .join('\n') + `\nYou: ${inputMessage}`;
 
     try {

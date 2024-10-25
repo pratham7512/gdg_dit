@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion';
-import Preloader from "@/components/Preloader";
+import Preloader from "@/components/Preloadercommon";
 import Chatbot from "@/components/Chatbot";
 import Header from "@/components/components/Header";
 import Footer from "@/components/components/Footer";
-import { CarouselComponent } from "@/components/components/Carousel";
+import { CarouselEvent } from "@/components/components/CarouselEvent";
 import ButtonGradient from "@/components/assets/svg/ButtonGradient";
 const Events = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
@@ -24,7 +24,7 @@ const Events = () => {
   return (
     <>
       <AnimatePresence mode='wait'>
-        {isLoading && <Preloader />}
+        {isLoading && <Preloader destination="events" words={["Upcoming Events", "Join Us", "Don’t Miss Out!", "Exciting Lineup Ahead"]} />}
       </AnimatePresence>
       <AnimatePresence mode='wait'>
         {!isLoading && <Chatbot />}
@@ -32,7 +32,7 @@ const Events = () => {
       <AnimatePresence mode='wait'>
         {!isLoading && 
         
-        <CarouselComponent />
+        <CarouselEvent />
         }
       </AnimatePresence>
       <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
