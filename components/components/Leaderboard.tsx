@@ -9,7 +9,6 @@ import { Search, ChevronLeft, ChevronRight } from 'lucide-react'
 type Player = {
   rank: number
   name: string
-  team: string
   Q1: number
   Q2: number
   Q3: number
@@ -17,36 +16,36 @@ type Player = {
 }
 
 const players: Player[] = [
-  {"rank": 1, "name": "Jon Rahm", "team": "Legion XIII", "Q1": -3, "Q2": -5, "Q3": -4, "score": -12},
-  {"rank": 2, "name": "Dustin Johnson", "team": "4 Aces GC", "Q1": -4, "Q2": -3, "Q3": -4, "score": -11},
-  {"rank": 3, "name": "Bryson DeChambeau", "team": "Crushers GC", "Q1": -2, "Q2": -4, "Q3": -4, "score": -10},
-  {"rank": 4, "name": "Brooks Koepka", "team": "Smash GC", "Q1": -3, "Q2": -2, "Q3": -4, "score": -9},
-  {"rank": 5, "name": "Cameron Smith", "team": "Ripper GC", "Q1": -2, "Q2": -3, "Q3": -3, "score": -8},
-  {"rank": 6, "name": "Phil Mickelson", "team": "HyFlyers GC", "Q1": -1, "Q2": -4, "Q3": -2, "score": -7},
-  {"rank": 7, "name": "Sergio Garcia", "team": "Fireballs GC", "Q1": -2, "Q2": -2, "Q3": -3, "score": -7},
-  {"rank": 8, "name": "Patrick Reed", "team": "4 Aces GC", "Q1": -1, "Q2": -3, "Q3": -2, "score": -6},
-  {"rank": 9, "name": "Joaquin Niemann", "team": "Torque GC", "Q1": -2, "Q2": -1, "Q3": -3, "score": -6},
-  {"rank": 10, "name": "Louis Oosthuizen", "team": "Stinger GC", "Q1": -1, "Q2": -2, "Q3": -2, "score": -5},
-  {"rank": 11, "name": "Bubba Watson", "team": "RangeGoats GC", "Q1": 0, "Q2": -3, "Q3": -2, "score": -5},
-  {"rank": 12, "name": "Kevin Na", "team": "Iron Heads GC", "Q1": -1, "Q2": -1, "Q3": -2, "score": -4},
-  {"rank": 13, "name": "Talor Gooch", "team": "RangeGoats GC", "Q1": 0, "Q2": -2, "Q3": -2, "score": -4},
-  {"rank": 14, "name": "Paul Casey", "team": "Crushers GC", "Q1": -1, "Q2": -1, "Q3": -1, "score": -3},
-  {"rank": 15, "name": "Ian Poulter", "team": "Majesticks GC", "Q1": 0, "Q2": -2, "Q3": -1, "score": -3},
-  {"rank": 16, "name": "Charles Howell III", "team": "Crushers GC", "Q1": 0, "Q2": -1, "Q3": -2, "score": -3},
-  {"rank": 17, "name": "Henrik Stenson", "team": "Majesticks GC", "Q1": -1, "Q2": 0, "Q3": -1, "score": -2},
-  {"rank": 18, "name": "Lee Westwood", "team": "Majesticks GC", "Q1": 0, "Q2": -1, "Q3": -1, "score": -2},
-  {"rank": 19, "name": "Matt Jones", "team": "Ripper GC", "Q1": 1, "Q2": -2, "Q3": -1, "score": -2},
-  {"rank": 20, "name": "Peter Uihlein", "team": "4 Aces GC", "Q1": 0, "Q2": 0, "Q3": -1, "score": -1},
-  {"rank": 21, "name": "Graeme McDowell", "team": "Cleeks GC", "Q1": 1, "Q2": -1, "Q3": -1, "score": -1},
-  {"rank": 22, "name": "Bernd Wiesberger", "team": "Cleeks GC", "Q1": 0, "Q2": 0, "Q3": 0, "score": 0},
-  {"rank": 23, "name": "Scott Vincent", "team": "Iron Heads GC", "Q1": 1, "Q2": 0, "Q3": -1, "score": 0},
-  {"rank": 24, "name": "Charl Schwartzel", "team": "Stinger GC", "Q1": 1, "Q2": 0, "Q3": 0, "score": 1},
-  {"rank": 25, "name": "Marc Leishman", "team": "Ripper GC", "Q1": 1, "Q2": 1, "Q3": -1, "score": 1},
-  {"rank": 26, "name": "Anirban Lahiri", "team": "Crushers GC", "Q1": 2, "Q2": 0, "Q3": 0, "score": 2},
-  {"rank": 27, "name": "Abraham Ancer", "team": "Fireballs GC", "Q1": 1, "Q2": 1, "Q3": 0, "score": 2},
-  {"rank": 28, "name": "Brendan Steele", "team": "HyFlyers GC", "Q1": 2, "Q2": 1, "Q3": 0, "score": 3},
-  {"rank": 29, "name": "Cameron Tringale", "team": "HyFlyers GC", "Q1": 2, "Q2": 1, "Q3": 1, "score": 4},
-  {"rank": 30, "name": "Jediah Morgan", "team": "Ripper GC", "Q1": 3, "Q2": 2, "Q3": 1, "score": 6}
+  {"rank": 1, "name": "Jon Rahm", "Q1": -3, "Q2": -5, "Q3": -4, "score": -12},
+  {"rank": 2, "name": "Dustin Johnson", "Q1": -4, "Q2": -3, "Q3": -4, "score": -11},
+  {"rank": 3, "name": "Bryson DeChambeau", "Q1": -2, "Q2": -4, "Q3": -4, "score": -10},
+  {"rank": 4, "name": "Brooks Koepka", "Q1": -3, "Q2": -2, "Q3": -4, "score": -9},
+  {"rank": 5, "name": "Cameron Smith", "Q1": -2, "Q2": -3, "Q3": -3, "score": -8},
+  {"rank": 6, "name": "Phil Mickelson", "Q1": -1, "Q2": -4, "Q3": -2, "score": -7},
+  {"rank": 7, "name": "Sergio Garcia", "Q1": -2, "Q2": -2, "Q3": -3, "score": -7},
+  {"rank": 8, "name": "Patrick Reed", "Q1": -1, "Q2": -3, "Q3": -2, "score": -6},
+  {"rank": 9, "name": "Joaquin Niemann", "Q1": -2, "Q2": -1, "Q3": -3, "score": -6},
+  {"rank": 10, "name": "Louis Oosthuizen", "Q1": -1, "Q2": -2, "Q3": -2, "score": -5},
+  {"rank": 11, "name": "Bubba Watson", "Q1": 0, "Q2": -3, "Q3": -2, "score": -5},
+  {"rank": 12, "name": "Kevin Na", "Q1": -1, "Q2": -1, "Q3": -2, "score": -4},
+  {"rank": 13, "name": "Talor Gooch", "Q1": 0, "Q2": -2, "Q3": -2, "score": -4},
+  {"rank": 14, "name": "Paul Casey", "Q1": -1, "Q2": -1, "Q3": -1, "score": -3},
+  {"rank": 15, "name": "Ian Poulter", "Q1": 0, "Q2": -2, "Q3": -1, "score": -3},
+  {"rank": 16, "name": "Charles Howell III", "Q1": 0, "Q2": -1, "Q3": -2, "score": -3},
+  {"rank": 17, "name": "Henrik Stenson", "Q1": -1, "Q2": 0, "Q3": -1, "score": -2},
+  {"rank": 18, "name": "Lee Westwood", "Q1": 0, "Q2": -1, "Q3": -1, "score": -2},
+  {"rank": 19, "name": "Matt Jones", "Q1": 1, "Q2": -2, "Q3": -1, "score": -2},
+  {"rank": 20, "name": "Peter Uihlein", "Q1": 0, "Q2": 0, "Q3": -1, "score": -1},
+  {"rank": 21, "name": "Graeme McDowell", "Q1": 1, "Q2": -1, "Q3": -1, "score": -1},
+  {"rank": 22, "name": "Bernd Wiesberger", "Q1": 0, "Q2": 0, "Q3": 0, "score": 0},
+  {"rank": 23, "name": "Scott Vincent", "Q1": 1, "Q2": 0, "Q3": -1, "score": 0},
+  {"rank": 24, "name": "Charl Schwartzel", "Q1": 1, "Q2": 0, "Q3": 0, "score": 1},
+  {"rank": 25, "name": "Marc Leishman", "Q1": 1, "Q2": 1, "Q3": -1, "score": 1},
+  {"rank": 26, "name": "Anirban Lahiri", "Q1": 2, "Q2": 0, "Q3": 0, "score": 2},
+  {"rank": 27, "name": "Abraham Ancer", "Q1": 1, "Q2": 1, "Q3": 0, "score": 2},
+  {"rank": 28, "name": "Brendan Steele", "Q1": 2, "Q2": 1, "Q3": 0, "score": 3},
+  {"rank": 29, "name": "Cameron Tringale", "Q1": 2, "Q2": 1, "Q3": 1, "score": 4},
+  {"rank": 30, "name": "Jediah Morgan", "Q1": 3, "Q2": 2, "Q3": 1, "score": 6}
 ]
 
 export default function Leaderboard() {
@@ -79,34 +78,34 @@ export default function Leaderboard() {
   }
 
   return (
-    <div className="min-h-screen bg-n-8 text-white md:py-[5%] max-sm:py-[5%]">
-      <div className="container mx-auto p-4 font-mono">
-        <h1 className="text-2xl font-bold mb-4">CP Leaderboard</h1>
+    <div className="min-h-screen bg-background text-foreground md:py-[5%] max-sm:py-[5%]">
+      <div className="container mx-auto p-4 font-sans">
+        <h1 className="text-3xl mb-4 font-code">CP Leaderboard</h1>
         <div className="mb-4 relative">
           <Input
             type="text"
             placeholder="Search players..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-n-7 text-white border-gray-800"
+            className="pl-10 bg-n-7 text-foreground border-border"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
         </div>
         <div className="border border-gray-800 rounded-lg overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow className="bg-n-6">
-                <TableHead className="w-16 text-gray-400">Rank</TableHead>
-                <TableHead className="text-gray-400">Player name</TableHead>
-                <TableHead className="text-right text-gray-400">Q1</TableHead>
-                <TableHead className="text-right text-gray-400">Q2</TableHead>
-                <TableHead className="text-right text-gray-400">Q3</TableHead>
-                <TableHead className="text-right text-gray-400">Total</TableHead>
+              <TableRow className="bg-n-6 hover:bg-n-5">
+                <TableHead className="w-16 text-muted-foreground">Rank</TableHead>
+                <TableHead className="text-muted-foreground">Name</TableHead>
+                <TableHead className="text-right text-muted-foreground">Q1</TableHead>
+                <TableHead className="text-right text-muted-foreground">Q2</TableHead>
+                <TableHead className="text-right text-muted-foreground">Q3</TableHead>
+                <TableHead className="text-right text-muted-foreground">Total</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentPlayers.map((player) => (
-                <TableRow key={player.rank} className={`border-b ${getBorderColor(player.rank)}`}>
+                <TableRow key={player.rank} className={`border-b ${getBorderColor(player.rank)} transition-all duration-200`}>
                   <TableCell className="font-bold flex items-center">
                     {player.rank}
                     <span className="ml-2 text-xl">{getBadge(player.rank)}</span>
@@ -115,8 +114,7 @@ export default function Leaderboard() {
                     <div className="flex items-center space-x-3">
                       <img src={`https://robohash.org/${player.name}?bgset=bg2`} alt={player.name} className="w-12 h-12 rounded-full" />
                       <div>
-                        <div className="font-bold">{player.name}</div>
-                        <div className="text-sm text-gray-500">{player.team}</div>
+                        <div className="font-mono text-md">{player.name}</div>
                       </div>
                     </div>
                   </TableCell>
@@ -134,7 +132,7 @@ export default function Leaderboard() {
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
             variant="outline"
-            className="bg-n-7 text-white border-gray-800 hover:bg-gray-800"
+            className="bg-n-7 text-white border-gray-800 hover:bg-n-6"
           >
             <ChevronLeft className="mr-2 h-4 w-4" /> Previous
           </Button>
@@ -143,7 +141,7 @@ export default function Leaderboard() {
             onClick={() => paginate(currentPage + 1)}
             disabled={indexOfLastPlayer >= filteredPlayers.length}
             variant="outline"
-            className="bg-n-7 text-white border-gray-800 hover:bg-gray-800"
+            className="bg-n-7 text-white border-gray-800 hover:bg-n-6"
           >
             Next <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
