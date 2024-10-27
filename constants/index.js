@@ -28,7 +28,6 @@ import {
   roadmap2,
   roadmap3,
   roadmap4,
-  roadmap5,
   searchMd,
   slack,
   sliders04,
@@ -56,7 +55,7 @@ export const navigation = [
   {
     id: "3",
     title: "Roadmaps",
-    url: "#roadmaps",
+    url: "/roadmap",
   },
   {
     id: "4",
@@ -131,7 +130,7 @@ export const roadmap = [
     text: "A comprehensive bootcamp covering data analysis, visualization, and machine learning techniques.",
     date: "Jan 15, 2025",
     status: "upcoming",
-    imageUrl: roadmap5,
+    imageUrl: roadmap4,
   },
   {
     id: "5",
