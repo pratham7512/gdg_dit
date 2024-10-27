@@ -3,7 +3,7 @@ import Section from "./Section";
 import { BottomLine } from "../design/Hero";
 
 import { useRef } from "react";
-
+import { curve } from "../assets";
 import { useScroll } from "framer-motion";
 import Image from 'next/image';
 
