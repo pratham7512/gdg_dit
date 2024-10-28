@@ -1,61 +1,51 @@
 'use client'
 
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react'
+import {ref, get} from 'firebase/database'
+import { database } from '@/app/firebase/config'
 
 type Player = {
   rank: number
   name: string
-  Q1: number
-  Q2: number
-  Q3: number
-  score: number
+  sept: number
+  oct: number
+  nov: number
+  total: number
 }
 
-const players: Player[] = [
-  {"rank": 1, "name": "Jon Rahm", "Q1": -3, "Q2": -5, "Q3": -4, "score": -12},
-  {"rank": 2, "name": "Dustin Johnson", "Q1": -4, "Q2": -3, "Q3": -4, "score": -11},
-  {"rank": 3, "name": "Bryson DeChambeau", "Q1": -2, "Q2": -4, "Q3": -4, "score": -10},
-  {"rank": 4, "name": "Brooks Koepka", "Q1": -3, "Q2": -2, "Q3": -4, "score": -9},
-  {"rank": 5, "name": "Cameron Smith", "Q1": -2, "Q2": -3, "Q3": -3, "score": -8},
-  {"rank": 6, "name": "Phil Mickelson", "Q1": -1, "Q2": -4, "Q3": -2, "score": -7},
-  {"rank": 7, "name": "Sergio Garcia", "Q1": -2, "Q2": -2, "Q3": -3, "score": -7},
-  {"rank": 8, "name": "Patrick Reed", "Q1": -1, "Q2": -3, "Q3": -2, "score": -6},
-  {"rank": 9, "name": "Joaquin Niemann", "Q1": -2, "Q2": -1, "Q3": -3, "score": -6},
-  {"rank": 10, "name": "Louis Oosthuizen", "Q1": -1, "Q2": -2, "Q3": -2, "score": -5},
-  {"rank": 11, "name": "Bubba Watson", "Q1": 0, "Q2": -3, "Q3": -2, "score": -5},
-  {"rank": 12, "name": "Kevin Na", "Q1": -1, "Q2": -1, "Q3": -2, "score": -4},
-  {"rank": 13, "name": "Talor Gooch", "Q1": 0, "Q2": -2, "Q3": -2, "score": -4},
-  {"rank": 14, "name": "Paul Casey", "Q1": -1, "Q2": -1, "Q3": -1, "score": -3},
-  {"rank": 15, "name": "Ian Poulter", "Q1": 0, "Q2": -2, "Q3": -1, "score": -3},
-  {"rank": 16, "name": "Charles Howell III", "Q1": 0, "Q2": -1, "Q3": -2, "score": -3},
-  {"rank": 17, "name": "Henrik Stenson", "Q1": -1, "Q2": 0, "Q3": -1, "score": -2},
-  {"rank": 18, "name": "Lee Westwood", "Q1": 0, "Q2": -1, "Q3": -1, "score": -2},
-  {"rank": 19, "name": "Matt Jones", "Q1": 1, "Q2": -2, "Q3": -1, "score": -2},
-  {"rank": 20, "name": "Peter Uihlein", "Q1": 0, "Q2": 0, "Q3": -1, "score": -1},
-  {"rank": 21, "name": "Graeme McDowell", "Q1": 1, "Q2": -1, "Q3": -1, "score": -1},
-  {"rank": 22, "name": "Bernd Wiesberger", "Q1": 0, "Q2": 0, "Q3": 0, "score": 0},
-  {"rank": 23, "name": "Scott Vincent", "Q1": 1, "Q2": 0, "Q3": -1, "score": 0},
-  {"rank": 24, "name": "Charl Schwartzel", "Q1": 1, "Q2": 0, "Q3": 0, "score": 1},
-  {"rank": 25, "name": "Marc Leishman", "Q1": 1, "Q2": 1, "Q3": -1, "score": 1},
-  {"rank": 26, "name": "Anirban Lahiri", "Q1": 2, "Q2": 0, "Q3": 0, "score": 2},
-  {"rank": 27, "name": "Abraham Ancer", "Q1": 1, "Q2": 1, "Q3": 0, "score": 2},
-  {"rank": 28, "name": "Brendan Steele", "Q1": 2, "Q2": 1, "Q3": 0, "score": 3},
-  {"rank": 29, "name": "Cameron Tringale", "Q1": 2, "Q2": 1, "Q3": 1, "score": 4},
-  {"rank": 30, "name": "Jediah Morgan", "Q1": 3, "Q2": 2, "Q3": 1, "score": 6}
-]
+
+
 
 export default function Leaderboard() {
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const playersPerPage = 10
+  const [players,setPlayers]=useState<Player[]>();
 
-  const filteredPlayers = players.filter(player =>
+  useEffect(()=>{
+    fetchData();
+  },[])
+  const fetchData=async()=>{
+    try {
+      const dbRef=ref(database,"leaderboard/DevChef2024/scores2");
+      const snapshot=await get(dbRef)
+      if(snapshot.exists()){
+            const p1 = snapshot.val().sort((a:Player,b:Player)=>b.total-a.total)
+              .map((player:Player, index:number) => ({...player, rank: index + 1}));
+            setPlayers(p1);
+      }
+    } catch (error) {
+      console.error("Error fetching leaderboard data:", error);
+    }
+  }
+
+  const filteredPlayers = players ? players.filter(player =>
     player.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  ) : []
 
   const indexOfLastPlayer = currentPage * playersPerPage
   const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage
@@ -71,14 +61,14 @@ export default function Leaderboard() {
   }
 
   const getBorderColor = (rank: number) => {
-    if (rank === 1) return "border-yellow-500"
+    if (rank === 1) return "border-yellow-400"
     if (rank === 2) return "border-gray-400"
-    if (rank === 3) return "border-amber-600"
+    if (rank === 3) return "border-amber-900"
     return "border-gray-800"
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground md:py-[5%] max-sm:py-[5%]">
+    <div className="min-h-screen bg-background text-foreground md:py-[5%] max-sm:py-[5%] ">
       <div className="container mx-auto p-4 font-sans">
         <h1 className="text-3xl mb-4 font-code">CP Leaderboard</h1>
         <div className="mb-4 relative">
@@ -94,34 +84,33 @@ export default function Leaderboard() {
         <div className="border border-gray-800 rounded-lg overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow className="bg-n-6 hover:bg-n-5">
+              <TableRow className="bg-n-8 hover:bg-n-7">
                 <TableHead className="w-16 text-muted-foreground">Rank</TableHead>
                 <TableHead className="text-muted-foreground">Name</TableHead>
-                <TableHead className="text-right text-muted-foreground">Q1</TableHead>
-                <TableHead className="text-right text-muted-foreground">Q2</TableHead>
-                <TableHead className="text-right text-muted-foreground">Q3</TableHead>
+                <TableHead className="text-right text-muted-foreground">sept</TableHead>
+                <TableHead className="text-right text-muted-foreground">oct</TableHead>
+                <TableHead className="text-right text-muted-foreground">nov</TableHead>
                 <TableHead className="text-right text-muted-foreground">Total</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentPlayers.map((player) => (
                 <TableRow key={player.rank} className={`border-b ${getBorderColor(player.rank)} transition-all duration-200`}>
-                  <TableCell className="font-bold flex items-center">
-                    {player.rank}
-                    <span className="ml-2 text-xl">{getBadge(player.rank)}</span>
+                  <TableCell className="font-mono">
+                    {player.rank}.
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-3">
                       <img src={`https://robohash.org/${player.name}?bgset=bg2`} alt={player.name} className="w-12 h-12 rounded-full" />
                       <div>
-                        <div className="font-mono text-md">{player.name}</div>
+                        <div className="font-mono text-md">{player.name} {getBadge(player.rank)}</div>
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell className="text-right font-mono">{player.Q1 > 0 ? `+${player.Q1}` : player.Q1}</TableCell>
-                  <TableCell className="text-right font-mono">{player.Q2 > 0 ? `+${player.Q2}` : player.Q2}</TableCell>
-                  <TableCell className="text-right font-mono">{player.Q3 > 0 ? `+${player.Q3}` : player.Q3}</TableCell>
-                  <TableCell className="text-right font-mono font-bold">{player.score > 0 ? `+${player.score}` : player.score}</TableCell>
+                  <TableCell className="text-right font-mono">{player.sept> 0 ? `+${player.sept}` : player.sept}</TableCell>
+                  <TableCell className="text-right font-mono">{player.oct > 0 ? `+${player.oct}` : player.oct}</TableCell>
+                  <TableCell className="text-right font-mono">{player.nov > 0 ? `+${player.nov}` : player.nov}</TableCell>
+                  <TableCell className="text-right font-mono font-bold">{player.total > 0 ? `+${player.total}` : player.total}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
