@@ -10,6 +10,7 @@ import { useState } from "react";
 import { signOut } from "next-auth/react";
 
 import { useSession } from "next-auth/react";
+import { AuthDialog } from "./Signin";
 
 function useGetUser() {
   const { data: session } = useSession();
@@ -61,7 +62,7 @@ const Header: React.FC = () => {
             openNavigation ? "flex" : "hidden"
           } fixed top-[5rem] left-0 right-0 bottom-0 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
-          <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
+          {session&&<div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
             {navigation.map((item) => (
               <a
                 key={item.id}
@@ -74,7 +75,7 @@ const Header: React.FC = () => {
                 {item.title}
               </a>
             ))}
-          </div>
+          </div>}
 
           <HamburgerMenu />
         </nav>
@@ -84,15 +85,16 @@ const Header: React.FC = () => {
             Logout
             </Button>
           ) : (<div className="flex justify-between items-center">
-            <a
-              href="/signup"
-              className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
-            >
+            <AuthDialog initialMode="signup">
+            <div className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block">
               New account
-            </a>
-            <Button className="hidden lg:flex" href="/signin">
+            </div>
+            </AuthDialog>
+            <AuthDialog initialMode="signin">
+            <Button className="hidden lg:flex">
               Sign in
             </Button>
+            </AuthDialog>
           </div>)}
         </div>
 
