@@ -1,12 +1,22 @@
-"use client";
+"use client"
 import { AnimatePresence } from 'framer-motion';
 import Chatbot from "@/components/Chatbot";
 import Header from "@/components/components/Header";
 import Footer from "@/components/components/Footer";
 import ButtonGradient from "@/components/assets/svg/ButtonGradient";
 import Leaderboard from '@/components/components/Leaderboard';
-const Ranking = () => {
+import { useSession } from "next-auth/react";
+import { redirect } from 'next/navigation';
 
+
+const Ranking =() => {
+  const {status} =  useSession();
+  if(status==="loading"){
+    return <p>Loading....</p>
+  }
+  if (status==='unauthenticated') {
+    redirect('/');
+  }
   return (
     <>
       <AnimatePresence mode='wait'>
