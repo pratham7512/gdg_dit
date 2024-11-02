@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react'
 import {ref, get} from 'firebase/database'
 import { database } from '@/app/firebase/config'
+import Image from 'next/image'
 
 type Player = {
   rank: number
@@ -16,8 +17,6 @@ type Player = {
   nov: number
   total: number
 }
-
-
 
 
 export default function Leaderboard() {
@@ -31,7 +30,7 @@ export default function Leaderboard() {
   },[])
   const fetchData=async()=>{
     try {
-      const dbRef=ref(database,"leaderboard/DevChef2024/scores2");
+      const dbRef=ref(database,"leaderboard/DevChef2024/scores");
       const snapshot=await get(dbRef)
       if(snapshot.exists()){
             const p1 = snapshot.val().sort((a:Player,b:Player)=>b.total-a.total)
@@ -101,7 +100,7 @@ export default function Leaderboard() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-3">
-                      <img src={`https://robohash.org/${player.name}?bgset=bg2`} alt={player.name} className="w-12 h-12 rounded-full" />
+                      <Image src={`https://robohash.org/${player.name}?bgset=bg2`} alt={player.name} className="w-12 h-12 rounded-full" />
                       <div>
                         <div className="font-mono text-md">{player.name} {getBadge(player.rank)}</div>
                       </div>

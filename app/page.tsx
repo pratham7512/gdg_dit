@@ -12,6 +12,7 @@ import Roadmap  from "@/components/components/Roadmap";
 import Footer  from "@/components/components/Footer";
 import ButtonGradient from "../components/assets/svg/ButtonGradient";
 
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Home() {
       </AnimatePresence>
       <AnimatePresence mode='wait'>
           {!isLoading && <Chatbot />}
-        </AnimatePresence>
+      </AnimatePresence>
       <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
         <Header />
         <Hero />

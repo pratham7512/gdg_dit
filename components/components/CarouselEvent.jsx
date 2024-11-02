@@ -1,166 +1,123 @@
-import * as React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+"use client"
+
+import * as React from "react"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import Image from "next/image";
-import { heroimg2, event1, event2 } from "../assets";
-import Link from "next/link";
-import { motion } from "framer-motion";
+} from "@/components/ui/carousel"
+import Image from "next/image"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import Tagline from "./Tagline"
+import {grid} from "../assets"
+import { Gradient } from "../design/Roadmap"
+import Button from "./Button"
+import Heading from "./Heading"
+import { Badge } from "../ui/badge"
+import Link from "next/link"
+import Autoplay from "embla-carousel-autoplay"
 
-const events = [
-  {
-    id: 1,
-    img: heroimg2,
-    name: "Hackathon 2024",
-    information:
-      "An intensive 48-hour hackathon bringing together tech enthusiasts to solve real-world challenges through innovative solutions.",
-    date: "March 1-3, 2024",
-    location: "Tech Park Auditorium",
-    additionalInfo: "Teams will compete for exciting prizes and networking opportunities.",
-    registrationLink: "/",
-  },
-  {
-    id: 2,
-    img: event1,
-    name: "Cybersecurity Awareness Workshop",
-    information:
-      "A comprehensive workshop to understand the fundamentals of cybersecurity, including current threats and best practices.",
-    date: "March 10, 2024",
-    location: "Room 204, Main Building",
-    additionalInfo: "Free for all students. Limited seats available.",
-    registrationLink: "/",
-  },
-  {
-    id: 3,
-    img: event2,
-    name: "Placement Preparation Series",
-    information:
-      "A series designed to help students excel in placement exams, technical interviews, and group discussions.",
-    date: "March 15-20, 2024",
-    location: "Online",
-    additionalInfo: "Join our expert sessions and mock interviews.",
-    registrationLink: "/",
-  },
-  {
-    id: 4,
-    img: heroimg2,
-    name: "AI & Machine Learning Bootcamp",
-    information:
-      "An intensive bootcamp covering the basics and advanced topics in AI and machine learning, with real-world project implementations.",
-    date: "April 1-7, 2024",
-    location: "Lab 3, Innovation Center",
-    additionalInfo: "Hands-on projects and mentorship included.",
-    registrationLink: "/",
-  },
-];
+export function CarouselEvent({events}) {
+  const targetRef = React.useRef(null)
+  const { scrollYProgress } = useScroll({ 
+    target: targetRef, 
+    offset: ["start end", "end start"] 
+  })
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 1, 1, 1])
+  const smoothOpacity = useSpring(opacity, { damping: 20, stiffness: 100 })
+  const MotionImage = motion(Image)
+  const plugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false })
+  )
 
-export function CarouselEvent() {
   return (
-    <div className="w-full h-full md:py-[10%] max-sm:py-[20%]">
-      <h2 className="max-w-7xl text-center pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-300 dark:text-neutral-200 font-sans mb-6">
-        Upcoming Events
-      </h2>
+    <div className="w-full h-full md:py-[5%] max-sm:py-[5%]">
+      {/* Image Carousel Section */}
+      <div className="container mb-16 w-3/5">
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full"
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+        >
+          <CarouselContent>
+            {events && events.flatMap((event) => 
+              event.imageUrls?.map((url, index) => (
+                <CarouselItem key={`${event.id}-${index}`} className="basis-full">
+                  <div className="relative h-[60vh] w-full overflow-hidden rounded-xl">
+                    <Image
+                      src={url}
+                      alt={`Event image for ${event.name}`}
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                    />
+                  </div>
+                </CarouselItem>
+              ))
+            )}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
 
-      <Carousel className="w-full h-full max-w-3xl m-auto mt-[2%]">
-        <CarouselContent>
-          {events.map((event, index) => (
-            <CarouselItem key={index}>
-              <div className="p-2">
-                <Link
-                  href={{
-                    pathname: `/events/${event.id}`,
-                  }}
-                  passHref
+      {/* Event Details Section */}
+      <div className="container md:pb-5">
+        <Heading tag="Ready to get started" title="What we're working on" />
+        <div className="relative grid gap-6 md:grid-cols-2 md:gap-4 md:pb-[7rem] mx-10">
+          {events && events.map((item) => {
+            return (
+              <Link href={`/event?id=${item.id}`} key={item.id}>
+                <motion.div
+                  className={`md:flex even:md:translate-y-[7rem] p-0.25 rounded-[2.5rem] bg-n-6 hover:bg-conic-gradient`}
+                  style={{ opacity: smoothOpacity }}
+                  initial={{ opacity: 1, scale: 0.95, y: 100 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="relative cursor-pointer rounded-lg overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300"
-                  >
-                    <Card className="items-center bg-gray-900 border border-gray-700">
-                      <CardContent className="flex w-full aspect-video p-1 relative group">
-                        <Image
-                          src={event.img}
-                          alt={event.name}
-                          height={200}
-                          width={760}
-                          objectFit="contain"
-                          className="rounded h-full w-full transition-transform duration-300 transform group-hover:scale-105"
-                        />
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileHover={{ opacity: 1, scale: 1.05 }}
-                          className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center text-white text-2xl font-bold p-4 transition-opacity duration-300 ease-in-out rounded-lg"
-                        >
-                          {event.name}
-                        </motion.div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </Link>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-
-      {/* Event Details Section */}
-      {/* Event Details Section */}
-      <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-  {events.map((event) => (
-    <motion.div
-      key={event.id}
-      className="bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 flex flex-col"
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6 }}
-    >
-      <Image
-        src={event.img}
-        alt={event.name}
-        height={300}
-        width={760}
-        objectFit="contain"
-        className="rounded-t-lg mb-4 h-64 w-full"
-      />
-      <div className="p-6 flex flex-col justify-between h-full">
-        <h3 className="text-xl font-bold mb-4 text-center text-neutral-100">
-          {event.name}
-        </h3>
-        <p className="text-gray-300 mb-3 leading-relaxed text-center">
-          {event.information}
-        </p>
-        <div className="flex flex-col items-center sm:items-start text-sm text-gray-400 mb-4 space-y-1">
-          <div>
-            <span className="font-semibold">Date:</span> {event.date}
-          </div>
-          <div>
-            <span className="font-semibold">Location:</span> {event.location}
-          </div>
-          <p className="text-gray-300 text-center sm:text-left mt-2">
-            {event.additionalInfo}
-          </p>
-        </div>
-        <div className="mt-5 pt-4">
-          <Link
-            href={event.registrationLink}
-            className="inline-block text-center bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-600 transition duration-300 absolute bottom-3 left-4"
-          >
-            Register Now
-          </Link>
+                  <div className="relative p-8 bg-n-8 rounded-[2.4375rem] overflow-hidden xl:p-15 w-full">
+                    <div className="absolute top-0 left-0 max-w-full">
+                      <MotionImage
+                        initial={{ scale: 1.1 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ duration: 0.6 }}
+                        className="w-full"
+                        src={grid}
+                        width={550}
+                        height={550}
+                        alt="Grid"
+                      />
+                    </div>
+                    <div className="relative z-1">
+                      <div className="flex items-center justify-between max-w-[27rem] mb-8 md:mb-8">
+                        <Tagline>{item.date}</Tagline>
+                        <Badge className="bg-transparent tagline border border-n-3 p-1 px-3 hover:bg-transparent text-n-3">
+                          {item.domain}
+                        </Badge>
+                      </div>
+                      <div className="flex flex-col justify-between">
+                        <div className="h-4/5">
+                          <h4 className="h4 mb-4">{item.name}</h4>
+                          <p className="body-2 text-n-4">{item.description}</p>
+                        </div>
+                        <div className="mt-5">
+                          <Button href={item.rsvpLink}>RSVP</Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            )
+          })}
+          <Gradient />
         </div>
       </div>
-    </motion.div>
-  ))}
-</div>
-
     </div>
-  );
+  )
 }

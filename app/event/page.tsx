@@ -3,20 +3,20 @@ import { AnimatePresence } from 'framer-motion';
 import Chatbot from "@/components/Chatbot";
 import Header from "@/components/components/Header";
 import Footer from "@/components/components/Footer";
-import { CarouselEvent } from "@/components/components/CarouselEvent";
+import EventPage from "@/components/components/Event";
 import ButtonGradient from "@/components/assets/svg/ButtonGradient";
-import {CarouselEventSkeleton} from '@/components/components/CarouselEventSkeleton';
+import { redirect} from 'next/navigation';
+import EventSkeleton from '@/components/components/EventSkeleton';
 import useFetchEvents from '@/hooks/useFetchEvents';
 import { motion } from 'framer-motion';
 import { useSession } from "next-auth/react"
-import { redirect } from 'next/navigation';
 
-
-const Events =  () => {
+const Event = ({ searchParams }: { searchParams: URLSearchParams }) => {
   const {status} =  useSession();
-  const { events, error, isLoading } = useFetchEvents();
+  const id = searchParams?.get("id");
+  const { events, error, isLoading } = useFetchEvents(id || undefined);
   if(status==="loading"){
-    return <CarouselEventSkeleton/>
+    return <EventSkeleton/>
   }
   if (status==='unauthenticated') {
     redirect('/');
@@ -24,7 +24,7 @@ const Events =  () => {
 
   const renderContent = () => {
     if (isLoading) {
-      return <CarouselEventSkeleton />;
+      return <EventSkeleton />;
     }
 
     if (error||!events) {
@@ -64,25 +64,25 @@ const Events =  () => {
 
     return (
       <AnimatePresence mode="wait">
-        <CarouselEvent events={events}/>
+        <EventPage event={events ? events[0] : null} />
       </AnimatePresence>
     );
   };
+
   return (
     <>
-
-      <AnimatePresence mode='wait'>
-        {!isLoading && <Chatbot />}
+      <AnimatePresence mode="wait">
+        <Chatbot />
       </AnimatePresence>
 
       <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
         <Header />
         {renderContent()}
-        <Footer /> 
+        <Footer />
       </div>
       <ButtonGradient />
     </>
-  )
-}
+  );
+};
 
-export default Events
+export default Event;
