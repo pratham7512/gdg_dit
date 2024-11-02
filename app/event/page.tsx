@@ -10,9 +10,12 @@ import EventSkeleton from '@/components/components/EventSkeleton';
 import useFetchEvents from '@/hooks/useFetchEvents';
 import { motion } from 'framer-motion';
 import { useSession } from "next-auth/react"
+import { useSearchParams } from 'next/navigation';
 
-const Event = ({ searchParams }: { searchParams: URLSearchParams }) => {
+
+const Event = () => {
   const {status} =  useSession();
+  const searchParams=useSearchParams()
   const id = searchParams?.get("id");
   const { events, error, isLoading } = useFetchEvents(id || undefined);
   if(status==="loading"){
