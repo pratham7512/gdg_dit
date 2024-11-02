@@ -28,7 +28,6 @@ import {
   roadmap2,
   roadmap3,
   roadmap4,
-  roadmap5,
   searchMd,
   slack,
   sliders04,
@@ -100,6 +99,7 @@ export const roadmap = [
     date: "Aug 25, 2024",
     status: "done",
     imageUrl: roadmap1,
+    domain: "Education",
   },
   {
     id: "1",
@@ -108,6 +108,7 @@ export const roadmap = [
     date: "Oct 25, 2024",
     status: "progress",
     imageUrl: roadmap2,
+    domain: "Hackathon",
   },
   {
     id: "2",
@@ -116,6 +117,7 @@ export const roadmap = [
     date: "Nov 15, 2024",
     status: "done",
     imageUrl: roadmap3,
+    domain: "Collaboration",
   },
   {
     id: "3",
@@ -124,6 +126,7 @@ export const roadmap = [
     date: "Dec 10, 2024",
     status: "progress",
     imageUrl: roadmap4,
+    domain: "Integration",
   },
   {
     id: "4",
@@ -131,7 +134,8 @@ export const roadmap = [
     text: "A comprehensive bootcamp covering data analysis, visualization, and machine learning techniques.",
     date: "Jan 15, 2025",
     status: "upcoming",
-    imageUrl: roadmap5,
+    imageUrl: roadmap4,
+    domain: "Education",
   },
   {
     id: "5",
@@ -140,6 +144,7 @@ export const roadmap = [
     date: "Feb 20, 2025",
     status: "upcoming",
     imageUrl: roadmap4,
+    domain: "Education",
   },
   {
     id: "6",
@@ -148,6 +153,7 @@ export const roadmap = [
     date: "Mar 10, 2025",
     status: "upcoming",
     imageUrl: roadmap4,
+    domain: "Discussion",
   },
   {
     id: "7",
@@ -156,6 +162,7 @@ export const roadmap = [
     date: "Apr 5, 2025",
     status: "upcoming",
     imageUrl: roadmap4,
+    domain: "Workshop",
   },
   {
     id: "8",
@@ -164,6 +171,7 @@ export const roadmap = [
     date: "May 15, 2025",
     status: "upcoming",
     imageUrl: roadmap4,
+    domain: "Education",
   },
   {
     id: "9",
@@ -172,6 +180,7 @@ export const roadmap = [
     date: "Jun 20, 2025",
     status: "upcoming",
     imageUrl: roadmap4,
+    domain: "Education",
   },
   {
     id: "10",
@@ -180,6 +189,7 @@ export const roadmap = [
     date: "Jul 30, 2025",
     status: "upcoming",
     imageUrl: roadmap4,
+    domain: "Symposium",
   },
 ];
 
