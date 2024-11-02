@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/components/CarouselEvent.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/components/CarouselEvent.jsx", "components/components/CreateRoadmap.jsx", "components/components/AppSidebar.jsx", "components/components/HeroDashboard.jsx"],
   "exclude": ["node_modules"]
 }

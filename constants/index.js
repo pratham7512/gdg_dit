@@ -55,7 +55,7 @@ export const navigation = [
   {
     id: "3",
     title: "Roadmaps",
-    url: "#roadmaps",
+    url: "/roadmap",
   },
   {
     id: "4",
@@ -135,7 +135,6 @@ export const roadmap = [
     date: "Jan 15, 2025",
     status: "upcoming",
     imageUrl: roadmap4,
-    domain: "Education",
   },
   {
     id: "5",
