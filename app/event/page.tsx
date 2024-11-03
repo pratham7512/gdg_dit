@@ -14,7 +14,13 @@ const Event = () => {
   const {status} =  useSession();
 
   if(status==="loading"){
-    return <EventSkeleton/>
+    return(
+      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+        <Header />
+          <EventSkeleton/>
+        <Footer /> 
+      </div>
+    )
   }
   if (status==='unauthenticated') {
     redirect('/');

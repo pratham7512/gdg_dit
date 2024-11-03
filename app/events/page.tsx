@@ -16,7 +16,13 @@ const Events =  () => {
   const {status} =  useSession();
   const { events, error, isLoading } = useFetchEvents();
   if(status==="loading"){
-    return <CarouselEventSkeleton/>
+    return(
+      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+        <Header />
+          <CarouselEventSkeleton/>
+        <Footer /> 
+      </div>
+    )
   }
   if (status==='unauthenticated') {
     redirect('/');
