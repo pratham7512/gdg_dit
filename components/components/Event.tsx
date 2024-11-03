@@ -15,43 +15,6 @@ import useFetchEvents from '@/hooks/useFetchEvents'
 import EventSkeleton from './EventSkeleton'
 import { motion } from 'framer-motion';
 
-type FAQ = {
-  question: string,
-  ans: string
-}
-type Event = {
-  id: string
-  name: string
-  date: string
-  dateTime: string
-  description: string
-  details: string
-  domain: string
-  entryFees: string
-  rsvpLink: string
-  "faq's": FAQ[]
-  imageUrls: string[]
-  itemsToBring: string[]
-  location: string
-  mode: string
-  prerequisites: string
-  prizepool: Array<{
-    ammount: string
-  }>
-  speakers: Record<string, {
-    name: string
-    designation: string
-    company: string
-    Expertise: string
-    image: string
-  }>
-  sponsors: Array<{
-    name: string
-    logo: string
-  }>
-}
-
-
 const EventPage=()=> {
     const [searchQuery, setSearchQuery] = useState('')
     const searchParams=useSearchParams()
