@@ -14,7 +14,9 @@ import { TableCell, TableRow } from '@/components/ui/table';
 const Ranking =() => {
   const {status} =  useSession();
   if(status==="loading"){
-    return(<>
+    return(
+    <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+    <Header />
     {[...Array(10)].map((_, index) => (
       <TableRow key={index} className="border-b border-gray-800 animate-pulse">
         <TableCell><Skeleton className="h-6 w-8" /></TableCell>
@@ -30,7 +32,8 @@ const Ranking =() => {
         <TableCell><Skeleton className="h-6 w-16 ml-auto" /></TableCell>
       </TableRow>
     ))}
-  </>)
+    <Footer /> 
+    </div>)
   }
   if (status==='unauthenticated') {
     redirect('/');
