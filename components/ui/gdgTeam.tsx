@@ -44,7 +44,7 @@ export const Team = ({ data }: { data: TimelineEntry[] }) => {
         <div className="flex flex-col items-start gap-6 mb-6">
           <div className="flex items-center py-8 justify-start">
               <Image src={GDSC} alt="GDSC Logo" className="w-[90px] h-[90px]" />
-              <h2 className="text-xl font-bold md:text-4xl text-foreground max-w-4xl ml-4">
+              <h2 className="text-lg font-bold md:text-4xl text-foreground max-w-4xl ml-4">
                   Google Devloper Groups DIT
               </h2>
           </div>
@@ -52,12 +52,12 @@ export const Team = ({ data }: { data: TimelineEntry[] }) => {
             <h2 className="text-md md:text-4xl mb-4 text-foreground max-w-4xl">
               Meet Our Team
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base max-w-lg">
+            <p className="text-muted-foreground text-sm md:text-base max-w-xl">
               Get to know the dedicated members of Google Developer Groups DIT who work together to foster learning and innovation in our community.
             </p>
           </div>
         </div>
-        <div className="lg:ml-auto xl:w-[30rem] mt-4">
+        <div className="hidden md:block lg:ml-auto xl:w-[30rem] mt-4">
           <motion.div
             className="relative left-1/2 flex w-[22rem] aspect-square border border-n-6 rounded-full -translate-x-1/2 scale:75 md:scale-100"
             initial={{ opacity: 0, scale: 0.8 }}
