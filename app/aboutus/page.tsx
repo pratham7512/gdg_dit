@@ -6,7 +6,7 @@ export default function TimelineDemo() {
     {
       title: "Web Development",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <TeamMember 
             name="John Doe"
             designation="Frontend Lead"
@@ -37,7 +37,7 @@ export default function TimelineDemo() {
     {
       title: "AI/ML",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <TeamMember 
             name="Sarah Wilson"
             designation="ML Engineer"
@@ -62,7 +62,7 @@ export default function TimelineDemo() {
     {
       title: "Android Development",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <TeamMember 
             name="David Kumar"
             designation="Android Lead"
@@ -87,7 +87,7 @@ export default function TimelineDemo() {
     {
       title: "Cloud Computing",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <TeamMember 
             name="Ryan Cloud"
             designation="Cloud Architect"
@@ -112,7 +112,7 @@ export default function TimelineDemo() {
     {
       title: "UI/UX Design",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <TeamMember 
             name="Sophie Chen"
             designation="UI/UX Lead"
@@ -143,7 +143,7 @@ export default function TimelineDemo() {
     {
       title: "Cybersecurity",
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <TeamMember 
             name="Marcus Security"
             designation="Security Lead"

@@ -43,7 +43,7 @@ export default function TeamMember({
           <img
             src={imageUrl}
             alt={name}
-            className={`w-full h-[150px] object-cover transition-opacity duration-300 ${
+            className={`w-full h-[250px] object-cover transition-opacity duration-300 ${
               isHovered ? 'opacity-0' : 'opacity-100 grayscale'
             }`}
           />
@@ -51,7 +51,7 @@ export default function TeamMember({
           <img
             src={imageUrl}
             alt={name}
-            className={`absolute inset-0 w-full h-[150px] object-cover transition-opacity duration-300 ${
+            className={`absolute inset-0 w-full h-[250px] object-cover transition-opacity duration-300 ${
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}
           />

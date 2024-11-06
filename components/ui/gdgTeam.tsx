@@ -105,7 +105,7 @@ export const Team = ({ data }: { data: TimelineEntry[] }) => {
         </div>
       </div>
 
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
+      <div ref={ref} className="relative max-w-7xl mx-auto pb-20 px-6">
         {data.map((item, index) => (
           <div
             key={index}
