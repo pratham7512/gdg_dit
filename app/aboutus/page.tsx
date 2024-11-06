@@ -25,6 +25,12 @@ export default function TimelineDemo() {
             imageUrl="https://i.pravatar.cc/1000?u=mike.johnson@gdsc.dev"
             color="bg-yellow-500"
           />
+          <TeamMember 
+            name="Alex Chen"
+            designation="Data Scientist"
+            imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
+            color="bg-green-500"
+          />
         </div>
       ),
     },
@@ -43,6 +49,12 @@ export default function TimelineDemo() {
             designation="Data Scientist"
             imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
             color="bg-green-500"
+          />
+          <TeamMember 
+            name="John Doe"
+            designation="Frontend Lead"
+            imageUrl="https://i.pravatar.cc/1000?u=lam@gdsc.dev"
+            color="bg-red-500"
           />
         </div>
       ),
@@ -63,6 +75,12 @@ export default function TimelineDemo() {
             imageUrl="https://i.pravatar.cc/1000?u=lisa@gdsc.dev"
             color="bg-blue-500"
           />
+          <TeamMember 
+            name="Alex Chen"
+            designation="Data Scientist"
+            imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
+            color="bg-green-500"
+          />
         </div>
       ),
     },
@@ -81,6 +99,12 @@ export default function TimelineDemo() {
             designation="DevOps Engineer"
             imageUrl="https://i.pravatar.cc/1000?u=emma.watson@gdsc.dev"
             color="bg-indigo-500"
+          />
+          <TeamMember 
+            name="John Doe"
+            designation="Frontend Lead"
+            imageUrl="https://i.pravatar.cc/1000?u=lam@gdsc.dev"
+            color="bg-red-500"
           />
         </div>
       ),
@@ -101,6 +125,18 @@ export default function TimelineDemo() {
             imageUrl="https://i.pravatar.cc/1000?u=tom.wright@gdsc.dev"
             color="bg-orange-500"
           />
+          <TeamMember 
+            name="John Doe"
+            designation="Frontend Lead"
+            imageUrl="https://i.pravatar.cc/1000?u=lam@gdsc.dev"
+            color="bg-red-500"
+          />
+          <TeamMember 
+            name="Alex Chen"
+            designation="Data Scientist"
+            imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
+            color="bg-green-500"
+          />
         </div>
       ),
     },
@@ -119,6 +155,18 @@ export default function TimelineDemo() {
             designation="Security Analyst"
             imageUrl="https://i.pravatar.cc/1000?u=nina.shield@gdsc.dev"
             color="bg-cyan-500"
+          />
+          <TeamMember 
+            name="Ryan Cloud"
+            designation="Cloud Architect"
+            imageUrl="https://i.pravatar.cc/1000?u=ryan.cloud@gdsc.dev"
+            color="bg-purple-500"
+          />
+          <TeamMember 
+            name="Emma Watson"
+            designation="DevOps Engineer"
+            imageUrl="https://i.pravatar.cc/1000?u=emma.watson@gdsc.dev"
+            color="bg-indigo-500"
           />
         </div>
       ),
