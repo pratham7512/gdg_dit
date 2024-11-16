@@ -1,181 +1,50 @@
-import TeamMember from "@/components/components/TeamMember";
-import { Team } from "@/components/ui/gdgTeam";
+import CommunitySection from "@/components/components/Community";
+import Footer from "@/components/components/Footer";
+import { Team } from "@/components/components/gdgTeam";
+import Header from "@/components/components/Header";
+import PastEvents from "@/components/components/PastEvents";
 
 export default function TimelineDemo() {
-  const data = [
-    {
-      title: "Web Development",
-      content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <TeamMember 
-            name="John Doe"
-            designation="Frontend Lead"
-            imageUrl="https://i.pravatar.cc/1000?u=lam@gdsc.dev"
-            color="bg-red-500"
-          />
-          <TeamMember 
-            name="Jane Smith"
-            designation="Backend Developer"
-            imageUrl="https://i.pravatar.cc/1000?u=jane.smith@gdsc.dev"
-            color="bg-blue-500"
-          />
-          <TeamMember 
-            name="Mike Johnson"
-            designation="Full Stack Developer"
-            imageUrl="https://i.pravatar.cc/1000?u=mike.johnson@gdsc.dev"
-            color="bg-yellow-500"
-          />
-          <TeamMember 
-            name="Alex Chen"
-            designation="Data Scientist"
-            imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
-            color="bg-green-500"
-          />
-        </div>
-      ),
-    },
-    {
-      title: "AI/ML",
-      content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <TeamMember 
-            name="Sarah Wilson"
-            designation="ML Engineer"
-            imageUrl="https://i.pravatar.cc/1000?u=sarah@gdsc.dev"
-            color="bg-red-500"
-          />
-          <TeamMember 
-            name="Alex Chen"
-            designation="Data Scientist"
-            imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
-            color="bg-green-500"
-          />
-          <TeamMember 
-            name="John Doe"
-            designation="Frontend Lead"
-            imageUrl="https://i.pravatar.cc/1000?u=lam@gdsc.dev"
-            color="bg-red-500"
-          />
-        </div>
-      ),
-    },
-    {
-      title: "Android Development",
-      content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <TeamMember 
-            name="David Kumar"
-            designation="Android Lead"
-            imageUrl="https://i.pravatar.cc/1000?u=david.kumar@gdsc.dev"
-            color="bg-green-500"
-          />
-          <TeamMember 
-            name="Lisa Park"
-            designation="Mobile Developer"
-            imageUrl="https://i.pravatar.cc/1000?u=lisa@gdsc.dev"
-            color="bg-blue-500"
-          />
-          <TeamMember 
-            name="Alex Chen"
-            designation="Data Scientist"
-            imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
-            color="bg-green-500"
-          />
-        </div>
-      ),
-    },
-    {
-      title: "Cloud Computing",
-      content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <TeamMember 
-            name="Ryan Cloud"
-            designation="Cloud Architect"
-            imageUrl="https://i.pravatar.cc/1000?u=ryan.cloud@gdsc.dev"
-            color="bg-purple-500"
-          />
-          <TeamMember 
-            name="Emma Watson"
-            designation="DevOps Engineer"
-            imageUrl="https://i.pravatar.cc/1000?u=emma.watson@gdsc.dev"
-            color="bg-indigo-500"
-          />
-          <TeamMember 
-            name="John Doe"
-            designation="Frontend Lead"
-            imageUrl="https://i.pravatar.cc/1000?u=lam@gdsc.dev"
-            color="bg-red-500"
-          />
-        </div>
-      ),
-    },
-    {
-      title: "UI/UX Design",
-      content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <TeamMember 
-            name="Sophie Chen"
-            designation="UI/UX Lead"
-            imageUrl="https://i.pravatar.cc/1000?u=sophie.chen@gdsc.dev"
-            color="bg-pink-500"
-          />
-          <TeamMember 
-            name="Tom Wright"
-            designation="Product Designer"
-            imageUrl="https://i.pravatar.cc/1000?u=tom.wright@gdsc.dev"
-            color="bg-orange-500"
-          />
-          <TeamMember 
-            name="John Doe"
-            designation="Frontend Lead"
-            imageUrl="https://i.pravatar.cc/1000?u=lam@gdsc.dev"
-            color="bg-red-500"
-          />
-          <TeamMember 
-            name="Alex Chen"
-            designation="Data Scientist"
-            imageUrl="https://i.pravatar.cc/1000?u=alex@gdsc.dev"
-            color="bg-green-500"
-          />
-        </div>
-      ),
-    },
-    {
-      title: "Cybersecurity",
-      content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <TeamMember 
-            name="Marcus Security"
-            designation="Security Lead"
-            imageUrl="https://i.pravatar.cc/1000?u=marcus.security@gdsc.dev"
-            color="bg-teal-500"
-          />
-          <TeamMember 
-            name="Nina Shield"
-            designation="Security Analyst"
-            imageUrl="https://i.pravatar.cc/1000?u=nina.shield@gdsc.dev"
-            color="bg-cyan-500"
-          />
-          <TeamMember 
-            name="Ryan Cloud"
-            designation="Cloud Architect"
-            imageUrl="https://i.pravatar.cc/1000?u=ryan.cloud@gdsc.dev"
-            color="bg-purple-500"
-          />
-          <TeamMember 
-            name="Emma Watson"
-            designation="DevOps Engineer"
-            imageUrl="https://i.pravatar.cc/1000?u=emma.watson@gdsc.dev"
-            color="bg-indigo-500"
-          />
-        </div>
-      ),
-    }
-  ];
+  const data = [{
+    name: "Mia Ward",
+    role: "Founder & CEO",
+    image: "https://i.pravatar.cc/1000?u=mia@gdsc.dev",
+  },
+  {
+    name: "Phoenix Baker",
+    role: "Head of Engineering",
+    image: "https://i.pravatar.cc/1000?u=phoenix@gdsc.dev",
+  },
+  {
+    name: "Lana Steiner",
+    role: "Chief Operating Office",
+    image: "https://i.pravatar.cc/1000?u=lana@gdsc.dev",
+  },
+  {
+    name: "Michael Chen",
+    role: "Lead Designer",
+    image: "https://i.pravatar.cc/1000?u=michael@gdsc.dev",
+  },
+  {
+    name: "David Kim",
+    role: "Frontend Developer",
+    image: "https://i.pravatar.cc/1000?u=david@gdsc.dev",
+  },
+  {
+    name: "Sarah Park",
+    role: "Backend Developer",
+    image: "https://i.pravatar.cc/1000?u=sarah@gdsc.dev",
+  },
+]
 
   return (
-    <div >
+    <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+      <Header />
       <Team data={data} />
+      <PastEvents/>
+      <CommunitySection/>
+      <Footer/>
     </div>
   );
 }
+

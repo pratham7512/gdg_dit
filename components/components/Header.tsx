@@ -1,7 +1,7 @@
 "use client"
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import Image from "next/image";
-import GDSC from "../assets/GDSC.svg";
+import GDSC from "../assets/GDSC-logo.svg";
 import { navigation } from "../../constants";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
@@ -48,13 +48,13 @@ const Header: React.FC = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm ${
+      className={`fixed top-0 left-0 w-full z-50 lg:bg-black/90 lg:backdrop-blur-sm ${
         openNavigation ? "bg-n-8" : "bg-n-8/90 backdrop-blur-sm"
       }`}
     >
-      <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2">
+      <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2 h-[4.3rem]">
         <a className="block w-[12rem] xl:mr-8" href="/">
-          <Image src={GDSC} width={150} height={40} alt="GDG" />
+          <Image src={GDSC} width={60} height={40} alt="GDG" />
         </a>
 
         <nav

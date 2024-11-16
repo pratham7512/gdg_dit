@@ -6,6 +6,7 @@ import useFetchEvents from '@/hooks/useFetchEvents'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, MapPin, Calendar, Clock, Link2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import {
   Accordion,
@@ -13,9 +14,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import EventSkeleton from "./EventSkeleton"
 
-export default function EventPage() {
+export default function Component() {
   const [currentImage, setCurrentImage] = useState(0)
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isExpired, setIsExpired] = useState(false)
@@ -52,7 +52,13 @@ export default function EventPage() {
 
   if (isLoading) {
     return (
-      <EventSkeleton/>
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <motion.div 
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-8 h-8 border-2 border-red-400 border-t-transparent rounded-full"
+        />
+      </div>
     )
   }
 
@@ -93,7 +99,7 @@ export default function EventPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white bg-grid-white/[0.090] mt-6">
+    <div className="min-h-screen bg-black text-white bg-grid-white/[0.090] ">
       <div className="max-w-5xl mx-auto border bg-black">
         <div className="relative h-[400px]">
           <img
@@ -139,16 +145,16 @@ export default function EventPage() {
                 <div className="tagline text-md border px-4 py-2 rounded-sm">{event.mode}</div>
               </div>
 
-              <div className="space-y-4 p-6 transition-smooth">
-                <p className="text-[1rem] leading-relaxed">{event.description}</p>
+              <div className="space-y-4 text-sm p-6 transition-smooth">
+                <p className="text-lg leading-relaxed">{event.description}</p>
                 
-                <div className="prose prose-lg prose-invert">
-                  <p className="leading-relaxed whitespace-pre-wrap text-justify text-[1rem]">{event.details}</p>
+                <div className="prose prose-lg text-lg prose-invert">
+                  <p className="leading-relaxed whitespace-pre-wrap text-justify text-md">{event.details}</p>
                 </div>
                 
                 <div className="space-y-4 border-t border-neutral-800 pt-6">
                   <h3 className="text-2xl font-bold mb-3">Items to Bring:</h3>
-                  <ul className="list-disc list-inside space-y-2 text-[1rem]">
+                  <ul className="list-disc list-inside space-y-2 text-lg">
                     {event.itemsToBring?.map((item, index) => (
                       <li key={index} className="leading-relaxed">{item}</li>
                     ))}
@@ -157,7 +163,7 @@ export default function EventPage() {
 
                 <div className="space-y-2 border-t border-neutral-800 pt-6">
                   <h3 className="text-2xl font-bold mb-3">Prerequisites:</h3>
-                  <p className="text-[1rem] leading-relaxed">{event.prerequisites}</p>
+                  <p className="text-lg leading-relaxed">{event.prerequisites}</p>
                 </div>
               </div>
             </div>

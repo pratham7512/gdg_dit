@@ -26,7 +26,7 @@ const Roadmap = () => {
       <div className="container md:pb-10">
         <Heading tag="Ready to get started" title="What we’re working on" />
 
-        <div className="relative grid gap-6 md:grid-cols-2 md:gap-4 md:pb-[7rem]">
+        {/* <div className="relative grid gap-6 md:grid-cols-2 md:gap-4 md:pb-[7rem]">
           {roadmap.map((item) => {
             const status = item.status === "done" ? "Done" : "In progress";
 
@@ -94,7 +94,7 @@ const Roadmap = () => {
           })}
 
           <Gradient />
-        </div>
+        </div> */}
 
         <div className="flex justify-center mt-12 md:mt-15 xl:mt-20">
           <Button href="/roadmap">Our roadmap</Button>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Preloader  from "@/components/Preloader";
 import Chatbot  from "@/components/Chatbot";
 import Benefits  from "@/components/components/Benefits";
-import Services  from "@/components/components/Services";
 import Header  from "@/components/components/Header";
 import Hero  from "@/components/components/Hero";
 import Collaboration  from "@/components/components/Collaboration";
@@ -35,12 +34,11 @@ export default function Home() {
       <AnimatePresence mode='wait'>
           {!isLoading && <Chatbot />}
       </AnimatePresence>
-      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden bg-black bg-grid-white/[0.090]">
         <Header />
         <Hero />
         <Benefits/>
         <Collaboration />
-        <Services />
         <Roadmap />
         <Footer />
         
