@@ -1,5 +1,4 @@
 import React from "react";
-import Section from "./Section";
 import { socials } from "../../constants";
 import Image from "next/image";
 

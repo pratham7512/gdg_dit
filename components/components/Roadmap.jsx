@@ -1,24 +1,24 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+// import {  useScroll, useTransform} from "framer-motion";
 import { useRef } from "react";
 import Button from "./Button";
 import Heading from "./Heading";
 import Section from "./Section";
-import Tagline from "./Tagline";
-import { roadmap } from "../../constants";
-import { check2, grid, loading1 } from "../assets";
-import { Gradient } from "../design/Roadmap";
-import Image from "next/image";
+// import Tagline from "./Tagline";
+// import { roadmap } from "../../constants";
+// import { check2, grid, loading1 } from "../assets";
+// import { Gradient } from "../design/Roadmap";
+// import Image from "next/image";
 
-const MotionImage = motion(Image);
+// const MotionImage = motion(Image);
 const Roadmap = () => {
   const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: targetRef, offset: ["start end", "end start"] });
+  // const { scrollYProgress } = useScroll({ target: targetRef, offset: ["start end", "end start"] });
 
   // Set up transforms for parallax and fade animations
   // const yTranslate = useTransform(scrollYProgress, [0, 1], [0, -100]);
   // const yTranslate2 = useTransform(scrollYProgress, [0, 1], [0, -200]); // Adjust for subtle parallax effect
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 1, 1, 1]); // Fade-in effect
-  const smoothOpacity = useSpring(opacity, { damping: 20, stiffness: 100 });
+  //const opacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 1, 1, 1]); // Fade-in effect
+  // const smoothOpacity = useSpring(opacity, { damping: 20, stiffness: 100 });
   // const smoothTranslate = useSpring(yTranslate, { damping: 15, stiffness: 80 });
 
   return (

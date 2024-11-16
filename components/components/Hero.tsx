@@ -1,14 +1,13 @@
-import { curve, heroimg2, gradient } from "../assets";
+import { curve} from "../assets";
 import Button from "./Button";
 import Section from "./Section";
-import { BackgroundCircles, BottomLine, Gradient } from "../design/Hero";
-import { heroIcons } from "../../constants";
-import { ScrollParallax } from "react-just-parallax";
+import { BackgroundCircles} from "../design/Hero";
+// import { heroIcons } from "../../constants";
+// import { ScrollParallax } from "react-just-parallax";
 import { useRef, useEffect, useState } from "react";
-import Notification from "./Notification";
+// import Notification from "./Notification";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from 'next/image';
-import herogif from "../assets/hero/herogif.gif"
 const Hero: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);

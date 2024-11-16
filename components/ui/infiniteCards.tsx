@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 export const InfiniteMovingCards = ({
   events,
@@ -100,7 +101,7 @@ export const InfiniteMovingCards = ({
                   imageIndex === 0 ? 'col-span-2 row-span-2' : ''
                 }`}
               >
-                <img
+                <Image
                   src={image}
                   alt={`${event.name} - Image ${imageIndex + 1}`}
                   className="w-full h-full object-cover"

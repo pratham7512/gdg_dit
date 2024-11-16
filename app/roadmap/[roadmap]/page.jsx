@@ -8,80 +8,78 @@ import Header from '@/components/components/Header'
 import { AnimatePresence } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
-const Roadmaps = [
-    {
-      id: "Frontend",
-      name: "Frontend Development",
-    },
-    {
-      id: "Backend",
-      name: "Backend Development",
-    },
-    {
-      id: "Fullstack",
-      name: "Fullstack Development",
-    },
-    {
-      id: "AI",
-      name: "AI & Machine Learning",
-    },
-    {
-      id: "Blockchain",
-      name: "Blockchain Development",
-    },
-    {
-      id: "DataScience",
-      name: "Data Science",
-    },
-    {
-      id: "DevOps",
-      name: "DevOps Engineering",
-    },
-    {
-      id: "CyberSecurity",
-      name: "Cyber Security",
-    },
-    {
-      id: "Cloud",
-      name: "Cloud Computing",
-    },
-    {
-      id: "Mobile",
-      name: "Mobile App Development",
-    },
-    {
-      id: "Game",
-      name: "Game Development",
-    },
-    {
-      id: "IoT",
-      name: "Internet of Things (IoT)",
-    },
-    {
-      id: "UIUX",
-      name: "UI/UX Design",
-    },
-    {
-      id: "SoftwareTesting",
-      name: "Software Testing",
-    },
-    {
-      id: "EmbeddedSystems",
-      name: "Embedded Systems",
-    },
-  ];
+// const Roadmaps = [
+//     {
+//       id: "Frontend",
+//       name: "Frontend Development",
+//     },
+//     {
+//       id: "Backend",
+//       name: "Backend Development",
+//     },
+//     {
+//       id: "Fullstack",
+//       name: "Fullstack Development",
+//     },
+//     {
+//       id: "AI",
+//       name: "AI & Machine Learning",
+//     },
+//     {
+//       id: "Blockchain",
+//       name: "Blockchain Development",
+//     },
+//     {
+//       id: "DataScience",
+//       name: "Data Science",
+//     },
+//     {
+//       id: "DevOps",
+//       name: "DevOps Engineering",
+//     },
+//     {
+//       id: "CyberSecurity",
+//       name: "Cyber Security",
+//     },
+//     {
+//       id: "Cloud",
+//       name: "Cloud Computing",
+//     },
+//     {
+//       id: "Mobile",
+//       name: "Mobile App Development",
+//     },
+//     {
+//       id: "Game",
+//       name: "Game Development",
+//     },
+//     {
+//       id: "IoT",
+//       name: "Internet of Things (IoT)",
+//     },
+//     {
+//       id: "UIUX",
+//       name: "UI/UX Design",
+//     },
+//     {
+//       id: "SoftwareTesting",
+//       name: "Software Testing",
+//     },
+//     {
+//       id: "EmbeddedSystems",
+//       name: "Embedded Systems",
+//     },
+//   ];
 
-const RoadmapPage = ({params}) => {
+const RoadmapPage = () => {
     const [isLoading, setIsLoading] = useState(true);
-  const RoadmapsId = (params.roadmap);  // Parse the event ID from params
-  const Roadmap = Roadmaps.find(e => e.id === RoadmapsId); // Find the event with the matching ID
+  // const RoadmapsId = (params.roadmap);  // Parse the event ID from params
+  // const Roadmap = Roadmaps.find(e => e.id === RoadmapsId); // Find the event with the matching ID
 
   useEffect(() => {
     (async () => {
       // const LocomotiveScroll = (await import('locomotive-scroll')).default;
       // const locomotiveScroll = new LocomotiveScroll();
-        console.log("this is roadmap current "+Roadmap.name);
-        console.log(params);
       setTimeout(() => {
         setIsLoading(false);
         document.body.style.cursor = 'default';

@@ -1,16 +1,13 @@
 "use client";
 
 import {
-  useScroll,
-  useTransform,
   motion,
 } from "framer-motion";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, {useRef} from "react";
 import GDSC from "@/components/assets/GDSC-logo.svg"
 import { collabApps } from "@/constants";
 import { LeftCurve } from "../design/Collaboration";
-
 interface TimelineEntry {
   name: string;
   role: string;
@@ -20,22 +17,13 @@ interface TimelineEntry {
 export const Team = ({ data }: { data: TimelineEntry[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
 
-  useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
-    }
-  }, [ref]);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10%", "end 50%"],
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start 10%", "end 50%"],
+  // });
 
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
     <div
@@ -139,7 +127,7 @@ export const Team = ({ data }: { data: TimelineEntry[] }) => {
                       )}
                     </svg>
                   </div>
-                  <img
+                  <Image
                     src={member.image}
                     alt={member.name}
                     className="absolute inset-0 w-full h-full object-cover"

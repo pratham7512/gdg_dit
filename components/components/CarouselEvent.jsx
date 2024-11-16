@@ -11,8 +11,6 @@ import {
 import Image from "next/image"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import Tagline from "./Tagline"
-import {grid} from "../assets"
-import { Gradient } from "../design/Roadmap"
 import Button from "./Button"
 import Heading from "./Heading"
 import { Badge } from "../ui/badge"
@@ -32,7 +30,7 @@ export function CarouselEvent({events}) {
   })
   const opacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 1, 1, 1])
   const smoothOpacity = useSpring(opacity, { damping: 20, stiffness: 100 })
-  const MotionImage = motion(Image)
+  // const MotionImage = motion(Image)
   const plugin = React.useRef(
     Autoplay({ delay: 4000, stopOnInteraction: false })
   )

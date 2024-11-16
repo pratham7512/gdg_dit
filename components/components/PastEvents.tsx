@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useEffect} from 'react'
 import { InfiniteMovingCards } from '../ui/infiniteCards'
-
+import Image from 'next/image'
 type Event = {
   id: number
   name: string
@@ -89,7 +88,7 @@ function EventCarousel({ event }: { event: Event }) {
       <div className="w-full md:w-1/2 relative">
         <div className="overflow-hidden aspect-video">
           {event.images.map((image, index) => (
-            <img
+            <Image
               key={index}
               src={image}
               alt={`${event.name} - Image ${index + 1}`}

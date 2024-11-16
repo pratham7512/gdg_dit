@@ -6,7 +6,7 @@ import useFetchEvents from '@/hooks/useFetchEvents'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, MapPin, Calendar, Clock, Link2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import {
   Accordion,
@@ -102,7 +102,7 @@ export default function Component() {
     <div className="min-h-screen bg-black text-white bg-grid-white/[0.090] ">
       <div className="max-w-5xl mx-auto border bg-black">
         <div className="relative h-[400px]">
-          <img
+          <Image
             src={event.imageUrls?.[currentImage]}
             alt={`${event.name} banner`}
             className="w-full h-full object-cover"
@@ -247,7 +247,7 @@ export default function Component() {
               <div className="grid grid-cols-3 gap-6">
                 {event.sponsors?.map((sponsor, i) => (
                   <div key={i} className="aspect-video bg-neutral-900 rounded-lg flex items-center justify-center">
-                    <img 
+                    <Image
                       src={sponsor.logo} 
                       alt={sponsor.name}
                       className="rounded-lg w-full h-full object-cover"
