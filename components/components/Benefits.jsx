@@ -85,7 +85,7 @@ const Benefits = () => {
               {item.light && <GradientLight />}
 
               <div
-                className="absolute inset-0.5 bg-n-8"
+                className="absolute inset-0.5 bg-black"
                 style={{ clipPath: "url(#benefits)" }}
               >
                 <motion.div

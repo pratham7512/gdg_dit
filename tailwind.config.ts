@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 import { fontFamily } from "tailwindcss/defaultTheme";
-
 import svgToDataUri from "mini-svg-data-uri";
 
 const config: Config = {
@@ -13,6 +12,12 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		animation: {
+			scroll:
+			  "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+		  },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -138,12 +143,14 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+			scroll: {
+			to: {
+				transform: "translate(calc(-50% - 0.5rem))",
+			},
+			},
+
   		},
-  		animation: {
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
   	}
   },
   plugins: [
