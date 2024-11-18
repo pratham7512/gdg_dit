@@ -75,13 +75,6 @@ function EventCarousel({ event }: { event: Event }) {
     return () => clearInterval(timer)
   }, [event.images.length])
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % event.images.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + event.images.length) % event.images.length)
-  }
 
   return (
     <div className="flex flex-col md:flex-row gap-8 items-start">
