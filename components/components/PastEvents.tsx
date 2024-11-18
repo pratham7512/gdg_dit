@@ -98,18 +98,6 @@ function EventCarousel({ event }: { event: Event }) {
             />
           ))}
         </div>
-        <button
-          onClick={prevSlide}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-          aria-label="Previous slide"
-        >
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
-          aria-label="Next slide"
-        >
-        </button>
       </div>
       <div className="w-full md:w-1/2">
         <h3 className="text-2xl font-semibold mb-4">{event.name}</h3>
