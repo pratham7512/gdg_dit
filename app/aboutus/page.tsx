@@ -1,4 +1,4 @@
-import CommunitySection from "@/components/components/Community";
+import Community from "@/components/components/Community";
 import Footer from "@/components/components/Footer";
 import { Team } from "@/components/components/gdgTeam";
 import Header from "@/components/components/Header";
@@ -42,7 +42,7 @@ export default function TimelineDemo() {
       <Header />
       <Team data={data} />
       <PastEvents/>
-      <CommunitySection/>
+      <Community/>
       <Footer/>
     </div>
   );

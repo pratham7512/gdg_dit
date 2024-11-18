@@ -102,9 +102,11 @@ export const InfiniteMovingCards = ({
                 }`}
               >
                 <Image
-                  src={image}
-                  alt={`${event.name} - Image ${imageIndex + 1}`}
-                  className="w-full h-full object-cover"
+                    src={image}
+                    alt={`${event.name} - Image ${imageIndex + 1}`}
+                    className="w-full h-full object-cover"
+                    width={1080} 
+                    height={720}
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4 transition-opacity opacity-0 hover:opacity-100">
                   <span className="text-white text-sm font-medium">{event.name}</span>

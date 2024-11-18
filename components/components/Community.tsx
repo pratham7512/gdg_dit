@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
-export default function Component() {
+export default function Community() {
   const [searchTerm, setSearchTerm] = useState('')
 
   const communities = [
@@ -63,7 +63,7 @@ export default function Component() {
   )
 
   return (
-    <div className="flex justify-center items-start gap-8 p-8 bg-black min-h-screen bg-background bg-grid-white/[0.050]">
+    <div className="flex justify-center items-start gap-8 p-8 min-h-screen bg-background">
       <div className="w-full max-w-md bg-[#111B21] rounded-xl overflow-hidden shadow-lg">
         <div className="p-4 flex justify-between items-center border-b border-gray-800">
           <h1 className="text-xl font-bold text-white">Communities</h1>

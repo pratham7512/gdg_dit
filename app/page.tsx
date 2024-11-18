@@ -10,6 +10,7 @@ import Collaboration  from "@/components/components/Collaboration";
 import Roadmap  from "@/components/components/Roadmap";
 import Footer  from "@/components/components/Footer";
 import ButtonGradient from "../components/assets/svg/ButtonGradient";
+import Community from '@/components/components/Community';
 
 
 export default function Home() {
@@ -40,8 +41,8 @@ export default function Home() {
         <Benefits/>
         <Collaboration />
         <Roadmap />
+        <Community/>
         <Footer />
-        
       </div>
       <ButtonGradient />
           

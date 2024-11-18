@@ -57,7 +57,7 @@ const Collaboration = () => {
             ))}
           </motion.ul>
 
-          <Button href="/try-now">Start Now</Button>
+          <Button href="/roadmap">Our Roadmap</Button>
         </div>
 
         <div className="lg:ml-auto xl:w-[38rem] mt-4">

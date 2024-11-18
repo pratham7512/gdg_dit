@@ -3,6 +3,7 @@ import { useRef } from "react";
 import Button from "./Button";
 import Heading from "./Heading";
 import Section from "./Section";
+import { InfiniteMovingCards } from "../ui/infiniteCards";
 // import Tagline from "./Tagline";
 // import { roadmap } from "../../constants";
 // import { check2, grid, loading1 } from "../assets";
@@ -10,8 +11,41 @@ import Section from "./Section";
 // import Image from "next/image";
 
 // const MotionImage = motion(Image);
+
 const Roadmap = () => {
   const targetRef = useRef(null);
+  const events = [
+    {
+      id: 1,
+      name: "Tech Talk 2023",
+      description: "A series of insightful discussions on emerging technologies and their impact on our future.",
+      images: [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVjaCUyMHRhbGt8ZW58MHx8MHx8fDA%3D",
+        "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHRlY2glMjB0YWxrfGVufDB8fDB8fHww",
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHRlY2glMjB0YWxrfGVufDB8fDB8fHww"
+      ]
+    },
+    {
+      id: 2,
+      name: "Hackathon Spring 2023",
+      description: "A 48-hour coding marathon where students collaborated to solve real-world problems.",
+      images: [
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhhY2thdGhvbnxlbnwwfHwwfHx8MA%3D%3D",
+        "https://images.unsplash.com/photo-1528901166007-3784c7dd3653?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aGFja2F0aG9ufGVufDB8fDB8fHww",
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aGFja2F0aG9ufGVufDB8fDB8fHww"
+      ]
+    },
+    {
+      id: 3,
+      name: "Workshop: Intro to AI",
+      description: "An interactive session introducing the basics of Artificial Intelligence and Machine Learning.",
+      images: [
+        "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8MHx8fDA%3D",
+        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8MHx8fDA%3D",
+        "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2V8ZW58MHx8MHx8fDA%3D"
+      ]
+    }
+  ]
   // const { scrollYProgress } = useScroll({ target: targetRef, offset: ["start end", "end start"] });
 
   // Set up transforms for parallax and fade animations
@@ -24,7 +58,8 @@ const Roadmap = () => {
   return (
     <Section className="overflow-hidden" id="roadmap" ref={targetRef}>
       <div className="container md:pb-10">
-        <Heading tag="Ready to get started" title="What we’re working on" />
+        <Heading tag="Relive the Highlights" title="A Glimpse into Our Past Events" />
+        <InfiniteMovingCards events={events} />
 
         {/* <div className="relative grid gap-6 md:grid-cols-2 md:gap-4 md:pb-[7rem]">
           {roadmap.map((item) => {
@@ -97,7 +132,7 @@ const Roadmap = () => {
         </div> */}
 
         <div className="flex justify-center mt-12 md:mt-15 xl:mt-20">
-          <Button href="/roadmap">Our roadmap</Button>
+          <Button href="/events">Upcoming Events</Button>
         </div>
       </div>
     </Section>
