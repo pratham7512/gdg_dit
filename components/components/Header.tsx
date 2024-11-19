@@ -53,10 +53,12 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2 h-[4.3rem]">
-        <a className="block w-[12rem] xl:mr-8" href="/">
-          <Image src={GDSC} width={60} height={40} alt="GDG" />
+      <a className="block " href="/">
+        <div className="flex w-[12rem] items-center xl:mr-8 gap-2">
+            <Image src={GDSC} width={40} height={30} alt="GDG" />
+          <span className="text-lg text-white font-semibold">GDG DIT</span>
+        </div>
         </a>
-
         <nav
           className={`${
             openNavigation ? "flex" : "hidden"

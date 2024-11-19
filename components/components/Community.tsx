@@ -63,7 +63,7 @@ export default function Community() {
   )
 
   return (
-    <div className="flex justify-center items-start gap-8 p-8 min-h-screen bg-background">
+    <div className="flex justify-center items-start gap-8 p-8 min-h-screen">
       <div className="w-full max-w-md bg-[#111B21] rounded-xl overflow-hidden shadow-lg">
         <div className="p-4 flex justify-between items-center border-b border-gray-800">
           <h1 className="text-xl font-bold text-white">Communities</h1>

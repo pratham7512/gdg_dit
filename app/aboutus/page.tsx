@@ -38,7 +38,7 @@ export default function TimelineDemo() {
 ]
 
   return (
-    <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+    <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden bg-black bg-grid-white/[0.090]">
       <Header />
       <Team data={data} />
       <PastEvents/>

@@ -27,7 +27,7 @@ export const Team = ({ data }: { data: TimelineEntry[] }) => {
 
   return (
     <div
-      className="pt-16 w-full bg-background bg-grid-white/[0.050] text-foreground font-sans py-10"
+      className="pt-16 w-full text-foreground font-sans py-10"
       ref={containerRef}
     >
       <div className="fixed pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_80%,black)]"></div>
