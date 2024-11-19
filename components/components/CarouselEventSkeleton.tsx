@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export function CarouselEventSkeleton() {
   return (
-    <div className="w-full h-full md:py-[5%] max-sm:py-[5%]">
+    <div className="w-full h-full md:py-[5%] max-sm:py-[5%] bg-black">
       {/* Skeleton Carousel Section */}
       <div className="container mb-16 w-3/5">
         <Skeleton className="w-full h-[60vh] rounded-xl" />
