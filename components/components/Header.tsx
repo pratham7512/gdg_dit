@@ -5,8 +5,8 @@ import GDSC from "../assets/GDSC-logo.svg";
 import { navigation } from "../../constants";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
-import { HamburgerMenu } from "../design/Header";
-import { useState } from "react";
+import { HamburgerMenu, HamburgerMenu2 } from "../design/Header";
+import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 
 import { useSession } from "next-auth/react";
@@ -21,10 +21,13 @@ const Header: React.FC = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
   // const [isClient, setIsClient] = useState(false);
   const session =useGetUser();
-  // useEffect(() => {
-  //   // Setting isClient to true once the component is mounted on the client
-  //   setIsClient(true);
-  // }, []);
+  console.log(session);
+  
+  useEffect(() => {
+    // Setting isClient to true once the component is mounted on the client
+    console.log(session);
+
+  }, []);
 
   // Using useRouter only if the component is mounted on the client
   // const { asPath } = isClient ? useRouter() : { asPath: "" };
@@ -48,8 +51,8 @@ const Header: React.FC = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 lg:bg-black/90 lg:backdrop-blur-sm ${
-        openNavigation ? "bg-n-8" : "bg-n-8/90 backdrop-blur-sm"
+      className={`fixed top-0 left-0 w-full z-50 lg:bg-transparent lg:backdrop-blur-sm ${
+        openNavigation ? "bg-black" : "bg-transparent backdrop-blur-sm"
       }`}
     >
       <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2 h-[4.3rem]">
@@ -62,24 +65,39 @@ const Header: React.FC = () => {
         <nav
           className={`${
             openNavigation ? "flex" : "hidden"
-          } fixed top-[5rem] left-0 right-0 bottom-0 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent`}
+          } fixed top-[5rem] left-0 right-0 bottom-0 bg-black lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
-          {session&&<div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
+          {session?(<div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
             {navigation.map((item) => (
               <a
                 key={item.id}
                 href={item.url}
                 onClick={handleClick}
-                className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
-                  item.onlyMobile ? "lg:hidden" : ""
-                } px-6 py-3 md:py-3 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
+                className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 px-6 py-3 md:py-3 lg:-mr-0.25 lg:text-xs lg:font-semibold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
               >
                 {item.title}
               </a>
             ))}
-          </div>}
-
-          <HamburgerMenu />
+           <Button className=" lg:hidden" onClick={async () => await signOut()}>
+            Logout
+            </Button>
+          </div>):
+           (<div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
+            <AuthDialog initialMode="signup">
+            <Button className=" lg:hidden relative p-2 py-3">
+              New account
+            </Button>
+            </AuthDialog>
+            <br />
+            <AuthDialog initialMode="signin">
+            <Button className=" lg:hidden relative p-2 py-3">
+              Sign in
+            </Button>
+            </AuthDialog>
+          </div>)
+          }
+      
+          {session?(<HamburgerMenu  />):<HamburgerMenu2  />}
         </nav>
         <div>
           {session ? (

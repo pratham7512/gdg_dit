@@ -57,18 +57,7 @@ export const navigation = [
     title: "Roadmaps",
     url: "/roadmap",
   },
-  {
-    id: "4",
-    title: "New account",
-    url: "/signup",
-    onlyMobile: true,
-  },
-  {
-    id: "5",
-    title: "Sign in",
-    url: "/signin",
-    onlyMobile: true,
-  },
+  
 ];
 
 export const heroIcons = [homeSmile, file02, searchMd, plusSquare];

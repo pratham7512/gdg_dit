@@ -34,7 +34,7 @@ export default function Component() {
   }
 
   return (
-    <footer className="w-full bg-black text-white border-t border-white/10">
+    <footer className="w-full bg-black/90 text-white border-t border-white/10">
       <div className="container px-4 py-16 mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="space-y-4">

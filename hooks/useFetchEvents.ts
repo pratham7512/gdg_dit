@@ -60,7 +60,7 @@ const useFetchEvents = (id?: string) => {
 
                     if (id) {
                         const foundEvent = eventArray.find(
-                            (event) => Number(event.id) === Number(id)
+                            (event) => (event.id) === (id)
                         );
                         setEvents(foundEvent ? [foundEvent] : null);
                     } else {
