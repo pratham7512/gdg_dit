@@ -1,6 +1,6 @@
 import Button from "./Button";
 import Section from "./Section";
-import { BottomLine } from "../design/Hero";
+
 
 import { useRef } from "react";
 import { curve } from "../assets";
@@ -53,7 +53,6 @@ const HeroRoadmap = () => {
         {/* <CompanyLogos className="hidden relative z-10 mt-20 lg:block" /> */}
       </div>
 
-      <BottomLine />
     </Section>
     </>
   )

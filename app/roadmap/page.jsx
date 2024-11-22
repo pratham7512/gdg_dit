@@ -26,7 +26,7 @@ const Page = () => {
     }, []);
 
     return (
-        <>
+        <div className="bg-grid-white/[0.090] bg-black">
             <AnimatePresence mode='wait'>
                 {isLoading && <Preloader destination="events" words={["Roadmaps", "Devlopment", "DSA!", "AI&ML", "Blockchain"]} />}
             </AnimatePresence>
@@ -51,8 +51,9 @@ const Page = () => {
                 <Footer />
             </div>
             <ButtonGradient />
+            
 
-        </>
+        </div>
     )
 }
 

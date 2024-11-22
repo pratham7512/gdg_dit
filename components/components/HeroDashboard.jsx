@@ -22,62 +22,119 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Textarea } from "@/components/ui/textarea"
+// import { Textarea } from "@/components/ui/textarea"
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+// import { uploadFileToFirebase } from '../../app/firebase/firebaseUtils'; // You need to implement this
 
 export default function AdminDashboard() {
   const router = useRouter()
-  const [events, setEvents] = useState([
-    { id: 1, name: 'CP Contest 2024', date: '2024-06-15', image: '/placeholder.svg?height=100&width=100', details: 'Annual coding competition', faq: 'Q: How to register?\nA: Visit our website', coordinators: 'John Doe, Jane Smith', contact: 'contact@cpcontest.com' },
-    { id: 2, name: 'Algorithmic Workshop', date: '2024-07-01', image: '/placeholder.svg?height=100&width=100', details: 'Learn advanced algorithms', faq: 'Q: What\'s the prerequisite?\nA: Basic programming knowledge', coordinators: 'Alice Johnson', contact: 'workshop@algo.com' },
-  ])
+
   const [roadmaps, setRoadmaps] = useState([])
   const [leaderboard, setLeaderboard] = useState([
     { id: 1, name: 'John Doe', scores: [95, 88, 92] },
     { id: 2, name: 'Jane Smith', scores: [98, 90, 95] },
   ])
 
-  const [newEvent, setNewEvent] = useState({ 
-    name: '', 
-    date: '', 
-    image: '', 
-    details: '', 
-    faq: '', 
-    coordinators: '', 
-    contact: '' 
-  })
+ 
   const [newLeaderboardEntry, setNewLeaderboardEntry] = useState({
     name: '',
     scores: ['', '', '']
   })
-  const [editingEvent, setEditingEvent] = useState(null)
+
+
   const [editingLeaderboardEntry, setEditingLeaderboardEntry] = useState(null)
 
-  useEffect(() => {
-    // Load roadmaps from local storage
-    const savedRoadmaps = JSON.parse(localStorage.getItem('roadmaps') || '[]')
-    setRoadmaps(savedRoadmaps)
-  }, [])
 
-  const addEvent = () => {
-    setEvents([...events, { ...newEvent, id: Date.now() }])
-    setNewEvent({ name: '', date: '', image: '', details: '', faq: '', coordinators: '', contact: '' })
-  }
+
+  const [events, setEvents] = useState([]); // This would be populated by the backend data
+  const [editingEvent, setEditingEvent] = useState(null);
+
+  // const handleImageUpload = async (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const imageUrl = await uploadFileToFirebase(file); // Upload file to Firebase Storage
+  //     setNewEvent((prev) => ({ ...prev, image: imageUrl }));
+  //   }
+  // };
+  const fetchEvents = async () => {
+    const response = await fetch('/api/event');
+    if (response.ok) {
+      return await response.json();
+    }
+    return [];
+  };
+
+  const fetchRoadamap = async () => {
+    const response = await fetch('/api/roadmap');
+    if (response.ok) {
+      return await response.json();
+    }
+    return [];
+  };
+  const handeladd =  () => {
+   
+    router.push('/admin/addevent');
+  };
+   
+  // const addEvent = async () => {
+  //   // Your API call to save the event in the database
+  //   const response = await fetch('/api/event', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(newEvent)
+  //   });
+  //   const result = await response.json();
+  //   setEvents((prevEvents) => [...prevEvents, result]);
+  //   setNewEvent({
+  //     name: '',
+  //     date: '',
+  //     dateTime:'',
+  //     imageUrls: null,
+  //     description:'',
+  //     details: '',
+  //     domain:'',
+  //     entryFees:'',
+  //     itemsToBring:null,
+  //     location:'',
+  //     mode:'',
+  //     faq: '',
+  //     prerequisites:'',
+  //     prizepool:null,
+  //     speakers:null,
+  //     sponsors:null,
+  //     status:'',
+  //     coordinators: '',
+  //     contact: ''
+  //   });
+  // };
 
   const startEditingEvent = (event) => {
-    setEditingEvent({ ...event })
-  }
+    setEditingEvent({ ...event });
+  };
 
-  const saveEditedEvent = () => {
-    setEvents(events.map(event => event.id === editingEvent.id ? editingEvent : event))
-    setEditingEvent(null)
-  }
+  const saveEditedEvent = async () => {
+    // Save the edited event
+    const response = await fetch(`/api/event/${editingEvent.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editingEvent)
+    });
+    const updatedEvent = await response.json();
+    setEvents((prevEvents) => prevEvents.map((e) => (e.id === updatedEvent.id ? updatedEvent : e)));
+    setEditingEvent(null);
+  };
 
-  const deleteEvent = (id) => {
-    setEvents(events.filter(event => event.id !== id))
-  }
+  const deleteEvent = async (id) => {
+    // API call to delete event
+    await fetch(`/api/event/${id}`, { method: 'DELETE' });
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+  };
 
   const addLeaderboardEntry = () => {
     const scores = newLeaderboardEntry.scores.map(score => Number(score))
@@ -114,7 +171,25 @@ export default function AdminDashboard() {
     setRoadmaps(updatedRoadmaps)
     localStorage.setItem('roadmaps', JSON.stringify(updatedRoadmaps))
   }
-
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const eventData = await fetchEvents();
+        const roadampData=await fetchRoadamap();
+        // Ensure that eventData is an object and convert it into an array
+        const roadmapArray=Object.values(roadampData);
+        const eventsArray = Object.values(eventData); 
+        setRoadmaps(roadmapArray);
+        setEvents(eventsArray);
+        console.log(events.imageUrls);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setEvents([]);  // Fallback to empty array on error
+      }
+    };
+    
+    loadData();
+  }, []); // Empty dependency array ensures this runs once on mount
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
@@ -155,217 +230,56 @@ export default function AdminDashboard() {
 
         {/* Events Tab Content */}
         <TabsContent value="events" className="space-y-4">
-          {/* ... (existing events management code) ... */}
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">Events</h2>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button><Plus className="mr-2 h-4 w-4" /> Add Event</Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[625px]">
-                <DialogHeader>
-                  <DialogTitle>Add New Event</DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="name" className="text-right">
-                      Name
-                    </Label>
-                    <Input
-                      id="name"
-                      value={newEvent.name}
-                      onChange={(e) => setNewEvent({...newEvent, name: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="date" className="text-right">
-                      Date
-                    </Label>
-                    <Input
-                      id="date"
-                      type="date"
-                      value={newEvent.date}
-                      onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="image" className="text-right">
-                      Image URL
-                    </Label>
-                    <Input
-                      id="image"
-                      value={newEvent.image}
-                      onChange={(e) => setNewEvent({...newEvent, image: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="details" className="text-right">
-                      Details
-                    </Label>
-                    <Textarea
-                      id="details"
-                      value={newEvent.details}
-                      onChange={(e) => setNewEvent({...newEvent, details: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="faq" className="text-right">
-                      FAQ
-                    </Label>
-                    <Textarea
-                      id="faq"
-                      value={newEvent.faq}
-                      onChange={(e) => setNewEvent({...newEvent, faq: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="coordinators" className="text-right">
-                      Coordinators
-                    </Label>
-                    <Input
-                      id="coordinators"
-                      value={newEvent.coordinators}
-                      onChange={(e) => setNewEvent({...newEvent, coordinators: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="contact" className="text-right">
-                      Contact
-                    </Label>
-                    <Input
-                      id="contact"
-                      value={newEvent.contact}
-                      onChange={(e) => setNewEvent({...newEvent, contact: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                </div>
-                <Button onClick={addEvent}>Add Event</Button>
-              </DialogContent>
-            </Dialog>
-          </div>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Image</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {events.map((event) => (
-                <TableRow key={event.id}>
-                  <TableCell>
-                    <Image src={event.image} width={30} height={30} alt={event.name} className="w-10 h-10 object-cover" />
-                  </TableCell>
-                  <TableCell>{event.name}</TableCell>
-                  <TableCell>{event.date}</TableCell>
-                  <TableCell>
-                    <Button variant="ghost" size="sm" onClick={() => startEditingEvent(event)}><Edit className="h-4 w-4" /></Button>
-                    <Button variant="ghost" size="sm" onClick={() => deleteEvent(event.id)}><Trash2 className="h-4 w-4" /></Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          {editingEvent && (
-            <Dialog open={!!editingEvent} onOpenChange={() => setEditingEvent(null)}>
-              <DialogContent className="sm:max-w-[625px]">
-                <DialogHeader>
-                  <DialogTitle>Edit Event</DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="edit-name" className="text-right">
-                      Name
-                    </Label>
-                    <Input
-                      id="edit-name"
-                      value={editingEvent.name}
-                      onChange={(e) => setEditingEvent({...editingEvent, name: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="edit-date" className="text-right">
-                      Date
-                    </Label>
-                    <Input
-                      id="edit-date"
-                      type="date"
-                      value={editingEvent.date}
-                      onChange={(e) => setEditingEvent({...editingEvent, date: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="edit-image" className="text-right">
-                      Image URL
-                    </Label>
-                    <Input
-                      id="edit-image"
-                      value={editingEvent.image}
-                      onChange={(e) => setEditingEvent({...editingEvent, image: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="edit-details" className="text-right">
-                      Details
-                    </Label>
-                    <Textarea
-                      id="edit-details"
-                      value={editingEvent.details}
-                      onChange={(e) => setEditingEvent({...editingEvent, details: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="edit-faq" className="text-right">
-                      FAQ
-                    </Label>
-                    <Textarea
-                      id="edit-faq"
-                      value={editingEvent.faq}
-                      onChange={(e) => setEditingEvent({...editingEvent, faq: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="edit-coordinators" className="text-right">
-                      Coordinators
-                    </Label>
-                    <Input
-                      id="edit-coordinators"
-                      value={editingEvent.coordinators}
-                      onChange={(e) => setEditingEvent({...editingEvent, coordinators: e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="edit-contact" className="text-right">
-                      Contact
-                    </Label>
-                    <Input
-                      id="edit-contact"
-                      value={editingEvent.contact}
-                      onChange={(e) => setEditingEvent({...editingEvent, contact:  e.target.value})}
-                      className="col-span-3"
-                    />
-                  </div>
-                </div>
-                <Button onClick={saveEditedEvent}>Save Changes</Button>
-              </DialogContent>
-            </Dialog>
-          )}
-        </TabsContent>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-semibold">Events</h2>
+        <Button onClick={handeladd} ><Plus className="mr-2 h-4 w-4" /> Add Event</Button>
+      </div>
+
+      <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Image</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {events.map((event) => (
+          <TableRow key={event.id}>
+            <TableCell>
+              <Image src={event.imageUrls[0]} width={30} height={30} alt={event.name} className="w-10 h-10 object-cover" />
+            </TableCell>
+            <TableCell>{event.name}</TableCell>
+            <TableCell>{event.date}</TableCell>
+            <TableCell>
+              <Button variant="ghost" size="sm" onClick={() => startEditingEvent(event)}>
+                <Edit className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => deleteEvent(event.id)}>
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+
+      {editingEvent && (
+        <Dialog open={!!editingEvent} onOpenChange={() => setEditingEvent(null)}>
+          <DialogContent className="sm:max-w-[625px]">
+            <DialogHeader>
+              <DialogTitle>Edit Event</DialogTitle>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              {/* Repeat the form similar to adding an event */}
+              {/* Form fields for editing */}
+            </div>
+            <Button onClick={saveEditedEvent}>Save Changes</Button>
+          </DialogContent>
+        </Dialog>
+      )}
+    </TabsContent>
 
         {/* Roadmaps Tab Content */}
         <TabsContent value="roadmaps" className="space-y-4">
@@ -386,7 +300,7 @@ export default function AdminDashboard() {
             <TableBody>
               {roadmaps.map((roadmap) => (
                 <TableRow key={roadmap.id}>
-                  <TableCell>{roadmap.name}</TableCell>
+                  <TableCell>{roadmap.title}</TableCell>
                   <TableCell>{roadmap.status}</TableCell>
                   <TableCell>
                     <Button variant="ghost" size="sm" onClick={() => editRoadmap(roadmap)}><Edit className="h-4 w-4" /></Button>
