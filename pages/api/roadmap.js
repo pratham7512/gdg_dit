@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 import { v4 as uuidv4 } from 'uuid';
-import serviceAccount from "../../servicekey.json";
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_KEY);
 
 if (!admin.apps.length) {
   admin.initializeApp({

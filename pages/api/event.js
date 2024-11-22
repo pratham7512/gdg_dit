@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from 'uuid'; // Assuming you are using uuid to generate unique IDs
 import * as admin from 'firebase-admin';
 
-import serviceAccount from "../../servicekey.json";
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_KEY);
 // Initialize Firebase Admin SDK
 if (!admin.apps.length) {
   admin.initializeApp({
