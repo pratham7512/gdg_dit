@@ -7,10 +7,10 @@ import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu, HamburgerMenu2 } from "../design/Header";
 import { useEffect, useState } from "react";
-import { signOut } from "next-auth/react";
-
 import { useSession } from "next-auth/react";
 import { AuthDialog } from "./Signin";
+import { UserNav } from "./user-nav";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function useGetUser() {
   const { data: session } = useSession();
@@ -76,9 +76,7 @@ const Header: React.FC = () => {
                 {item.title}
               </a>
             ))}
-           <Button className=" lg:hidden" onClick={async () => await signOut()}>
-            Logout
-            </Button>
+          <Avatar></Avatar>
           </div>):
            (<div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
             <AuthDialog initialMode="signup">
@@ -99,9 +97,15 @@ const Header: React.FC = () => {
         </nav>
         <div>
           {session ? (
-            <Button className="hidden lg:flex" onClick={async () => await signOut()}>
-            Logout
-            </Button>
+            <UserNav>
+              <Avatar className="h-14 w-14">
+                <AvatarImage
+                  src={"/placeholder.svg"}
+                  alt="User avatar"
+                />
+                <AvatarFallback>{session?.user?.email?.charAt(0) || "U"}</AvatarFallback>
+              </Avatar>
+            </UserNav>
           ) : (<div className="flex justify-between items-center">
             <AuthDialog initialMode="signup">
             <div className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block">

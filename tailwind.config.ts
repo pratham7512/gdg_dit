@@ -12,12 +12,11 @@ const config: Config = {
   ],
   theme: {
   	extend: {
-		animation: {
-			scroll:
-			  "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
-			'accordion-down': 'accordion-down 0.2s ease-out',
+  		animation: {
+  			scroll: 'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
+  			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-		  },
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -84,6 +83,16 @@ const config: Config = {
   				'11': '#1B1B2E',
   				'12': '#2E2A41',
   				'13': '#6C7275'
+  			},
+  			sidebar: {
+  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				foreground: 'hsl(var(--sidebar-foreground))',
+  				primary: 'hsl(var(--sidebar-primary))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				accent: 'hsl(var(--sidebar-accent))',
+  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+  				border: 'hsl(var(--sidebar-border))',
+  				ring: 'hsl(var(--sidebar-ring))'
   			}
   		},
   		fontFamily: {
@@ -144,13 +153,12 @@ const config: Config = {
   					height: '0'
   				}
   			},
-			scroll: {
-			to: {
-				transform: "translate(calc(-50% - 0.5rem))",
-			},
-			},
-
-  		},
+  			scroll: {
+  				to: {
+  					transform: 'translate(calc(-50% - 0.5rem))'
+  				}
+  			}
+  		}
   	}
   },
   plugins: [
