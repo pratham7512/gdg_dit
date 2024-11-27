@@ -20,9 +20,9 @@ const Hero: React.FC = () => {
   const scale = useTransform(scrollYProgress, [1, 0], [1.2, 0.9]);
 
   const texts = [
-    "Explore GDG-dit and its amazing community.",
+    "Explore GDG-DIT and its amazing community.",
     "Join us to innovate and collaborate.",
-    "Be part of the future with GDG-dit!",
+    "Be part of the future with GDG-DIT!",
   ];
   
   const [displayText, setDisplayText] = useState("");
@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">
             Join a global network of developers and innovators, sharpen your skills, and work on real-world projects.
           </p>
-          <Button href="/join-us">
+          <Button href="/aboutus">
             Contact Us
           </Button>
         </div>
@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="p-4 font-mono text-sm h-96 overflow-auto">
                 <pre className="whitespace-pre-wrap text-xl text-white leading-relaxed">
-                {"Welcome to the Google Developers Group Terminal!\n\n$ ls\nprojects  workshops  events  resources\n\n$ cat about.txt\nJoin us to explore cutting-edge technologies,\nattend workshops, and collaborate on exciting projects.\nLet's innovate together!\n\n"}
+                {"Welcome to the Google Developer Group Terminal!\n\n$ ls\nprojects  workshops  events  resources\n\n$ cat about.txt\nJoin us to explore cutting-edge technologies,\nattend workshops, and collaborate on exciting projects.\nLet's innovate together!\n\n"}
                 {displayText}
                   <span className="animate-blink">█</span>
                 </pre>

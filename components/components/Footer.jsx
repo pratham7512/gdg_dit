@@ -15,9 +15,9 @@ export default function Component() {
   const links = {
     "Quick Links": [
       { title: "Leaderboard", href: "/leaderboard" },
-      { title: "About Us", href: "/about" },
+      { title: "About Us", href: "/aboutus" },
       { title: "Upcoming Events", href: "/events" },
-      { title: "Roadmaps", href: "/roadmaps" },
+      { title: "Roadmaps", href: "/roadmap" },
     ],
     Resources: [
       { title: "Documentation", href: "#" },
@@ -43,7 +43,7 @@ export default function Component() {
               <span className="text-xl font-semibold">GDG DIT</span>
             </div>
             <p className="text-sm text-gray-400">
-              Google Developer Student Clubs DIT Chapter. Building a community of developers.
+            Google Developer Groups DIT. Building a community of developers.
             </p>
           </div>
           {Object.entries(links).map(([category, items]) => (
