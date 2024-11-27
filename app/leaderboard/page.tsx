@@ -29,7 +29,7 @@ const Ranking =() => {
         {<Chatbot />}
       </AnimatePresence>
 
-      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+      <div className="lg:pt-[2.8rem] overflow-hidden">
         <Header />
         <AnimatePresence mode='wait'>
         <Leaderboard/>

@@ -98,7 +98,7 @@ export default function Leaderboard() {
   )
 
   return (
-    <div className="min-h-screen bg-background text-foreground md:py-[5%] max-sm:py-[5%]">
+    <div className="mt-[4rem] min-h-screen bg-background text-foreground md:py-[5%] max-sm:py-[5%]">
       <div className="container mx-auto p-4 font-sans">
         <h1 className="text-3xl mb-4 font-code">CP Leaderboard</h1>
         <div className="mb-4 relative">
