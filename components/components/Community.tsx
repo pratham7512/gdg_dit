@@ -1,13 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { Search, Plus, MoreVertical } from 'lucide-react'
+import { Search, Plus, MoreVertical, Menu } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
-export default function Community() {
+
+export default function Component() {
   const [searchTerm, setSearchTerm] = useState('')
 
   const communities = [
@@ -63,87 +66,129 @@ export default function Community() {
   )
 
   return (
-    <div className="flex justify-center items-start gap-8 p-8 min-h-screen">
-      <div className="w-full max-w-md bg-[#111B21] rounded-xl overflow-hidden shadow-lg">
-        <div className="p-4 flex justify-between items-center border-b border-gray-800">
-          <h1 className="text-xl font-bold text-white">Communities</h1>
+    <div className="flex flex-col lg:flex-row justify-center items-start gap-8 p-4 lg:p-8 min-h-screen bg-background">
+      <Card className="w-full lg:w-[500px] bg-card">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-2xl font-bold">Communities</CardTitle>
           <div className="flex gap-2">
-            <Button size="icon" variant="ghost" className="text-gray-400 hover:text-white">
+            <Button size="icon" variant="ghost">
               <Plus className="h-5 w-5" />
+              <span className="sr-only">Add community</span>
             </Button>
-            <Button size="icon" variant="ghost" className="text-gray-400 hover:text-white">
+            <Button size="icon" variant="ghost">
               <MoreVertical className="h-5 w-5" />
+              <span className="sr-only">More options</span>
             </Button>
           </div>
-        </div>
-
-        <div className="p-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+        </CardHeader>
+        <CardContent>
+          <div className="relative mb-4">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input 
               placeholder="Search" 
-              className="w-full bg-[#202C33] border-none text-white pl-10 placeholder:text-gray-400 focus-visible:ring-0"
+              className="pl-10"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-        </div>
-
-        <div className="flex gap-2 p-2 overflow-x-auto scrollbar-none">
-          {filters.map((filter, index) => (
-            <Button
-              key={filter}
-              variant="ghost"
-              className={cn(
-                "text-sm rounded-full px-4 py-1 h-auto",
-                index === 0 ? "bg-[#00A884] text-white hover:bg-[#00A884]" : "text-gray-400 hover:bg-[#202C33]"
-              )}
-            >
-              {filter}
-            </Button>
-          ))}
-        </div>
-
-        <div className="h-[calc(95vh-240px)] overflow-y-auto">
-          {filteredCommunities.map((community) => (
-            <div
-              key={community.id}
-              className="flex items-center gap-3 p-3 hover:bg-[#202C33] cursor-pointer border-b border-gray-800"
-            >
-              <Avatar className="h-12 w-12">
-                <AvatarImage src={community.image} />
-                <AvatarFallback className="bg-[#202C33] text-white">
-                  {community.name.slice(0, 2)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <div className="flex justify-between items-start">
-                  <h3 className="text-white font-medium truncate">{community.name}</h3>
-                  <span className="text-xs text-gray-400 whitespace-nowrap ml-2">
-                    {community.time}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-400 truncate">
-                  {community.message}
-                </p>
-              </div>
+          <ScrollArea className="h-[calc(100vh-240px)]">
+            <div className="flex gap-2 pb-4 overflow-x-auto">
+              {filters.map((filter, index) => (
+                <Button
+                  key={filter}
+                  variant={index === 0 ? "default" : "outline"}
+                  className="rounded-full px-4 py-1 h-auto text-sm"
+                >
+                  {filter}
+                </Button>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+            {filteredCommunities.map((community) => (
+              <div
+                key={community.id}
+                className="flex items-center gap-3 p-3 hover:bg-accent rounded-lg cursor-pointer"
+              >
+                <Avatar className="h-12 w-12">
+                  <AvatarImage src={community.image} alt={community.name} />
+                  <AvatarFallback>{community.name.slice(0, 2)}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1 min-w-0">
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-medium truncate">{community.name}</h3>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap ml-2">
+                      {community.time}
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground truncate">
+                    {community.message}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </ScrollArea>
+        </CardContent>
+      </Card>
 
-      <div className="w-full max-w-md">
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight max-w-4/5">
-              <div>Join our WhatsApp</div>  
-              <div>communities now !</div>
-            </h1>
-        <p className="text-xl text-gray-400 mt-5">
-          Connect with fellow developers, share knowledge, and stay updated on the latest in tech. Our GDSC communities are the perfect place to grow your skills and network with like-minded individuals.
-        </p>
-        <Button className="mt-6 bg-[#00A884] hover:bg-[#008f6f] text-white">
-          Explore All Communities
-        </Button>
-      </div>
+      <Card className="w-full lg:w-[500px] mt-8 lg:mt-0">
+        <CardContent className="pt-6">
+          <h1 className="text-3xl lg:text-5xl font-bold tracking-tight mb-4">
+            Join our WhatsApp communities now!
+          </h1>
+          <p className="text-xl text-muted-foreground mb-6">
+            Connect with fellow developers, share knowledge, and stay updated on the latest in tech. Our GDSC communities are the perfect place to grow your skills and network with like-minded individuals.
+          </p>
+          <Button size="lg" className="w-full sm:w-auto">
+            Explore All Communities
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" className="fixed bottom-4 right-4 lg:hidden">
+            <Menu className="h-6 w-6" />
+            <span className="sr-only">Open communities</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+          <div className="h-full flex flex-col">
+            <h2 className="text-2xl font-bold mb-4">Communities</h2>
+            <div className="relative mb-4">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Input 
+                placeholder="Search" 
+                className="pl-10"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <ScrollArea className="flex-1">
+              {filteredCommunities.map((community) => (
+                <div
+                  key={community.id}
+                  className="flex items-center gap-3 p-3 hover:bg-accent rounded-lg cursor-pointer"
+                >
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage src={community.image} alt={community.name} />
+                    <AvatarFallback>{community.name.slice(0, 2)}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-medium truncate">{community.name}</h3>
+                      <span className="text-xs text-muted-foreground whitespace-nowrap ml-2">
+                        {community.time}
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted-foreground truncate">
+                      {community.message}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </ScrollArea>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
