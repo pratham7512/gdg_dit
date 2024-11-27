@@ -49,22 +49,20 @@ const Header: React.FC = () => {
   return (
     <div
       className={`fixed top-0 left-0 w-full z-50 lg:bg-black/90 lg:backdrop-blur-sm ${
-        openNavigation ? "bg-n-8" : "bg-n-8/90 backdrop-blur-sm"
+        openNavigation ? "bg-black" : "bg-n-black backdrop-blur-sm"
       }`}
     >
       <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2 h-[4.3rem]">
-      <a className="block " href="/">
-        <div className="flex w-[12rem] items-center xl:mr-8 gap-2">
-            <Image src={GDSC} width={40} height={30} alt="GDG" />
-          <span className="text-lg text-white font-semibold">GDG DIT</span>
-        </div>
+        <a className="block w-[12rem] xl:mr-8" href="/">
+          <Image src={GDSC} width={60} height={40} alt="GDG" />
         </a>
+
         <nav
           className={`${
             openNavigation ? "flex" : "hidden"
-          } fixed top-[5rem] left-0 right-0 bottom-0 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent`}
+          } fixed top-[5rem] left-0 right-0 bottom-0 bg-black lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
-          {session&&<div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
+          {<div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
             {navigation.map((item) => (
               <a
                 key={item.id}

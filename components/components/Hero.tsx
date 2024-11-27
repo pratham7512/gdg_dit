@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
     >
       <div className="container relative" ref={parallaxRef}>
         <div className="relative z-20 relative max-w-[62rem] mx-auto text-center mb-[3.875rem] md:mb-20 lg:mb-[6.25rem]">
-          <h1 className="h1 mb-6 ">
+          <h1 className=" text-3xl font-bold lg:h1 mb-6 ">
             Unlock Your Potential with&nbsp;GDG&nbsp;{` `}
             <span className="inline-block relative">
               Community{" "}

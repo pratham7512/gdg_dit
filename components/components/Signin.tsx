@@ -3,10 +3,8 @@
 import React, { useState } from 'react';
 import { X, Loader2 } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { auth } from '@/app/firebase/config';
 
 interface AuthDialogProps {
   children: React.ReactNode;
@@ -19,13 +17,13 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
   initialMode = 'signin',
   onSuccess 
 }) => {
-  const [createUserWithEmailAndPassword] = 
-    useCreateUserWithEmailAndPassword(auth);
+
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
+    surname: '',
     email: '',
     password: ''
   });
@@ -42,7 +40,8 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
 
   const resetForm = () => {
     setFormData({
-      username: '',
+      name: '',
+      surname: '',
       email: '',
       password: ''
     });
@@ -71,12 +70,22 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
         onSuccess?.();
         router.push("/");
       } else {
-        const result = await createUserWithEmailAndPassword(
-          formData.email, 
-          formData.password
-        );
-        
-        if (!result) {
+        const response = await fetch("https://gdg-cfw.prathameshdesai679.workers.dev/cr-acc", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            surname: formData.surname,
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
           setError("Failed to create account");
           return;
         }
@@ -89,9 +98,9 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
         const successMessage = "Account created successfully! Please sign in.";
         setError(successMessage);
       }
-    } catch (err:unknown) {
+    } catch (err: unknown) {
       console.error(err);
-        setError("An unexpected error occurred. Please try again.");
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -141,12 +150,28 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
                   {mode === 'signup' && (
                     <div className="space-y-2">
                       <label className="block text-sm text-[#6E6E8F] font-code">
-                        USERNAME
+                        NAME
                       </label>
                       <input
                         type="text"
-                        name="username"
-                        value={formData.username}
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="w-full h-10 rounded-lg bg-[#1A1A27] px-4 text-md text-white border border-[#2A2A3C] focus:border-[#5252E5] focus:outline-none transition-colors font-code disabled:opacity-50"
+                        required
+                        disabled={isLoading}
+                      />
+                    </div>
+                  )}
+                  {mode === 'signup' && (
+                    <div className="space-y-2">
+                      <label className="block text-sm text-[#6E6E8F] font-code">
+                        SURNAME
+                      </label>
+                      <input
+                        type="text"
+                        name="surname"
+                        value={formData.surname}
                         onChange={handleInputChange}
                         className="w-full h-10 rounded-lg bg-[#1A1A27] px-4 text-md text-white border border-[#2A2A3C] focus:border-[#5252E5] focus:outline-none transition-colors font-code disabled:opacity-50"
                         required
