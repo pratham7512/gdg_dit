@@ -19,21 +19,21 @@ export default function Component() {
       name: "Web Development Community",
       message: "Join us to learn and discuss web development!",
       time: "Thursday",
-      image: "https://api.dicebear.com/6.x/initials/svg?seed=WD"
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s"
     },
     {
       id: 2,
       name: "Android Development",
       message: "🎯 Learn Android app development with Kotlin",
       time: "01:17",
-      image: "https://api.dicebear.com/6.x/initials/svg?seed=AD"
+      image: "https://i.pinimg.com/736x/95/b7/e1/95b7e17b5161175de4fe88b1b2602236.jpg"
     },
     {
       id: 3,
       name: "AI/ML Community GDSC",
       message: "📚 Resources for getting started with AI/ML",
       time: "00:38",
-      image: "https://api.dicebear.com/6.x/initials/svg?seed=AI"
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s"
     },
     {
       id: 4,
