@@ -120,7 +120,7 @@ export function UserNav({ children }: UserNavProps) {
               src={"/placeholder.svg"}
               alt="User avatar"
             />
-            <AvatarFallback>{session?.user?.email?.charAt(0) || "U"}</AvatarFallback>
+            <AvatarFallback className="text-lg font-bold">{session?.user?.email?.charAt(0).toUpperCase() || "U"}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
             <p className="text-md font-semibold">

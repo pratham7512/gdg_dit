@@ -98,12 +98,12 @@ const Header: React.FC = () => {
         <div>
           {session ? (
             <UserNav>
-              <Avatar className="h-14 w-14">
+              <Avatar className="h-10 w-10">
                 <AvatarImage
                   src={"/placeholder.svg"}
                   alt="User avatar"
                 />
-                <AvatarFallback>{session?.user?.email?.charAt(0) || "U"}</AvatarFallback>
+                <AvatarFallback>{session?.user?.email?.charAt(0).toUpperCase() || "U"}</AvatarFallback>
               </Avatar>
             </UserNav>
           ) : (<div className="flex justify-between items-center">
