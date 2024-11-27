@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { NEXT_AUTH_CONFIG } from '@/lib/auth'; // Update this path to point to your NEXT_AUTH_CONFIG
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     try {
         // Retrieve session to access the token
         const session = await getServerSession(NEXT_AUTH_CONFIG);

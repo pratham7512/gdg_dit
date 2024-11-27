@@ -10,6 +10,14 @@ interface CustomUser {
   admin: boolean;
 }
 
+// Define the user object type for JWT
+interface User {
+  id: string;
+  email: string;
+  admin: boolean;
+  token: string; // Include token in the user type
+}
+
 // Extend the JWT type to include custom properties
 declare module "next-auth/jwt" {
   interface JWT {
@@ -96,7 +104,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         token.id = (user as CustomUser).id;
         token.email = (user as CustomUser).email;
         token.admin = (user as CustomUser).admin;
-        token.token = (user as any).token; // Add token from authorize to JWT
+        token.token = (user as User).token; // Use User type instead of any
         token.exp = Math.floor(Date.now() / 1000) + 60 * 60; // 1 hour expiry
       }
       return token;
@@ -104,7 +112,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
 
     async session({ session, token }) {
       if (!session.user) {
-        session.user = {} as any;
+        session.user = {} as User; // Use User type instead of any
       }
       session.user.id = token.id;
       session.user.email = token.email;
