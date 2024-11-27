@@ -1,56 +1,70 @@
 "use client";
 
-import {
-  motion,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import React, {useRef} from "react";
-import GDSC from "@/components/assets/GDSC-logo.svg"
-import { collabApps } from "@/constants";
+import React, { useEffect, useState } from "react";
 import { LeftCurve } from "../design/Collaboration";
+import GDSC from "@/components/assets/GDSC-logo.svg";
+import { collabApps } from "@/constants";
+
 interface TimelineEntry {
+  id: string;
   name: string;
   role: string;
   image: string;
+  bio?: string;
+  domain?: string;
+  socialLinks?: {
+    linkedin?: string;
+    github?: string;
+    twitter?: string;
+  };
 }
 
-export const Team = ({ data }: { data: TimelineEntry[] }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+export const Team = () => {
+  const [teamData, setTeamData] = useState<TimelineEntry[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      try {
+        const response = await fetch('/api/team-members'); // Replace with your API endpoint
+        const data = await response.json();
+        setTeamData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching team data:", error);
+        setLoading(false);
+      }
+    };
+    
+    fetchTeamData();
+  }, []);
 
-
-  // const { scrollYProgress } = useScroll({
-  //   target: containerRef,
-  //   offset: ["start 10%", "end 50%"],
-  // });
-
+  if (loading) {
+    return (
+      <div className="text-center py-16">
+        <p>Loading team data...</p>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className="pt-16 w-full text-foreground font-sans py-10"
-      ref={containerRef}
-    >
+    <div className="pt-16 w-full text-foreground font-sans py-10">
       <div className="fixed pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_80%,black)]"></div>
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-10">
         <div className="flex flex-col lg:flex-row justify-between items-start mb-10">
           <div className="flex flex-col items-start gap-6 mb-6 lg:mb-0">
-            {/* <div className="flex items-center py-8 justify-start">
-              <Image src={GDSC} alt="GDSC Logo" className="w-[90px] h-[90px]" />
-              <h2 className="text-lg font-bold md:text-4xl text-foreground max-w-4xl ml-4">
-                Google Developer Groups DIT
-              </h2>
-            </div> */}
             <div className="pl-2 z-10 relative">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight max-w-3xl">
-              Meet our team of <span className="italic">creators</span>,{" "}
-              <span className="italic">designers</span>, and world-class{" "}
-              <span className="italic">problem solvers</span>
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-3xl">
-              To be the company our customers want us to be, it takes an{" "}
-              <span className="italic">eclectic group</span> of passionate operators. Get to know the people{" "}
-              <span className="italic">leading the way</span> at Untitled.
-            </p>
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight max-w-3xl">
+                Meet our team of <span className="italic">Developers</span>,{" "}
+                <span className="italic">designers</span>, and world-class{" "}
+                <span className="italic">problem solvers</span>
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground max-w-3xl">
+              Join a global network of developers and innovators, 
+              sharpen your skills, and work on real-world projects.
+              </p>
             </div>
           </div>
           <div className="hidden lg:block lg:ml-auto xl:w-[30rem] mt-4">
@@ -100,10 +114,10 @@ export const Team = ({ data }: { data: TimelineEntry[] }) => {
             </motion.div>
           </div>
         </div>
-        <div ref={ref} className="relative mx-auto mt-20">
+        <div className="relative mx-auto mt-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {data.map((member) => (
-              <div key={member.name} className="space-y-4">
+            {teamData.map((member) => (
+              <div key={member.id} className="space-y-4">
                 <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
                   <div className="absolute inset-0 opacity-10">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
