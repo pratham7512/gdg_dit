@@ -65,7 +65,13 @@ export default function AdminDashboard() {
     }
     return [];
   };
-
+  const fetchteam = async () => {
+    const response = await fetch('/api/team-members');
+    if (response.ok) {
+      return await response.json();
+    }
+    return [];
+  };
   const fetchRoadamap = async () => {
     const response = await fetch('/api/roadmap');
     if (response.ok) {
@@ -77,7 +83,10 @@ export default function AdminDashboard() {
    
     router.push('/admin/addevent');
   };
+  const [teamMembers, setTeamMembers] = useState([
    
+  ])
+  const [editingTeamMember, setEditingTeamMember] = useState(null)
   // const addEvent = async () => {
   //   // Your API call to save the event in the database
   //   const response = await fetch('/api/event', {
@@ -176,11 +185,15 @@ export default function AdminDashboard() {
       try {
         const eventData = await fetchEvents();
         const roadampData=await fetchRoadamap();
+        const teamData=await fetchteam();
         // Ensure that eventData is an object and convert it into an array
+
         const roadmapArray=Object.values(roadampData);
         const eventsArray = Object.values(eventData); 
+        const teamArray=Object.values(teamData);
         setRoadmaps(roadmapArray);
         setEvents(eventsArray);
+        setTeamMembers(teamArray);
         console.log(events.imageUrls);
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -219,6 +232,14 @@ export default function AdminDashboard() {
             <div className="text-2xl font-bold">{leaderboard.length}</div>
           </CardContent>
         </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Team Members Entries</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{teamMembers.length}</div>
+          </CardContent>
+        </Card>
       </div>
 
       <Tabs defaultValue="events" className="space-y-4">
@@ -226,6 +247,7 @@ export default function AdminDashboard() {
           <TabsTrigger value="events">Manage Events</TabsTrigger>
           <TabsTrigger value="roadmaps">Manage Roadmaps</TabsTrigger>
           <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
+          <TabsTrigger value="team">Team</TabsTrigger>
         </TabsList>
 
         {/* Events Tab Content */}
@@ -429,6 +451,55 @@ export default function AdminDashboard() {
                   ))}
                 </div>
                 <Button onClick={saveEditedLeaderboardEntry}>Save Changes</Button>
+              </DialogContent>
+            </Dialog>
+          )}
+        </TabsContent>
+         <TabsContent value="team" className="space-y-4">
+          <div className="flex justify-between items-center">
+            <h2 className="text-2xl font-semibold">Team Members</h2>
+            <Link href="addmember">
+              <Button><Plus className="mr-2 h-4 w-4" /> Add Member</Button>
+            </Link>
+          </div>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Image</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Domain</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {teamMembers.map((member) => (
+                <TableRow key={member.id}>
+                  <TableCell>
+                    <Image src={member.image} width={40} height={40} alt={member.name} className="rounded-full" />
+                  </TableCell>
+                  <TableCell>{member.name}</TableCell>
+                  <TableCell>{member.role}</TableCell>
+                  <TableCell>{member.domain}</TableCell>
+                  <TableCell>
+                    <Button variant="ghost" size="sm" onClick={() => startEditingTeamMember(member)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => deleteTeamMember(member.id)}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          {editingTeamMember && (
+            <Dialog open={!!editingTeamMember} onOpenChange={() => setEditingTeamMember(null)}>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Edit Team Member</DialogTitle>
+                </DialogHeader>
+                
               </DialogContent>
             </Dialog>
           )}
