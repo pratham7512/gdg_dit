@@ -26,29 +26,25 @@ export default function Home() {
     })();
   }, []);
 
-  // Compare dates using getTime() for accurate comparison
-  if (0) {
-    return <ComingSoon />; // Show ComingSoon if before 5:30 PM
-  } else {
-    return (
-      <>
-        <AnimatePresence mode='wait'>
-          {isLoading && <Preloader />}
-        </AnimatePresence>
-        <AnimatePresence mode='wait'>
-          {!isLoading && <Chatbot />}
-        </AnimatePresence>
-        <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden bg-black bg-grid-white/[0.090]">
-          <Header />
-          <Hero />
-          <Benefits />
-          <Collaboration />
-          <Roadmap />
-          <Community />
-          <Footer />
-        </div>
-        <ButtonGradient />
-      </>
-    );
-  }
+
+  return (
+    <>
+      <AnimatePresence mode='wait'>
+        {isLoading && <Preloader />}
+      </AnimatePresence>
+      <AnimatePresence mode='wait'>
+        {!isLoading && <Chatbot />}
+      </AnimatePresence>
+      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden bg-black bg-grid-white/[0.090]">
+        <Header />
+        <Hero />
+        <Benefits />
+        <Collaboration />
+        <Roadmap />
+        <Community />
+        <Footer />
+      </div>
+      <ButtonGradient />
+    </>
+  );
 }
