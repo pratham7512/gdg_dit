@@ -1,3 +1,18 @@
+"use client"
+import { AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import Preloader  from "@/components/Preloader";
+import Chatbot  from "@/components/Chatbot";
+import Benefits  from "@/components/components/Benefits";
+import Header  from "@/components/components/Header";
+import Hero  from "@/components/components/Hero";
+import Collaboration  from "@/components/components/Collaboration";
+import Roadmap  from "@/components/components/Roadmap";
+import Footer  from "@/components/components/Footer";
+import ButtonGradient from "../components/assets/svg/ButtonGradient";
+import Community from '@/components/components/Community';
+import ComingSoon from '@/components/components/CommingSoon';
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const currentDate = new Date();
