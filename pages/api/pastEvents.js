@@ -35,10 +35,9 @@ export default async function handler(req, res) {
         const pastEventsSnapshot = await database.ref('events/pastEvents').once('value');
         const pastEvents = pastEventsSnapshot.val();
 
-        // Safeguard against undefined or null data
+        // Ensure pastEvents is always an object
         if (!pastEvents || typeof pastEvents !== 'object') {
-          console.error('Fetched past events data is invalid or undefined:', pastEvents);
-          return res.status(200).json([]); // Return an empty array
+          return res.status(200).json([]); // Return an empty array if no data
         }
 
         // Format the response
@@ -51,7 +50,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error('Error fetching past events:', error);
-      return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+      return res.status(500).json({ message: 'Internal Server Error', error });
     }
   } else {
     return res.status(405).json({ message: 'Method not allowed' });
