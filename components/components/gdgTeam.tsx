@@ -141,7 +141,7 @@ export const Team = () => {
                       )}
                     </svg>
                   </div>
-                  <Image
+                  <img
                     src={member.image}
                     alt={member.name}
                     className="absolute inset-0 w-full h-full object-cover"
