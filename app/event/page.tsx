@@ -31,7 +31,7 @@ const Event = () => {
         <Chatbot />
       </AnimatePresence>
 
-      <div className=" lg:pt-[2.8rem] overflow-hidden">
+      <div className=" lg:pt-[2.8rem] overflow-hidden bg-black">
         <Header />
         <EventPage/>
         <Footer />
