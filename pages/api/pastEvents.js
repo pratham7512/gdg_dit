@@ -34,18 +34,13 @@ export default async function handler(req, res) {
         // Fetch all past events
         const pastEventsSnapshot = await database.ref('events/pastEvents').once('value');
         const pastEvents = pastEventsSnapshot.val();
-
-        // Ensure pastEvents is always an object
-        if (!pastEvents || typeof pastEvents !== 'object') {
-          return res.status(200).json([]); // Return an empty array if no data
-        }
-
+        
+        
         // Format the response
-        const pastEventsList = Object.keys(pastEvents).map((key) => ({
-          id: key,
-          ...pastEvents[key],
-        }));
-
+        const pastEventsList = pastEvents
+          ? Object.keys(pastEvents).map((key) => ({ id: key, ...pastEvents[key] }))
+          : [];
+          console.log(pastEventsList);
         return res.status(200).json(pastEventsList);
       }
     } catch (error) {
