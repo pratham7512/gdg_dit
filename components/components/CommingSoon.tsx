@@ -12,7 +12,7 @@ export default function ComingSoon() {
   })
 
   useEffect(() => {
-    const targetDate = new Date('2024-11-28T17:30:00+05:30') // Set your launch date here
+    const targetDate = new Date('2024-11-28T17:00:00+05:30') // Set your launch date here
 
     const calculateTimeLeft = () => {
       const now = new Date()
