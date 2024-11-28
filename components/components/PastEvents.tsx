@@ -23,36 +23,33 @@ export default function PastEvents() {
         if (!response.ok) {
           throw new Error(`Failed to fetch events: ${response.statusText}`);
         }
-
+  
         const data = await response.json();
-
-        // Validate that data is an array
-        if (!Array.isArray(data)) {
-          throw new Error('Fetched data is not in the expected array format.');
-        }
-
-        // Add fallback for missing properties
-        const validatedData = data.map((event) => ({
-          id: event.id ?? 0, // Ensure id is a number
-          name: event.name || 'Unnamed Event', // Fallback for name
-          description: event.description || 'No description available', // Fallback for description
-          imageUrls: Array.isArray(event.imageUrls) ? event.imageUrls : [], // Ensure imageUrls is always an array
-        }));
-
+  
+        // Ensure data is always an array
+        const validatedData = Array.isArray(data)
+          ? data.map((event) => ({
+              id: event?.id ?? 0, // Ensure id is a number
+              name: event?.name || 'Unnamed Event', // Fallback for name
+              description: event?.description || 'No description available', // Fallback for description
+              imageUrls: Array.isArray(event?.imageUrls) ? event.imageUrls : [], // Ensure imageUrls is always an array
+            }))
+          : []; // Fallback to an empty array if data is not valid
+  
         setEvents(validatedData);
-        setLoading(false);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message); // Access the error message
-        } else {
-          setError('An unknown error occurred');
-        }
+      } catch (err) {
+        // Handle errors gracefully
+        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+        setError(errorMessage);
+      } finally {
+        // Ensure loading is always set to false
         setLoading(false);
       }
     };
-
+  
     fetchEvents();
   }, []);
+  
 
   if (loading) {
     return (
