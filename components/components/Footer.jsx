@@ -1,34 +1,30 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Facebook, Github, Instagram, Linkedin, Twitter } from 'lucide-react'
+import {  Instagram, Linkedin, Mail, Phone } from 'lucide-react'
 import GDSC from "../assets/GDSC-logo.svg";
 
 export default function Component() {
   const socials = [
-    { id: 1, title: "Twitter", url: "#", icon: Twitter },
-    { id: 2, title: "Facebook", url: "#", icon: Facebook },
-    { id: 3, title: "Instagram", url: "#", icon: Instagram },
-    { id: 4, title: "LinkedIn", url: "#", icon: Linkedin },
-    { id: 5, title: "GitHub", url: "#", icon: Github },
+    { id: 1, title: "Instagram", url: "#", icon: Instagram },
+    { id: 2, title: "LinkedIn", url: "#", icon: Linkedin },
+    { id: 3, title: "WhatsApp", url: "https://chat.whatsapp.com/Jt2uFQ1vQf249FHpFCnPGh", icon: Phone },
+    { id: 4, title: "Mail", url: "mailto:contactus@gdgdit.tech", icon: Mail },
   ]
 
   const links = {
     "Quick Links": [
       { title: "Leaderboard", href: "/leaderboard" },
-      { title: "About Us", href: "/about" },
+      { title: "About Us", href: "/aboutus" },
       { title: "Upcoming Events", href: "/events" },
-      { title: "Roadmaps", href: "/roadmaps" },
     ],
     Resources: [
-      { title: "Documentation", href: "#" },
+      { title: "Roadmaps", href: "/roadmap" },
       { title: "Blog", href: "#" },
       { title: "Community", href: "#" },
-      { title: "Contact", href: "#" },
+      { title: "Contact", href: "mailto:contactus@gdgdit.tech" },
     ],
     Community: [
-      { title: "Join Discord", href: "#" },
-      { title: "Follow Twitter", href: "#" },
-      { title: "GitHub", href: "#" },
+      { title: "Join whatsapp", href: "https://chat.whatsapp.com/Jt2uFQ1vQf249FHpFCnPGh" },
       { title: "Code of Conduct", href: "#" },
     ],
   }
@@ -43,7 +39,7 @@ export default function Component() {
               <span className="text-xl font-semibold">GDG DIT</span>
             </div>
             <p className="text-sm text-gray-400">
-              Google Developer Student Clubs DIT Chapter. Building a community of developers.
+            Google Developer Groups DIT. Building a community of developers.
             </p>
           </div>
           {Object.entries(links).map(([category, items]) => (

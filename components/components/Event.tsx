@@ -93,7 +93,7 @@ export default function EventPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white bg-grid-white/[0.090] mt-6">
+    <div className="min-h-screen bg-black text-white bg-grid-white/[0.090] mt-[2rem]">
       <div className="max-w-5xl mx-auto border bg-black">
         <div className="relative h-[400px]">
           <Image

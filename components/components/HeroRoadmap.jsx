@@ -1,4 +1,4 @@
-import Button from "./Button";
+
 import Section from "./Section";
 
 
@@ -44,9 +44,6 @@ const HeroRoadmap = () => {
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">
             Join a global network of developers and GDG provide a community effort to create roadmaps, guides and other educational content to help guide developers in picking up a path and guide their learnings.
             </p>
-          <Button href="/join-us">
-            Contact Us
-          </Button>
         </div>
         
 

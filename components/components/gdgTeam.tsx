@@ -30,7 +30,10 @@ export const Team = () => {
       try {
         const response = await fetch('/api/team-members'); // Replace with your API endpoint
         const data = await response.json();
-        setTeamData(data);
+        const sortedData = data.sort((a: TimelineEntry, b: TimelineEntry) => {
+          return (a.domain || '').localeCompare(b.domain || '');
+        });
+        setTeamData(sortedData);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching team data:", error);
