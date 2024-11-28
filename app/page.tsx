@@ -1,26 +1,29 @@
 "use client"
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from "react";
-import Preloader  from "@/components/Preloader";
-import Chatbot  from "@/components/Chatbot";
-import Benefits  from "@/components/components/Benefits";
-import Header  from "@/components/components/Header";
-import Hero  from "@/components/components/Hero";
-import Collaboration  from "@/components/components/Collaboration";
-import Roadmap  from "@/components/components/Roadmap";
-import Footer  from "@/components/components/Footer";
+import Preloader from "@/components/Preloader";
+import Chatbot from "@/components/Chatbot";
+import Benefits from "@/components/components/Benefits";
+import Header from "@/components/components/Header";
+import Hero from "@/components/components/Hero";
+import Collaboration from "@/components/components/Collaboration";
+import Roadmap from "@/components/components/Roadmap";
+import Footer from "@/components/components/Footer";
 import ButtonGradient from "../components/assets/svg/ButtonGradient";
 import Community from '@/components/components/Community';
 import ComingSoon from '@/components/components/CommingSoon';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  
+  // Current date
+  const currentDate = new Date();
+  
+  // Target date
+  const targetDate = new Date('2025-11-28T17:30:00+05:30'); // 5:30 PM IST on 28-11-2025
 
   useEffect(() => {
     (async () => {
-      // const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      // const locomotiveScroll = new LocomotiveScroll();
-
       setTimeout(() => {
         setIsLoading(false);
         document.body.style.cursor = 'default';
@@ -29,8 +32,8 @@ export default function Home() {
     })();
   }, []);
 
-  // Check if current date is before the target date
-  if (0) {
+  // Compare dates using getTime() for accurate comparison
+  if (currentDate.getTime() < targetDate.getTime()) {
     return <ComingSoon />; // Show ComingSoon if before 5:30 PM
   } else {
     return (
