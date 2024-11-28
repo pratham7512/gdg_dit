@@ -11,7 +11,6 @@ import Roadmap  from "@/components/components/Roadmap";
 import Footer  from "@/components/components/Footer";
 import ButtonGradient from "../components/assets/svg/ButtonGradient";
 import Community from '@/components/components/Community';
-import ComingSoon from '@/components/components/CommingSoon';
 
 
 export default function Home() {
