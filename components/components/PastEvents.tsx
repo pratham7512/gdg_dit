@@ -4,6 +4,13 @@ import { useState, useEffect } from 'react';
 import { InfiniteMovingCards } from '../ui/infiniteCards';
 import Image from 'next/image';
 
+type RawEvent = {
+  id?: number;
+  name?: string;
+  description?: string;
+  imageUrls?: string[];
+};
+
 type Event = {
   id: number;
   name: string;
@@ -24,17 +31,17 @@ export default function PastEvents() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
   
-        const data = await response.json();
+        const data: RawEvent[] = await response.json();
   
-        // More robust data validation
-        const validatedData = (data || []).filter(Boolean).map((event: any) => ({
-          id: Number(event?.id) || 0,
-          name: event?.name?.toString() || 'Unnamed Event',
-          description: event?.description?.toString() || 'No description available',
-          imageUrls: Array.isArray(event?.imageUrls) 
-            ? event.imageUrls.filter((url: any) => typeof url === 'string')
-            : []
-        }));
+        const validatedData: Event[] = data
+          .filter((event): event is RawEvent => event != null)
+          .map(event => ({
+            id: Number(event.id) || 0,
+            name: event.name?.toString() || 'Unnamed Event',
+            description: event.description?.toString() || 'No description available',
+            imageUrls: (event.imageUrls || [])
+              .filter((url): url is string => typeof url === 'string')
+          }));
   
         setEvents(validatedData);
       } catch (err) {
