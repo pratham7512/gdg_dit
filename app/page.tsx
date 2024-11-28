@@ -32,7 +32,7 @@ export default function Home() {
   }, []);
 
   // Check if current date is before the target date
-  if (currentDate < targetDate) {
+  if (0) {
     return <ComingSoon />; // Show ComingSoon if before 5:30 PM
   } else {
     return (
