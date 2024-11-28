@@ -33,7 +33,7 @@ export default function Home() {
   }, []);
 
   // Compare dates using getTime() for accurate comparison
-  if (currentDate.getTime() < targetDate.getTime()) {
+  if (0) {
     return <ComingSoon />; // Show ComingSoon if before 5:30 PM
   } else {
     return (
