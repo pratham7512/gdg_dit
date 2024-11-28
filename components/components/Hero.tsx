@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">
             Join a global network of developers and innovators, sharpen your skills, and work on real-world projects.
           </p>
-          <Button href="/aboutus">
+          <Button href="mailto:contactus@gdgdit.tech">
             Contact Us
           </Button>
         </div>

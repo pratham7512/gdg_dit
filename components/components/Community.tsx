@@ -15,46 +15,76 @@ export default function Component() {
 
   const communities = [
     {
-      id: 1,
-      name: "Web Development Community",
-      message: "Join us to learn and discuss web development!",
-      time: "Thursday",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s"
+      id: 7,
+      name: "Cybersecurity",
+      message: "Join us to discuss cybersecurity topics!",
+      time: "Now",
+      image: "https://api.dicebear.com/6.x/initials/svg?seed=CS",
+      link: "https://chat.whatsapp.com/KOEVISf5fceBWbgRL7st32"
     },
     {
-      id: 2,
-      name: "Android Development",
-      message: "🎯 Learn Android app development with Kotlin",
-      time: "01:17",
-      image: "https://i.pinimg.com/736x/95/b7/e1/95b7e17b5161175de4fe88b1b2602236.jpg"
+      id: 8,
+      name: "Flutter",
+      message: "Connect with Flutter developers!",
+      time: "Now",
+      image: "https://cdn.prod.website-files.com/5ee12d8d7f840543bde883de/5ef3a1148ac97166a06253c1_flutter-logo-white-inset.svg",
+      link: "https://chat.whatsapp.com/CjEpoHXbfmF3AfkZ1LEp5X"
     },
     {
-      id: 3,
-      name: "AI/ML Community GDSC",
-      message: "📚 Resources for getting started with AI/ML",
-      time: "00:38",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s"
+      id: 9,
+      name: "Android",
+      message: "Join our Android development community!",
+      time: "Now",
+      image: "https://i.pinimg.com/736x/95/b7/e1/95b7e17b5161175de4fe88b1b2602236.jpg",
+      link: "https://chat.whatsapp.com/GNXhJwCpwPR28YaUNAFe2B"
     },
     {
-      id: 4,
-      name: "Blockchain Tech",
-      message: "New meeting scheduled for tomorrow!",
-      time: "Yesterday",
-      image: "https://api.dicebear.com/6.x/initials/svg?seed=BT"
+      id: 10,
+      name: "Competitive Programming",
+      message: "Sharpen your coding skills with us!",
+      time: "Now",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s",
+      link: "https://chat.whatsapp.com/E61t8Fk2hGn1H91dumtWHE"
     },
     {
-      id: 5,
+      id: 11,
       name: "Cloud Computing",
-      message: "AWS workshop this weekend! 🚀",
-      time: "Yesterday",
-      image: "https://api.dicebear.com/6.x/initials/svg?seed=CC"
+      message: "Join our cloud computing discussions!",
+      time: "Now",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfZtWD6rC11TPy0gP1hGCQAjAYPizxyMRZA&s",
+      link: "https://chat.whatsapp.com/KRjmxF7C4ScH192QSXeeiF"
     },
     {
-      id: 6,
-      name: "Coding Club GDSC",
-      message: "✨ DSA Problems discussion at 6 PM",
-      time: "Yesterday",
-      image: "https://api.dicebear.com/6.x/initials/svg?seed=CG"
+      id: 12,
+      name: "AI/ML",
+      message: "Explore AI and ML topics with us!",
+      time: "Now",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s",
+      link: "https://chat.whatsapp.com/EVlz7THQclX6bsjkiIUfvM"
+    },
+    {
+      id: 13,
+      name: "UI/UX",
+      message: "Join our UI/UX design community!",
+      time: "Now",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s",
+      link: "https://chat.whatsapp.com/EfO8Y4892LPHBhNR0dPONu"
+    },
+    {
+      id: 14,
+      name: "Blockchain",
+      message: "Discuss blockchain technology with us!",
+      time: "Now",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s",
+      link: "https://chat.whatsapp.com/FqlBROKCJipH8kxxuLss6j"
+    },
+    {
+      id: 15,
+      name: "Web Dev Community",
+      message: "Join our Web Development community!",
+      time: "Now",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1ifvMfrD9VzaphHBYLhM6wUV-YHR0g28Ow&s",
+      link: "https://chat.whatsapp.com/JWantqkWXr30chv4HcYwWb"
     }
   ]
 
@@ -104,8 +134,11 @@ export default function Component() {
               ))}
             </div>
             {filteredCommunities.map((community) => (
-              <div
+              <a
                 key={community.id}
+                href={community.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 p-3 hover:bg-accent rounded-lg cursor-pointer"
               >
                 <Avatar className="h-12 w-12">
@@ -123,7 +156,7 @@ export default function Component() {
                     {community.message}
                   </p>
                 </div>
-              </div>
+              </a>
             ))}
           </ScrollArea>
         </CardContent>
@@ -137,7 +170,7 @@ export default function Component() {
           <p className="text-xl text-muted-foreground mb-6">
             Connect with fellow developers, share knowledge, and stay updated on the latest in tech. Our GDSC communities are the perfect place to grow your skills and network with like-minded individuals.
           </p>
-          <Button size="lg" className="w-full sm:w-auto">
+          <Button size="lg" className="w-full sm:w-auto" onClick={() => window.open("https://chat.whatsapp.com/Jt2uFQ1vQf249FHpFCnPGh", "_blank")}>
             Explore All Communities
           </Button>
         </CardContent>
@@ -164,8 +197,11 @@ export default function Component() {
             </div>
             <ScrollArea className="flex-1">
               {filteredCommunities.map((community) => (
-                <div
+                <a
                   key={community.id}
+                  href={community.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 hover:bg-accent rounded-lg cursor-pointer"
                 >
                   <Avatar className="h-12 w-12">
@@ -183,7 +219,7 @@ export default function Component() {
                       {community.message}
                     </p>
                   </div>
-                </div>
+                </a>
               ))}
             </ScrollArea>
           </div>
