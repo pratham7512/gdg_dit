@@ -13,8 +13,8 @@ body {
   }
 }
 @layer base {
-  .dark {
-    --sidebar-background: 240 5.9% 10%;
+  .root {
+    --sidebar-background: 240 10% 3.9%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -24,7 +24,7 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  :root{
+  :dark{
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
