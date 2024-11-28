@@ -4,11 +4,18 @@ import { useState, useEffect } from 'react';
 import { InfiniteMovingCards } from '../ui/infiniteCards';
 import Image from 'next/image';
 
+type RawEvent = {
+  id?: number;
+  name?: string;
+  description?: string;
+  imageUrls?: string[];
+};
+
 type Event = {
   id: number;
   name: string;
   description: string;
-  imageUrls: string[]; // Ensure this matches your API structure
+  imageUrls: string[];
 };
 
 export default function PastEvents() {
@@ -19,40 +26,35 @@ export default function PastEvents() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/pastEvents'); // Replace with your API route
+        const response = await fetch('/api/pastEvents');
         if (!response.ok) {
-          throw new Error(`Failed to fetch events: ${response.statusText}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        const data = await response.json();
-
-        // Validate that data is an array
-        if (!Array.isArray(data)) {
-          throw new Error('Fetched data is not in the expected array format.');
-        }
-
-        // Add fallback for missing properties
-        const validatedData = data.map((event) => ({
-          id: event.id ?? 0, // Ensure id is a number
-          name: event.name || 'Unnamed Event', // Fallback for name
-          description: event.description || 'No description available', // Fallback for description
-          imageUrls: Array.isArray(event.imageUrls) ? event.imageUrls : [], // Ensure imageUrls is always an array
-        }));
-
+  
+        const data: RawEvent[] = await response.json();
+  
+        const validatedData: Event[] = data
+          .filter((event): event is RawEvent => event != null)
+          .map(event => ({
+            id: Number(event.id) || 0,
+            name: event.name?.toString() || 'Unnamed Event',
+            description: event.description?.toString() || 'No description available',
+            imageUrls: (event.imageUrls || [])
+              .filter((url): url is string => typeof url === 'string')
+          }));
+  
         setEvents(validatedData);
-        setLoading(false);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message); // Access the error message
-        } else {
-          setError('An unknown error occurred');
-        }
+      } catch (err) {
+        console.error('Event fetching error:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch events');
+      } finally {
         setLoading(false);
       }
     };
-
+  
     fetchEvents();
   }, []);
+  
 
   if (loading) {
     return (
@@ -80,9 +82,13 @@ export default function PastEvents() {
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight max-w-4/5 italic underline">Past Events</h2>
         <br />
         <div className="space-y-16 mb-16">
-          {events.map((event) => (
-            <EventCarousel key={event.id} event={event} />
-          ))}
+          {events.length > 0 ? (
+            events.map((event) => (
+              <EventCarousel key={event.id} event={event} />
+            ))
+          ) : (
+            <p>No events found</p>
+          )}
         </div>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight max-w-4/5">
           <div className="italic underline">Event Gallery</div>
@@ -101,7 +107,7 @@ function EventCarousel({ event }: { event: Event }) {
     if (event.imageUrls?.length > 0) {
       const timer = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % event.imageUrls.length);
-      }, 5000); // Change slide every 5 seconds
+      }, 5000);
 
       return () => clearInterval(timer);
     }
@@ -117,6 +123,8 @@ function EventCarousel({ event }: { event: Event }) {
                 key={index}
                 src={image}
                 alt={`${event.name} - Image ${index + 1}`}
+                width={600}
+                height={400}
                 className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${
                   index === currentIndex ? 'opacity-100' : 'opacity-0'
                 }`}
