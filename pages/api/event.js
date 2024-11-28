@@ -1,6 +1,7 @@
 
 import { v4 as uuidv4 } from 'uuid'; // Assuming you are using uuid to generate unique IDs
 import * as admin from 'firebase-admin';
+import { moveEventsToPast } from './moveEventsToPast';
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_KEY);
 // Initialize Firebase Admin SDK
@@ -21,8 +22,10 @@ export const config = {
 
 // POST request to create a new event
 export default async function handler(req, res) {
+
   if (req.method === 'POST') {
     // Create a new event
+    await moveEventsToPast();
     try {
       const fields = req.body; // Assuming JSON body format (text and object data)
 
@@ -126,7 +129,7 @@ export default async function handler(req, res) {
     // Fetch event(s)
     try {
       const { id } = req.query;
-
+      await moveEventsToPast();
       if (id) {
         // Fetch a specific event
         const eventSnapshot = await database.ref('events').child(id).once('value');
