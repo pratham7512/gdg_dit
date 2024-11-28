@@ -8,7 +8,7 @@ type Event = {
   id: number;
   name: string;
   description: string;
-  imageUrls: string[]; // Ensure this matches your API structure
+  imageUrls: string[];
 };
 
 export default function PastEvents() {
@@ -19,30 +19,28 @@ export default function PastEvents() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/pastEvents'); // Replace with your API route
+        const response = await fetch('/api/pastEvents');
         if (!response.ok) {
-          throw new Error(`Failed to fetch events: ${response.statusText}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
   
         const data = await response.json();
   
-        // Ensure data is always an array
-        const validatedData = Array.isArray(data)
-          ? data.map((event) => ({
-              id: event?.id ?? 0, // Ensure id is a number
-              name: event?.name || 'Unnamed Event', // Fallback for name
-              description: event?.description || 'No description available', // Fallback for description
-              imageUrls: Array.isArray(event?.imageUrls) ? event.imageUrls : [], // Ensure imageUrls is always an array
-            }))
-          : []; // Fallback to an empty array if data is not valid
+        // More robust data validation
+        const validatedData = (data || []).filter(Boolean).map((event: any) => ({
+          id: Number(event?.id) || 0,
+          name: event?.name?.toString() || 'Unnamed Event',
+          description: event?.description?.toString() || 'No description available',
+          imageUrls: Array.isArray(event?.imageUrls) 
+            ? event.imageUrls.filter((url: any) => typeof url === 'string')
+            : []
+        }));
   
         setEvents(validatedData);
       } catch (err) {
-        // Handle errors gracefully
-        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-        setError(errorMessage);
+        console.error('Event fetching error:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch events');
       } finally {
-        // Ensure loading is always set to false
         setLoading(false);
       }
     };
@@ -77,9 +75,13 @@ export default function PastEvents() {
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight max-w-4/5 italic underline">Past Events</h2>
         <br />
         <div className="space-y-16 mb-16">
-          {events.map((event) => (
-            <EventCarousel key={event.id} event={event} />
-          ))}
+          {events.length > 0 ? (
+            events.map((event) => (
+              <EventCarousel key={event.id} event={event} />
+            ))
+          ) : (
+            <p>No events found</p>
+          )}
         </div>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight max-w-4/5">
           <div className="italic underline">Event Gallery</div>
@@ -98,7 +100,7 @@ function EventCarousel({ event }: { event: Event }) {
     if (event.imageUrls?.length > 0) {
       const timer = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % event.imageUrls.length);
-      }, 5000); // Change slide every 5 seconds
+      }, 5000);
 
       return () => clearInterval(timer);
     }
@@ -114,6 +116,8 @@ function EventCarousel({ event }: { event: Event }) {
                 key={index}
                 src={image}
                 alt={`${event.name} - Image ${index + 1}`}
+                width={600}
+                height={400}
                 className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${
                   index === currentIndex ? 'opacity-100' : 'opacity-0'
                 }`}
