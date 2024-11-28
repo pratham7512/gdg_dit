@@ -16,7 +16,6 @@ export default function Component() {
       { title: "Leaderboard", href: "/leaderboard" },
       { title: "About Us", href: "/aboutus" },
       { title: "Upcoming Events", href: "/events" },
-      { title: "Roadmaps", href: "/roadmap" },
     ],
     Resources: [
       { title: "Documentation", href: "/roadmap" },
