@@ -34,18 +34,24 @@ export default async function handler(req, res) {
         // Fetch all past events
         const pastEventsSnapshot = await database.ref('events/pastEvents').once('value');
         const pastEvents = pastEventsSnapshot.val();
-        
-        
+
+        // Safeguard against undefined or null data
+        if (!pastEvents || typeof pastEvents !== 'object') {
+          console.error('Fetched past events data is invalid or undefined:', pastEvents);
+          return res.status(200).json([]); // Return an empty array
+        }
+
         // Format the response
-        const pastEventsList = pastEvents
-          ? Object.keys(pastEvents).map((key) => ({ id: key, ...pastEvents[key] }))
-          : [];
-          console.log(pastEventsList);
+        const pastEventsList = Object.keys(pastEvents).map((key) => ({
+          id: key,
+          ...pastEvents[key],
+        }));
+
         return res.status(200).json(pastEventsList);
       }
     } catch (error) {
       console.error('Error fetching past events:', error);
-      return res.status(500).json({ message: 'Internal Server Error', error });
+      return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
   } else {
     return res.status(405).json({ message: 'Method not allowed' });
