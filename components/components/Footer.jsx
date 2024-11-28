@@ -19,7 +19,7 @@ export default function Component() {
       { title: "Roadmaps", href: "/roadmap" },
     ],
     Resources: [
-      { title: "Documentation", href: "#" },
+      { title: "Documentation", href: "/roadmap" },
       { title: "Blog", href: "#" },
       { title: "Community", href: "#" },
       { title: "Contact", href: "mailto:contactus@gdgdit.tech" },
