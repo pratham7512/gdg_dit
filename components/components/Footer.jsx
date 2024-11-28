@@ -18,7 +18,7 @@ export default function Component() {
       { title: "Upcoming Events", href: "/events" },
     ],
     Resources: [
-      { title: "Documentation", href: "/roadmap" },
+      { title: "Roadmaps", href: "/roadmap" },
       { title: "Blog", href: "#" },
       { title: "Community", href: "#" },
       { title: "Contact", href: "mailto:contactus@gdgdit.tech" },
