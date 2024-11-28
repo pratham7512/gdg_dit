@@ -80,7 +80,7 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20 max-w-10xl overflow-hidden",
+        "scroller relative z-20  max-w-10xl overflow-hidden",
         className
       )}
     >
@@ -91,18 +91,18 @@ export const InfiniteMovingCards = ({
           start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
-        style={{ width: "200%" }}
+        style={{ width: "100%" }}
       >
         {[...events, ...events].map((event, eventIndex) => (
           <div
             key={`${event.id}-${eventIndex}`}
-            className="grid grid-cols-3 gap-4 p-4"
+            className="grid grid-cols-3 gap-3 p-3"
             style={{ width: "70%", flexShrink: 0.02 }}
           >
             {event.imageUrls.map((image, imageIndex) => (
               <div
                 key={`${event.id}-${eventIndex}-${imageIndex}`}
-                className={`relative overflow-hidden rounded-lg ${
+                className={`relative  overflow-hidden rounded-lg ${
                   imageIndex === 0 ? "col-span-2 row-span-2" : ""
                 }`}
               >
