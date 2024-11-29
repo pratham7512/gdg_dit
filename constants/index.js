@@ -49,7 +49,7 @@ export const navigation = [
   },
   {
     id: "2",
-    title: "Upcoming Events",
+    title: "Events",
     url: "/events",
   },
   {
