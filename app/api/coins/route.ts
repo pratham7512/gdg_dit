@@ -27,6 +27,12 @@ export async function GET() {
         if (!response.ok) {
             const errorBody = await response.text();
             console.error('Error response:', errorBody);
+            if (response.status === 403) {
+                return NextResponse.json(
+                    { error: errorBody },
+                    { status: 403 }
+                );
+            }
             throw new Error('Network response was not ok');
         }
 
