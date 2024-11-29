@@ -6,7 +6,7 @@ import { navigation } from "../../constants";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu, HamburgerMenu2 } from "../design/Header";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useSession } from "next-auth/react";
 import { AuthDialog } from "./Signin";
 import { UserNav } from "./user-nav";
@@ -21,13 +21,7 @@ const Header: React.FC = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
   // const [isClient, setIsClient] = useState(false);
   const session =useGetUser();
-  console.log(session);
-  
-  useEffect(() => {
-    // Setting isClient to true once the component is mounted on the client
-    console.log(session);
 
-  }, []);
 
   // Using useRouter only if the component is mounted on the client
   // const { asPath } = isClient ? useRouter() : { asPath: "" };
