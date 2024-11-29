@@ -39,7 +39,6 @@ export function UserNav({ children }: UserNavProps) {
 
         if (!response.ok) {
           if (response.status === 403) {
-            console.log("Good Bye")
             signOut(); 
           }
           throw new Error("Network response was not ok");

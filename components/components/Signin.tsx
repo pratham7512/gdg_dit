@@ -84,7 +84,6 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
         });
 
         const { result} = await response.json();
-        console.log(result);
         if (!result.success) {
           setError("Failed to create account");
           return;
