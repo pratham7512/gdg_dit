@@ -53,7 +53,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
                   <div className="relative w-full pt-[56.25%]"> {/* 16:9 Aspect Ratio */}
                     <iframe
                       src={roadmapData.notionHtmlFileUrl}
-                      className="absolute top-0 left-0 w-full h-full border-0"
+                      className="absolute top-0 left-0 w-full h-full border-0 bg-white text-black"
                       title="Notion Roadmap"
                       allowFullScreen
                     />
@@ -62,7 +62,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
               </div>
             )}
 
-            <div>
+            <div className="text-white">
               <ul className="space-y-2">
                 {roadmapData.steps && roadmapData.steps.map((step, index) => (
                   <li key={index} className="flex items-start">
@@ -89,7 +89,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
 
 function RoadmapSkeleton() {
   return (
-    <div className="w-full">
+    <div className="w-full text-white">
       <Skeleton className="h-4 w-full mb-2" />
       <Skeleton className="h-4 w-5/6 mb-6" />
       <Skeleton className="h-[600px] w-full mb-6" />
