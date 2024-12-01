@@ -1,4 +1,3 @@
-"use client"
 import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -34,7 +33,7 @@ const BlocksRoadmap = () => {
 
   if (loading) {
     return (
-      <Section className="py-20">
+      <Section className="py-20 px-4 sm:px-6 lg:px-8">
         <RoadmapSkeleton />
       </Section>
     );
@@ -42,15 +41,15 @@ const BlocksRoadmap = () => {
 
   if (error) {
     return (
-      <Section className="py-20">
+      <Section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="text-center text-red-500">Error: {error}</div>
       </Section>
     );
   }
 
   return (
-    <Section className="py-20">
-      <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+    <Section className="py-20 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-secondary">
         Explore Our Roadmaps
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -69,8 +68,10 @@ const RoadmapCard = ({ roadmap, index }) => (
     transition={{ duration: 0.5, delay: index * 0.1 }}
   >
     <Link href={`/roadmap/${roadmap.id}`}>
-      <Card className="group h-full bg-black hover:bg-gradient-to-br from-primary/10 to-secondary/10 transition-all duration-300 border-primary/20 hover:border-primary/40">
-        <CardContent className="p-6 flex flex-col h-full">
+      <Card className="group h-full bg-black transition-all duration-300 border-primary/20 hover:border-primary/0 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 transition-colors duration-300" style={{ animation: 'blinkBorder 2s infinite' }} />
+        <CardContent className="p-6 flex flex-col h-full justify-between relative z-10">
           <h3 className="text-2xl font-semibold mb-4 text-primary group-hover:text-secondary transition-colors duration-300">
             {roadmap.title}
           </h3>
@@ -78,8 +79,8 @@ const RoadmapCard = ({ roadmap, index }) => (
             {roadmap.description}
           </p>
           <div className="flex items-center text-primary group-hover:text-secondary transition-colors duration-300">
-            <span className="mr-2">Explore</span>
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+            <span className="mr-2 text-sm font-medium">Learn more</span>
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
           </div>
         </CardContent>
       </Card>
