@@ -50,10 +50,10 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
             {roadmapData.notionHtmlFileUrl && (
               <div className="mb-6">
                 <div className="w-full overflow-hidden rounded-lg">
-                  <div className="relative w-full pt-[75%]"> {/* 4:3 Aspect Ratio */}
+                  <div className="relative w-full h-[87vh]"> {/* 4:3 Aspect Ratio */}
                     <iframe
                       src={roadmapData.notionHtmlFileUrl}
-                      className="absolute top-0 left-0 w-full h-full border-0 bg-black text-white"
+                      className="absolute top-0 left-0 w-full h-full border-0 bg-white text-black"
                       title="Notion Roadmap"
                       allowFullScreen
                     />
