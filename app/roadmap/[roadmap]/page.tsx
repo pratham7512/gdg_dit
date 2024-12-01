@@ -42,7 +42,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
   }, [params.roadmap]);
 
   return (
-    <div className="lg:pt-[1.8rem] min-h-screen bg-background text-foreground flex flex-col">
+    <div className="lg:pt-[2.5rem] min-h-screen bg-background text-foreground flex flex-col">
       <Header />
 
       <main className="flex-grow container mx-auto px-4 py-8">
@@ -60,7 +60,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
                         className="absolute top-0 left-0 w-full h-full border-0"
                         style={{
                           minHeight: '600px',
-                          maxHeight: '80vh'
+                          maxHeight: '85vh'
                         }}
                         title="Notion Roadmap"
                       />
@@ -70,7 +70,6 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
               )}
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">Steps to Follow</h3>
                 <ul className="space-y-2">
                   {roadmapData.steps && roadmapData.steps.map((step, index) => (
                     <li key={index} className="flex items-start">
