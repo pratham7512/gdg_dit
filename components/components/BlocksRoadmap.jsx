@@ -52,7 +52,7 @@ const BlocksRoadmap = () => {
       <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-secondary">
         Explore Our Roadmaps
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
         {roadmaps.map((roadmap, index) => (
           <RoadmapCard key={roadmap.id} roadmap={roadmap} index={index} />
         ))}
@@ -68,7 +68,7 @@ const RoadmapCard = ({ roadmap, index }) => (
     transition={{ duration: 0.5, delay: index * 0.1 }}
   >
     <Link href={`/roadmap/${roadmap.id}`}>
-      <Card className="group h-full bg-black transition-all duration-300 border-primary/20 hover:border-primary/0 relative overflow-hidden">
+      <Card className="group h-full bg-black transition-all duration-300 border-primary/20 hover:border-white relative overflow-hidden">
         <CardContent className="p-6 flex flex-col h-full justify-between relative z-10">
           <h3 className="text-2xl font-semibold mb-4 text-primary transition-colors duration-300">
             {roadmap.title}
