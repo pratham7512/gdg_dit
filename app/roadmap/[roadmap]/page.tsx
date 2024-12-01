@@ -14,11 +14,13 @@ interface RoadmapData {
   rootPageId: string;
   steps: string[];
 }
-
-export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
+async function getData(rootPageId:string) {
+  return await notion.getPage(rootPageId);
+}
+export default async function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
-  const [notionData, setNotionData] = useState<any>(null);
+  let notionData=await getData("98d8acfc9a0c4b98b94d68324d219b97");
 
   useEffect(() => {
     const fetchRoadmap = async () => {
@@ -32,8 +34,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         setRoadmapData(data);
 
         // Fetch Notion page data using the rootPageId
-        const pageData = await notion.getPage(data.rootPageId);
-        setNotionData(pageData);
+        notionData=await getData(data.rootPageId);
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
