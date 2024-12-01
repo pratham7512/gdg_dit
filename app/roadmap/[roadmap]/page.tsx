@@ -39,7 +39,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
   }, [params.roadmap]);
 
   return (
-    <div className="pt-[2.8rem] min-h-screen bg-background text-foreground flex flex-col">
+    <div className="pt-[2.8rem] min-h-screen bg-black text-white flex flex-col">
       <Header />
 
       <main className="flex-grow container px-1 md:px-4 py-8">
@@ -50,10 +50,10 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
             {roadmapData.notionHtmlFileUrl && (
               <div className="mb-6">
                 <div className="w-full overflow-hidden rounded-lg shadow-lg">
-                  <div className="relative w-full pt-[56.25%]"> {/* 16:9 Aspect Ratio */}
+                  <div className="relative w-full pt-[75%]"> {/* 4:3 Aspect Ratio */}
                     <iframe
                       src={roadmapData.notionHtmlFileUrl}
-                      className="absolute top-0 left-0 w-full h-full border-0 bg-white text-black"
+                      className="absolute top-0 left-0 w-full h-full border-0 bg-black text-white"
                       title="Notion Roadmap"
                       allowFullScreen
                     />
@@ -92,7 +92,7 @@ function RoadmapSkeleton() {
     <div className="w-full text-white">
       <Skeleton className="h-4 w-full mb-2" />
       <Skeleton className="h-4 w-5/6 mb-6" />
-      <Skeleton className="h-[600px] w-full mb-6" />
+      <Skeleton className="h-[75vh] w-full mb-6" />
       <div className="space-y-2">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-5/6" />
