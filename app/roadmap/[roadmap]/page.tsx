@@ -7,25 +7,33 @@ import Footer from '@/components/components/Footer'
 import Header from '@/components/components/Header'
 import { Skeleton } from "@/components/ui/skeleton"
 import { CheckCircle2 } from 'lucide-react'
+import { NotionPage } from "@/components/components/NotionPage"
+import { notion } from "@/lib/notion"
 
 interface RoadmapData {
-  notionHtmlFileUrl: string;
+  rootPageId: string;
   steps: string[];
 }
 
 export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
+  const [notionData, setNotionData] = useState<any>(null);
 
   useEffect(() => {
     const fetchRoadmap = async () => {
       try {
+        // Fetch roadmap data from API
         const response = await fetch(`/api/roadmap?id=${params.roadmap}`);
         if (!response.ok) {
           throw new Error('Failed to fetch roadmap data');
         }
         const data = await response.json();
         setRoadmapData(data);
+
+        // Fetch Notion page data using the rootPageId
+        const pageData = await notion.getPage(data.rootPageId);
+        setNotionData(pageData);
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
@@ -45,23 +53,13 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
       <main className="flex-grow container px-1 md:px-4 py-8">
         {isLoading ? (
           <RoadmapSkeleton />
-        ) : roadmapData ? (
+        ) : roadmapData && notionData ? (
           <div className="w-full h-full">
-            {roadmapData.notionHtmlFileUrl && (
-              <div className="mb-6">
-                <div className="w-full overflow-hidden rounded-lg">
-                  <div className="relative w-full h-[87vh]"> {/* 4:3 Aspect Ratio */}
-                    <iframe
-                      src={roadmapData.notionHtmlFileUrl}
-                      className="absolute top-0 left-0 w-full h-full border-0 bg-white text-black"
-                      title="Notion Roadmap"
-                      allowFullScreen
-                    />
-                  </div>
-                </div>
+            <div className="mb-6">
+              <div className="w-full overflow-hidden rounded-lg">
+                <NotionPage recordMap={notionData} rootPageId={roadmapData.rootPageId} />
               </div>
-            )}
-
+            </div>
             <div className="text-white">
               <ul className="space-y-2">
                 {roadmapData.steps && roadmapData.steps.map((step, index) => (

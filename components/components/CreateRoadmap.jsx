@@ -6,16 +6,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useRouter } from 'next/navigation'
-import { uploadFileToFirebase } from '../../app/firebase/firebaseRoadmap'; // You need to implement this
 
 export default function CreateRoadmap() {
   const router = useRouter()
   const [roadmapData, setRoadmapData] = useState({
     id: Date.now(),
     name: '',
-    steps:[],
+    steps: [],
     status: 'Planning',
-    notionHtmlFile: null, // for HTML file
+    notionLink: '', // For Notion link
   })
 
   const handleInputChange = (e) => {
@@ -23,23 +22,24 @@ export default function CreateRoadmap() {
     setRoadmapData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
-    setRoadmapData((prev) => ({ ...prev, notionHtmlFile: file }))
+  const extractRootId = (url) => {
+    const match = url.match(/([a-f0-9]{32})/)
+    return match ? match[0] : null
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!roadmapData.notionHtmlFile) {
-      return alert("Please upload the HTML file.")
+    if (!roadmapData.notionLink) {
+      return alert("Please enter the Notion link.")
     }
 
-    // Upload the file to Firebase Storage (or your chosen storage solution)
-    const file = roadmapData.notionHtmlFile
-    const fileUrl = await uploadFileToFirebase(file);
-    
-    // Now save the file URL along with other roadmap data
+    const rootId = extractRootId(roadmapData.notionLink)
+    if (!rootId) {
+      return alert("Invalid Notion link. Please check the URL.")
+    }
+
+    // Save the root ID along with other roadmap data
     try {
       const response = await fetch('/api/roadmap', {
         method: 'POST',
@@ -48,7 +48,7 @@ export default function CreateRoadmap() {
           title: roadmapData.name,
           description: 'Roadmap description',
           status: roadmapData.status,
-          notionHtmlFileUrl: fileUrl, // Save the file URL
+          notionRootId: rootId, // Save the extracted root ID
         }),
       })
 
@@ -84,13 +84,14 @@ export default function CreateRoadmap() {
               />
             </div>
             <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="notionHtmlFile">Notion HTML File</Label>
+              <Label htmlFor="notionLink">Notion Link</Label>
               <Input
-                type="file"
-                id="notionHtmlFile"
-                name="notionHtmlFile"
-                accept=".html"
-                onChange={handleFileChange}
+                type="url"
+                id="notionLink"
+                name="notionLink"
+                value={roadmapData.notionLink}
+                onChange={handleInputChange}
+                placeholder="https://example.notion.site/Your-Roadmap-98d8acfc9a0c4b98b94d68324d219b97"
                 required
               />
             </div>
@@ -109,19 +110,6 @@ export default function CreateRoadmap() {
         </Card>
         <Button type="submit">Save Roadmap</Button>
       </form>
-      {roadmapData.notionHtmlFile && (
-        <div className="mt-6">
-          <h2 className="text-xl font-bold">Preview</h2>
-          <iframe
-            src={URL.createObjectURL(roadmapData.notionHtmlFile)} // Directly using the uploaded HTML file
-            title="Notion Roadmap"
-            width="100%"
-            height="600px"
-            className="border rounded"
-            allow="fullscreen"
-          />
-        </div>
-      )}
     </div>
   )
 }
