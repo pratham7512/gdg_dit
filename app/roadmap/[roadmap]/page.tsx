@@ -54,13 +54,13 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
               {roadmapData.notionHtmlFileUrl && (
                 <div className="mb-6">
                   <div className="border rounded-lg overflow-hidden bg-white shadow-lg">
-                    <div className="relative h-[95vh] overflow-hidden max-w-full">
+                    <div className="relative h-[90vh] overflow-hidden max-w-full">
                       <iframe
                         src={roadmapData.notionHtmlFileUrl}
                         className="absolute top-0 left-0 w-full h-full border-0"
                         style={{
                           minHeight: '600px',
-                          maxHeight: '95vh'
+                          maxHeight: '90vh'
                         }}
                         title="Notion Roadmap"
                       />
@@ -100,10 +100,6 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
 function RoadmapSkeleton() {
   return (
     <Card className="w-full">
-      <CardHeader>
-        <Skeleton className="h-8 w-3/4" />
-        <Skeleton className="h-4 w-full mt-2" />
-      </CardHeader>
       <CardContent>
         <Skeleton className="h-4 w-full mb-2" />
         <Skeleton className="h-4 w-5/6 mb-6" />
