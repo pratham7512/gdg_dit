@@ -45,7 +45,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
     <div className="pt-[2.8rem] min-h-screen bg-background text-foreground flex flex-col">
       <Header />
 
-      <main className="flex-grow container mx-auto px-1 md:px-4 py-8">
+      <main className="flex-grow container px-1 md:px-4 py-8">
         {isLoading ? (
           <RoadmapSkeleton />
         ) : roadmapData ? (
