@@ -70,7 +70,7 @@ const RoadmapCard = ({ roadmap, index }) => (
     <Link href={`/roadmap/${roadmap.id}`}>
       <Card className="group h-full bg-black transition-all duration-300 border-primary/20 hover:border-primary/0 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 transition-colors duration-300" style={{ animation: 'blinkBorder 2s infinite' }} />
+        <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/50 transition-colors duration-300" style={{ animation: 'blinkBorder 2s infinite' }} />
         <CardContent className="p-6 flex flex-col h-full justify-between relative z-10">
           <h3 className="text-2xl font-semibold mb-4 text-primary group-hover:text-secondary transition-colors duration-300">
             {roadmap.title}
