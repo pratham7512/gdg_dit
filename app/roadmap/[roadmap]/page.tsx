@@ -31,7 +31,6 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         }
         const data = await response.json();
         setRoadmapData(data);
-        setProgress(Math.floor(Math.random() * 101)); // Simulated progress
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
