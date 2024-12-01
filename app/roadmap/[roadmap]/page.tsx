@@ -20,7 +20,7 @@ interface RoadmapData {
 export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
-  const [progress, setProgress] = useState(0);
+  // const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const fetchRoadmap = async () => {
