@@ -46,10 +46,10 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         {isLoading ? (
           <RoadmapSkeleton />
         ) : roadmapData ? (
-          <div className="w-full">
+          <div className="w-full h-full">
             {roadmapData.notionHtmlFileUrl && (
               <div className="mb-6">
-                <div className="w-full overflow-hidden rounded-lg shadow-lg">
+                <div className="w-full overflow-hidden rounded-lg">
                   <div className="relative w-full pt-[75%]"> {/* 4:3 Aspect Ratio */}
                     <iframe
                       src={roadmapData.notionHtmlFileUrl}
