@@ -1,8 +1,12 @@
+"use client"
 import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight } from 'lucide-react';
 
 import Section from "./Section";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const BlocksRoadmap = () => {
   const [roadmaps, setRoadmaps] = React.useState([]);
@@ -10,7 +14,6 @@ const BlocksRoadmap = () => {
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    // Fetch roadmaps from API
     const fetchRoadmaps = async () => {
       try {
         const response = await fetch("/api/roadmap");
@@ -31,48 +34,73 @@ const BlocksRoadmap = () => {
 
   if (loading) {
     return (
-      <Section className="pt-[12rem] -mt-[5.25rem]"  customPaddings>
-        <div className="text-center">Loading roadmaps...</div>
+      <Section className="py-20">
+        <RoadmapSkeleton />
       </Section>
     );
   }
 
   if (error) {
     return (
-      <Section className="pt-[12rem] -mt-[5.25rem]"   customPaddings>
-        <div className="text-center text-red-600">Error: {error}</div>
+      <Section className="py-20">
+        <div className="text-center text-red-500">Error: {error}</div>
       </Section>
     );
   }
 
   return (
-    <Section className="pt-[8rem] -mt-[5.25rem]"   customPaddings>
-      <div className="relative mt-10 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {roadmaps.map((roadmap) => (
-          <Link key={roadmap.id} href={`/roadmap/${roadmap.id}`}>
-            <motion.div
-              className={`md:flex even:md:translate-y-[7rem] p-0.25 rounded-lg bg-slate-500 cursor-pointer hover:bg-conic-gradient`}
-              initial={{ opacity: 1, scale: 0.95, y: 100 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <motion.div
-                className="bg-gray-800 rounded-lg w-full shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 flex flex-col"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="p-3 flex w-full flex-col justify-between h-full">
-                  <h3 className="text-lg text-neutral-100">{roadmap.title}</h3>
-                </div>
-              </motion.div>
-            </motion.div>
-          </Link>
+    <Section className="py-20">
+      <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+        Explore Our Roadmaps
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {roadmaps.map((roadmap, index) => (
+          <RoadmapCard key={roadmap.id} roadmap={roadmap} index={index} />
         ))}
-      
       </div>
     </Section>
   );
 };
 
+const RoadmapCard = ({ roadmap, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+  >
+    <Link href={`/roadmap/${roadmap.id}`}>
+      <Card className="group h-full bg-black hover:bg-gradient-to-br from-primary/10 to-secondary/10 transition-all duration-300 border-primary/20 hover:border-primary/40">
+        <CardContent className="p-6 flex flex-col h-full">
+          <h3 className="text-2xl font-semibold mb-4 text-primary group-hover:text-secondary transition-colors duration-300">
+            {roadmap.title}
+          </h3>
+          <p className="text-muted-foreground mb-6 flex-grow">
+            {roadmap.description}
+          </p>
+          <div className="flex items-center text-primary group-hover:text-secondary transition-colors duration-300">
+            <span className="mr-2">Explore</span>
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
+  </motion.div>
+);
+
+const RoadmapSkeleton = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {[...Array(6)].map((_, index) => (
+      <Card key={index} className="bg-black border-primary/20">
+        <CardContent className="p-6">
+          <Skeleton className="h-6 w-3/4 mb-4 bg-primary/20" />
+          <Skeleton className="h-4 w-full mb-2 bg-muted" />
+          <Skeleton className="h-4 w-5/6 mb-6 bg-muted" />
+          <Skeleton className="h-4 w-1/4 bg-primary/20" />
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+);
+
 export default BlocksRoadmap;
+
