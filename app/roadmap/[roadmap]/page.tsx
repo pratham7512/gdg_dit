@@ -1,12 +1,10 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import ButtonGradient from '@/components/assets/svg/ButtonGradient'
 import Chatbot from '@/components/Chatbot'
 import Footer from '@/components/components/Footer'
 import Header from '@/components/components/Header'
-import { Card, CardContent} from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { CheckCircle2 } from 'lucide-react'
 
@@ -18,7 +16,6 @@ interface RoadmapData {
 export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
-  // const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const fetchRoadmap = async () => {
@@ -35,7 +32,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         setIsLoading(false);
       }
     };
-    
+
     fetchRoadmap();
     document.body.style.cursor = 'default';
     window.scrollTo(0, 0);
@@ -49,49 +46,42 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         {isLoading ? (
           <RoadmapSkeleton />
         ) : roadmapData ? (
-          <Card className="w-full bg-card border border-card text-card-foreground">
-            <CardContent>
-              {roadmapData.notionHtmlFileUrl && (
-                <div className="mb-6">
-                  <div className="border rounded-lg overflow-hidden bg-white shadow-lg">
-                    <div className="relative h-[90vh] overflow-hidden max-w-full">
-                      <iframe
-                        src={roadmapData.notionHtmlFileUrl}
-                        className="absolute top-0 left-0 w-full h-full border-0"
-                        style={{
-                          minHeight: '600px',
-                          maxHeight: '90vh'
-                        }}
-                        title="Notion Roadmap"
-                      />
-                    </div>
+          <div className="w-full">
+            {roadmapData.notionHtmlFileUrl && (
+              <div className="mb-6">
+                <div className="w-full overflow-hidden rounded-lg shadow-lg">
+                  <div className="relative w-full pt-[56.25%]"> {/* 16:9 Aspect Ratio */}
+                    <iframe
+                      src={roadmapData.notionHtmlFileUrl}
+                      className="absolute top-0 left-0 w-full h-full border-0"
+                      title="Notion Roadmap"
+                      allowFullScreen
+                    />
                   </div>
                 </div>
-              )}
-
-              <div>
-                <ul className="space-y-2">
-                  {roadmapData.steps && roadmapData.steps.map((step, index) => (
-                    <li key={index} className="flex items-start">
-                      <CheckCircle2 className="mr-2 h-5 w-5 text-primary" />
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
-            </CardContent>
-          </Card>
+            )}
+
+            <div>
+              <ul className="space-y-2">
+                {roadmapData.steps && roadmapData.steps.map((step, index) => (
+                  <li key={index} className="flex items-start">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         ) : (
           <p className="text-center text-muted-foreground">No roadmap data available.</p>
         )}
       </main>
 
       <Footer />
-
       <AnimatePresence mode='wait'>
         {!isLoading && <Chatbot />}
       </AnimatePresence>
-
       <ButtonGradient />
     </div>
   )
@@ -99,18 +89,15 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
 
 function RoadmapSkeleton() {
   return (
-    <Card className="w-full">
-      <CardContent>
-        <Skeleton className="h-4 w-full mb-2" />
-        <Skeleton className="h-4 w-5/6 mb-6" />
-        <Skeleton className="h-[600px] w-full mb-6" />
-        <div className="space-y-2">
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-5/6" />
-          <Skeleton className="h-4 w-4/6" />
-        </div>
-      </CardContent>
-    </Card>
+    <div className="w-full">
+      <Skeleton className="h-4 w-full mb-2" />
+      <Skeleton className="h-4 w-5/6 mb-6" />
+      <Skeleton className="h-[600px] w-full mb-6" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-5/6" />
+        <Skeleton className="h-4 w-4/6" />
+      </div>
+    </div>
   )
 }
-
