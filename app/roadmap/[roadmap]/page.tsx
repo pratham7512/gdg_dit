@@ -6,13 +6,11 @@ import ButtonGradient from '@/components/assets/svg/ButtonGradient'
 import Chatbot from '@/components/Chatbot'
 import Footer from '@/components/components/Footer'
 import Header from '@/components/components/Header'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader,} from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { CheckCircle2 } from 'lucide-react'
 
 interface RoadmapData {
-  title: string;
-  description: string;
   notionHtmlFileUrl: string;
   steps: string[];
 }
@@ -44,7 +42,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
   }, [params.roadmap]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="lg:pt-[0.8rem] min-h-screen bg-background text-foreground flex flex-col">
       <Header />
 
       <main className="flex-grow container mx-auto px-4 py-8">
@@ -52,14 +50,9 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
           <RoadmapSkeleton />
         ) : roadmapData ? (
           <Card className="w-full bg-card text-card-foreground">
-            <CardHeader>
-              <CardTitle className="text-3xl font-bold">{roadmapData.title}</CardTitle>
-              <p className="text-muted-foreground mt-2">{roadmapData.description}</p>
-            </CardHeader>
             <CardContent>
               {roadmapData.notionHtmlFileUrl && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-2">Detailed Roadmap</h3>
                   <div className="border rounded-lg overflow-hidden bg-white shadow-lg">
                     <div className="relative pb-[56.25%] h-0 overflow-hidden max-w-full">
                       <iframe
