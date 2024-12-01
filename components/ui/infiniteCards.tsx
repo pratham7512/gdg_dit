@@ -80,6 +80,31 @@ export const InfiniteMovingCards: React.FC<InfiniteMovingCardsProps> = ({
     }
   };
 
+  const renderImages = (images: string[]) => {
+    const filledImages = [...images];
+    while (filledImages.length < 4) {
+      filledImages.push(images[filledImages.length % images.length]);
+    }
+
+    return filledImages.map((image, imageIndex) => (
+      <div
+        key={`image-${imageIndex}`}
+        className={cn(
+          "relative overflow-hidden rounded-md",
+          imageIndex === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
+        )}
+      >
+        <Image
+          src={image}
+          alt={`Event image ${imageIndex + 1}`}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 280px, (max-width: 1200px) 400px, 500px"
+        />
+      </div>
+    ));
+  };
+
   return (
     <div
       ref={containerRef}
@@ -101,29 +126,12 @@ export const InfiniteMovingCards: React.FC<InfiniteMovingCardsProps> = ({
             key={`${event.id}-${eventIndex}`}
             className="w-[280px] md:w-[400px] lg:w-[500px] flex-shrink-0"
           >
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 bg-white rounded-lg shadow-md">
-              {event.imageUrls.map((image, imageIndex) => (
-                <div
-                  key={`${event.id}-${eventIndex}-${imageIndex}`}
-                  className={cn(
-                    "relative overflow-hidden rounded-md aspect-square",
-                    imageIndex === 0 && "col-span-2 row-span-2"
-                  )}
-                >
-                  <Image
-                    src={image}
-                    alt={`${event.name} - Image ${imageIndex + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 280px, (max-width: 1200px) 400px, 500px"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-2 transition-opacity opacity-0 hover:opacity-100">
-                    <span className="text-white text-xs md:text-sm font-medium truncate">
-                      {event.name}
-                    </span>
-                  </div>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 bg-black rounded-lg shadow-md">
+              {renderImages(event.imageUrls)}
+            </div>
+            <div className="mt-2 p-2 bg-black rounded-lg shadow-md">
+              <h3 className="text-lg font-semibold truncate">{event.name}</h3>
+              <p className="text-sm text-gray-600 truncate">{event.description}</p>
             </div>
           </li>
         ))}
