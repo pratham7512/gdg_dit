@@ -50,7 +50,7 @@ export function CarouselEvent({ events }) {
             {events && events.flatMap((event) => 
               event.imageUrls?.map((url, index) => (
                 <CarouselItem key={`${event.id}-${index}`} className="basis-full">
-                  <div className="relative h-[60vh] sm:h-[80vh] w-full overflow-hidden rounded-xl">
+                  <div className="relative h-[30vh] sm:h-[60vh] w-full overflow-hidden rounded-xl">
                     <Image
                       src={url}
                       alt={`Event image for ${event.name}`}
