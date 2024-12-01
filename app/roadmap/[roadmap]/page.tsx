@@ -6,7 +6,7 @@ import ButtonGradient from '@/components/assets/svg/ButtonGradient'
 import Chatbot from '@/components/Chatbot'
 import Footer from '@/components/components/Footer'
 import Header from '@/components/components/Header'
-import { Card, CardContent, CardHeader,} from "@/components/ui/card"
+import { Card, CardContent} from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { CheckCircle2 } from 'lucide-react'
 
