@@ -7,34 +7,25 @@ import Footer from '@/components/components/Footer'
 import Header from '@/components/components/Header'
 import { Skeleton } from "@/components/ui/skeleton"
 import { CheckCircle2 } from 'lucide-react'
-import { NotionPage } from "@/components/components/NotionPage"
-import { notion } from "@/lib/notion"
 
 interface RoadmapData {
-  rootPageId: string;
+  notionHtmlFileUrl: string;
   steps: string[];
 }
-async function getData(rootPageId:string) {
-  return await notion.getPage(rootPageId);
-}
-export default async function RoadmapPage({ params }: { params: { roadmap: string } }) {
+
+export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
-  let notionData=await getData("98d8acfc9a0c4b98b94d68324d219b97");
 
   useEffect(() => {
     const fetchRoadmap = async () => {
       try {
-        // Fetch roadmap data from API
         const response = await fetch(`/api/roadmap?id=${params.roadmap}`);
         if (!response.ok) {
           throw new Error('Failed to fetch roadmap data');
         }
         const data = await response.json();
         setRoadmapData(data);
-
-        // Fetch Notion page data using the rootPageId
-        notionData=await getData(data.rootPageId);
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
@@ -54,13 +45,23 @@ export default async function RoadmapPage({ params }: { params: { roadmap: strin
       <main className="flex-grow container px-1 md:px-4 py-8">
         {isLoading ? (
           <RoadmapSkeleton />
-        ) : roadmapData && notionData ? (
+        ) : roadmapData ? (
           <div className="w-full h-full">
-            <div className="mb-6">
-              <div className="w-full overflow-hidden rounded-lg">
-                <NotionPage recordMap={notionData} rootPageId={roadmapData.rootPageId} />
+            {roadmapData.notionHtmlFileUrl && (
+              <div className="mb-6">
+                <div className="w-full overflow-hidden rounded-lg">
+                  <div className="relative w-full h-[87vh]"> {/* 4:3 Aspect Ratio */}
+                    <iframe
+                      src={roadmapData.notionHtmlFileUrl}
+                      className="absolute top-0 left-0 w-full h-full border-0 bg-white text-black"
+                      title="Notion Roadmap"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
+
             <div className="text-white">
               <ul className="space-y-2">
                 {roadmapData.steps && roadmapData.steps.map((step, index) => (
