@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from 'next/dynamic'
 import { ExtendedRecordMap } from "notion-types";
 
-import 'react-notion-x/src/styles.css'
+import '@/lib/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
