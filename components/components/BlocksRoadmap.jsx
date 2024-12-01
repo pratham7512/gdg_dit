@@ -33,7 +33,7 @@ const BlocksRoadmap = () => {
 
   if (loading) {
     return (
-      <Section className="py-20 px-4 sm:px-6 lg:px-8">
+      <Section className="py-20 px-4 sm:px-6 lg:px-24">
         <RoadmapSkeleton />
       </Section>
     );
@@ -48,7 +48,7 @@ const BlocksRoadmap = () => {
   }
 
   return (
-    <Section className="py-20 px-4 sm:px-6 lg:px-16">
+    <Section className="py-20 px-4 sm:px-6 lg:px-24">
       <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-secondary">
         Explore Our Roadmaps
       </h2>
@@ -87,7 +87,7 @@ const RoadmapCard = ({ roadmap, index }) => (
 );
 
 const RoadmapSkeleton = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
     {[...Array(6)].map((_, index) => (
       <Card key={index} className="bg-black border-primary/20">
         <CardContent className="p-6">
