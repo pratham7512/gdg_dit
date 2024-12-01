@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     try {
       const { rootPageId, steps } = req.body;
 
-      if (!rootPageId || !steps) {
+      if (!rootPageId ) {
         return res.status(400).json({ message: 'Missing required fields' });
       }
 
