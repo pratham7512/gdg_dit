@@ -3,9 +3,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from 'lucide-react';
 
-import Section from "./Section";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import Section from "@/components/components/Section";
 
 const BlocksRoadmap = () => {
   const [roadmaps, setRoadmaps] = React.useState([]);
