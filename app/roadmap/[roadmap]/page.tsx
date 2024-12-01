@@ -42,14 +42,14 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
   }, [params.roadmap]);
 
   return (
-    <div className="lg:pt-[2.5rem] min-h-screen bg-background text-foreground flex flex-col">
+    <div className="lg:pt-[2.8rem] min-h-screen bg-background text-foreground flex flex-col">
       <Header />
 
       <main className="flex-grow container mx-auto px-4 py-8">
         {isLoading ? (
           <RoadmapSkeleton />
         ) : roadmapData ? (
-          <Card className="w-full bg-card text-card-foreground">
+          <Card className="w-full bg-card border border-card text-card-foreground">
             <CardContent>
               {roadmapData.notionHtmlFileUrl && (
                 <div className="mb-6">
@@ -60,7 +60,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
                         className="absolute top-0 left-0 w-full h-full border-0"
                         style={{
                           minHeight: '600px',
-                          maxHeight: '85vh'
+                          maxHeight: '95vh'
                         }}
                         title="Notion Roadmap"
                       />
