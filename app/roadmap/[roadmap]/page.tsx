@@ -42,7 +42,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
   }, [params.roadmap]);
 
   return (
-    <div className="lg:pt-[0.8rem] min-h-screen bg-background text-foreground flex flex-col">
+    <div className="lg:pt-[1.8rem] min-h-screen bg-background text-foreground flex flex-col">
       <Header />
 
       <main className="flex-grow container mx-auto px-4 py-8">
@@ -54,7 +54,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
               {roadmapData.notionHtmlFileUrl && (
                 <div className="mb-6">
                   <div className="border rounded-lg overflow-hidden bg-white shadow-lg">
-                    <div className="relative pb-[56.25%] h-0 overflow-hidden max-w-full">
+                    <div className="relative h-0 overflow-hidden max-w-full">
                       <iframe
                         src={roadmapData.notionHtmlFileUrl}
                         className="absolute top-0 left-0 w-full h-full border-0"
