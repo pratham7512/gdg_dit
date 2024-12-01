@@ -22,7 +22,7 @@ function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-export function CarouselEvent({events}) {
+export function CarouselEvent({ events }) {
   const targetRef = React.useRef(null)
   const { scrollYProgress } = useScroll({ 
     target: targetRef, 
@@ -30,7 +30,6 @@ export function CarouselEvent({events}) {
   })
   const opacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0, 1, 1, 1])
   const smoothOpacity = useSpring(opacity, { damping: 20, stiffness: 100 })
-  // const MotionImage = motion(Image)
   const plugin = React.useRef(
     Autoplay({ delay: 4000, stopOnInteraction: false })
   )
@@ -38,7 +37,7 @@ export function CarouselEvent({events}) {
   return (
     <div className="w-full h-full md:py-[5%] max-sm:py-[5%]">
       {/* Image Carousel Section */}
-      <div className="container mb-16 w-3/5">
+      <div className="container mb-16 w-full md:w-3/5">
         <Carousel
           plugins={[plugin.current]}
           className="w-full"
@@ -51,7 +50,7 @@ export function CarouselEvent({events}) {
             {events && events.flatMap((event) => 
               event.imageUrls?.map((url, index) => (
                 <CarouselItem key={`${event.id}-${index}`} className="basis-full">
-                  <div className="relative h-[60vh] w-full overflow-hidden rounded-xl">
+                  <div className="relative h-[60vh] sm:h-[80vh] w-full overflow-hidden rounded-xl">
                     <Image
                       src={url}
                       alt={`Event image for ${event.name}`}
@@ -70,9 +69,9 @@ export function CarouselEvent({events}) {
       </div>
 
       {/* Event Details Section */}
-      <div className="container md:pb-5">
+      <div className="container md:pb-5 px-4 md:px-0">
         <Heading tag="Ready to get started" title="What we're working on" />
-        <div className="relative grid gap-6 md:grid-cols-2 md:gap-6 md:pb-[7rem] mx-10">
+        <div className="relative grid gap-6 md:grid-cols-2 md:gap-6 md:pb-[7rem] mx-0 md:mx-10">
           {events && events.map((item) => {
             return (
               <Link href={`/event?id=${item.id}`} key={item.id}>
