@@ -1,8 +1,3 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import ButtonGradient from '@/components/assets/svg/ButtonGradient';
-import Chatbot from '@/components/Chatbot';
 import Footer from '@/components/components/Footer';
 import Header from '@/components/components/Header';
 import { Skeleton } from "@/components/ui/skeleton";
@@ -14,89 +9,64 @@ interface RoadmapData {
   steps: string[];
 }
 
-export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
-  const [rootPageId, setRootPageId] = useState<string>();
+interface RoadmapPageProps {
+  roadmapData: RoadmapData | null;
+}
 
-  useEffect(() => {
-    const fetchRoadmap = async () => {
-      try {
-        const response = await fetch(`/api/roadmap?id=${params.roadmap}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch roadmap data');
-        }
-        const data: RoadmapData = await response.json();
-        setRoadmapData(data);
-  
-        // Safely set rootPageId
-        setRootPageId(data.notionLink);
-  
-        console.log("Fetched notion link:", data.notionLink);
-      } catch (error) {
-        console.error('Error fetching roadmap data:', error);
-      } finally {
-        setIsLoading(false); // Always stop loading
-      }
-    };
-  
-    fetchRoadmap();
-    document.body.style.cursor = 'default';
-    window.scrollTo(0, 0);
-  }, [params.roadmap]);
-  
-
+export default function RoadmapPage({ roadmapData }: RoadmapPageProps) {
   return (
-    <div className="pt-[2.8rem] min-h-screen bg-black text-white flex flex-col">
+    <>
       <Header />
-
-      <main className="flex-grow container px-1 md:px-4 py-8">
-        {isLoading ? (
-          <RoadmapSkeleton />
-        ) : roadmapData ? (
-          <div className="w-full h-full">
-            {rootPageId && (
-              <div className="mb-6">
-                <NotionRoadmap rootPageid={rootPageId} />
-              </div>
+      <main>
+        {roadmapData ? (
+          <div>
+            {roadmapData.notionLink && (
+              <NotionRoadmap rootPageid={roadmapData.notionLink} />
             )}
-
-            <div className="text-white">
-              <ul className="space-y-2">
-                {roadmapData.steps && roadmapData.steps.map((step, index) => (
-                  <li key={index} className="flex items-start">
-                    <CheckCircle2 className="mr-2 h-5 w-5 text-primary flex-shrink-0" />
-                    <span>{step}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {roadmapData.steps.map((step, index) => (
+              <div key={index} className="step-item">
+                <CheckCircle2 className="icon" />
+                {step}
+              </div>
+            ))}
           </div>
         ) : (
-          <p className="text-center text-muted-foreground">No roadmap data available.</p>
+          <div>No roadmap data available.</div>
         )}
       </main>
-
       <Footer />
-      <AnimatePresence mode="wait">
-        {!isLoading && <Chatbot />}
-      </AnimatePresence>
-      <ButtonGradient />
+    </>
+  );
+}
+
+export function RoadmapSkeleton() {
+  return (
+    <div className="skeleton-container">
+      <Skeleton className="w-48 h-8 mb-4" />
+      <Skeleton className="w-96 h-4" />
+      <Skeleton className="w-96 h-4" />
     </div>
   );
 }
 
-function RoadmapSkeleton() {
-  return (
-    <div className="w-full text-white">
-      <Skeleton className="h-4 w-full mb-2" />
-      <Skeleton className="h-4 w-5/6 mb-6" />
-      <Skeleton className="h-[75vh] w-full mb-6" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-5/6" />
-        <Skeleton className="h-4 w-4/6" />
-      </div>
-    </div>
-  );
+export async function getServerSideProps(context: { params: { roadmap: string } }) {
+  const { roadmap } = context.params;
+  let roadmapData: RoadmapData | null = null;
+
+  try {
+    const response = await fetch(`/api/roadmap?id=${roadmap}`);
+    if (response.ok) {
+      roadmapData = await response.json();
+    } else {
+      console.error(`Failed to fetch roadmap data: ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error('Error fetching roadmap data:', error);
+  }
+
+  return {
+    props: {
+      roadmapData,
+    },
+  };
 }
