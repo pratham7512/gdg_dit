@@ -1,3 +1,4 @@
+"use server"
 import { NotionPage } from "@/components/components/NotionPage";
 import {notion} from "@/lib/notion"
 
