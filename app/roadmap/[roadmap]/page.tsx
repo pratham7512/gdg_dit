@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import ButtonGradient from '@/components/assets/svg/ButtonGradient';
@@ -38,7 +38,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); // Ensure loading state stops regardless of errors
       }
     };
 
@@ -58,7 +58,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
           <div className="w-full h-full">
             {rootPageId && (
               <div className="mb-6">
-                <NotionRoadmap  rootPageid={rootPageId} />
+                <NotionRoadmap rootPageid={rootPageId} />
               </div>
             )}
 
