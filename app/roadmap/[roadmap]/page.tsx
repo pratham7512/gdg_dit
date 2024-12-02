@@ -1,26 +1,23 @@
 import Footer from '@/components/components/Footer';
 import Header from '@/components/components/Header';
-import { Skeleton } from "@/components/ui/skeleton";
-import { CheckCircle2 } from 'lucide-react';
 import NotionRoadmap from '@/components/components/NotionRoadmap';
-import { useRoadmap } from '@/hooks/useRoadmap';
+import { CheckCircle2 } from 'lucide-react';
+import { fetchRoadmapData } from '@/lib/fetchRoadmapData';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface RoadmapPageProps {
-  params: { roadmap: string }; // Expecting `params` as a prop
+  params: { roadmap: string };
 }
 
-export default function RoadmapPage({ params }: RoadmapPageProps) {
-  const { isLoading, roadmapData, error } = useRoadmap({ roadmapId: params.roadmap });
+export default async function RoadmapPage({ params }: RoadmapPageProps) {
+  // Fetch the roadmap data server-side
+  const roadmapData = await fetchRoadmapData(params.roadmap);
 
   return (
     <>
       <Header />
       <main>
-        {isLoading ? (
-          <RoadmapSkeleton />
-        ) : error ? (
-          <div>Error: {error}</div>
-        ) : roadmapData ? (
+        {roadmapData ? (
           <div>
             {roadmapData.notionLink && (
               <NotionRoadmap rootPageid={roadmapData.notionLink} />
@@ -40,7 +37,6 @@ export default function RoadmapPage({ params }: RoadmapPageProps) {
     </>
   );
 }
-
 function RoadmapSkeleton() {
   return (
     <div className="skeleton-container">
@@ -49,14 +45,4 @@ function RoadmapSkeleton() {
       <Skeleton className="w-96 h-4" />
     </div>
   );
-}
-
-export async function getServerSideProps(context: { params: { roadmap: string } }) {
-  const { params } = context;
-
-  return {
-    props: {
-      params,
-    },
-  };
 }
