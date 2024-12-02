@@ -9,7 +9,7 @@ type Roadmap = {
 
 type FirebaseRoadmap = Record<string, Roadmap>;
 
-export const fetchRoadmap = async (id: string): Promise<string | null> => {
+const fetchRoadmap = async (id: string): Promise<string | null> => {
   const dbRef = ref(database, "roadmaps");
   const snapshot = await get(dbRef);
 
