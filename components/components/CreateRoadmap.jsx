@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useRouter } from 'next/navigation'
-import { uploadFileToFirebase } from '../../app/firebase/firebaseRoadmap'; // You need to implement this
+
 
 export default function CreateRoadmap() {
   const router = useRouter()
@@ -23,21 +23,16 @@ export default function CreateRoadmap() {
     setRoadmapData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
-    setRoadmapData((prev) => ({ ...prev, notionLink: file }))
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!roadmapData.notionLink) {
-      return alert("Please upload the HTML file.")
+      return alert("Please upload the notionLink.")
     }
 
     // Upload the file to Firebase Storage (or your chosen storage solution)
-    const file = roadmapData.notionLink
-    const fileUrl = await uploadFileToFirebase(file);
+    // const file = roadmapData.notionLink
     
     // Now save the file URL along with other roadmap data
     try {
