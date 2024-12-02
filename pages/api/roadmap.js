@@ -21,9 +21,9 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     // Create a new roadmap
     try {
-      const { title, description, steps, status, notionHtmlFileUrl } = req.body;
+      const { title, description, steps, status, notionLink } = req.body;
 
-      if (!title || !description || !notionHtmlFileUrl) {
+      if (!title || !description || !notionLink) {
         return res.status(400).json({ message: 'Missing required fields' });
       }
 
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
         description,
         steps: Array.isArray(steps) ? steps : JSON.parse(steps || '[]'),
         status: status || 'draft',
-        notionHtmlFileUrl, // Store the file URL instead
+        notionLink, // Store the file URL instead
         createdAt: admin.database.ServerValue.TIMESTAMP,
         updatedAt: admin.database.ServerValue.TIMESTAMP,
       };
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
   } else if (req.method === 'PUT') {
     // Update an existing roadmap
     try {
-      const { id, title, description, steps, status, notionHtmlFileUrl } = req.body;
+      const { id, title, description, steps, status, notionLink } = req.body;
 
       if (!id) {
         return res.status(400).json({ message: 'Roadmap ID is required for updating.' });
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
         description,
         steps: Array.isArray(steps) ? steps : JSON.parse(steps || '[]'),
         status,
-        notionHtmlFileUrl, // Update the file URL
+        notionLink, // Update the file URL
         updatedAt: admin.database.ServerValue.TIMESTAMP,
       };
 

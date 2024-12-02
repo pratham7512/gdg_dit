@@ -15,7 +15,7 @@ export default function CreateRoadmap() {
     name: '',
     steps:[],
     status: 'Planning',
-    notionHtmlFile: null, // for HTML file
+    notionLink: '', 
   })
 
   const handleInputChange = (e) => {
@@ -25,18 +25,18 @@ export default function CreateRoadmap() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
-    setRoadmapData((prev) => ({ ...prev, notionHtmlFile: file }))
+    setRoadmapData((prev) => ({ ...prev, notionLink: file }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!roadmapData.notionHtmlFile) {
+    if (!roadmapData.notionLink) {
       return alert("Please upload the HTML file.")
     }
 
     // Upload the file to Firebase Storage (or your chosen storage solution)
-    const file = roadmapData.notionHtmlFile
+    const file = roadmapData.notionLink
     const fileUrl = await uploadFileToFirebase(file);
     
     // Now save the file URL along with other roadmap data
@@ -48,13 +48,13 @@ export default function CreateRoadmap() {
           title: roadmapData.name,
           description: 'Roadmap description',
           status: roadmapData.status,
-          notionHtmlFileUrl: fileUrl, // Save the file URL
+          notionLink: roadmapData.notionLink, // Save the file URL
         }),
       })
 
       const result = await response.json()
       if (response.ok) {
-        router.push('/admin/dashboard')
+        router.push('/ditgdgadmin/dashboard')
       } else {
         console.error('Error saving roadmap:', result.message)
       }
@@ -84,13 +84,13 @@ export default function CreateRoadmap() {
               />
             </div>
             <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="notionHtmlFile">Notion HTML File</Label>
+              <Label htmlFor="notionLink">notion Link</Label>
               <Input
-                type="file"
-                id="notionHtmlFile"
-                name="notionHtmlFile"
-                accept=".html"
-                onChange={handleFileChange}
+                type="text"
+                id="notionLink"
+                name="notionLink"
+                value={roadmapData.notionLink}
+                onChange={handleInputChange}
                 required
               />
             </div>
@@ -109,11 +109,11 @@ export default function CreateRoadmap() {
         </Card>
         <Button type="submit">Save Roadmap</Button>
       </form>
-      {roadmapData.notionHtmlFile && (
+      {roadmapData.notionLink && (
         <div className="mt-6">
           <h2 className="text-xl font-bold">Preview</h2>
           <iframe
-            src={URL.createObjectURL(roadmapData.notionHtmlFile)} // Directly using the uploaded HTML file
+            src={(roadmapData.notionLink)} // Directly using the uploaded HTML file
             title="Notion Roadmap"
             width="100%"
             height="600px"
