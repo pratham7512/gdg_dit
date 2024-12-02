@@ -17,7 +17,7 @@ interface RoadmapData {
 export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
-  const [rootPageId, setRootPageId] = useState<string | null>(null);
+  const [rootPageId, setRootPageId] = useState<string>();
 
   useEffect(() => {
     const fetchRoadmap = async () => {
@@ -28,22 +28,23 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         }
         const data: RoadmapData = await response.json();
         setRoadmapData(data);
-        console.log("this is rootid :" + data.notionLink)
-        // Extract the Notion page ID from the notionLink
+  
+        // Safely set rootPageId
         setRootPageId(data.notionLink);
-        console.log("this is rootid :" + rootPageId)
-        setIsLoading(false);
+  
+        console.log("Fetched notion link:", data.notionLink);
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
-        setIsLoading(false); // Ensure loading state stops regardless of errors
+        setIsLoading(false); // Always stop loading
       }
     };
-
+  
     fetchRoadmap();
     document.body.style.cursor = 'default';
     window.scrollTo(0, 0);
   }, [params.roadmap]);
+  
 
   return (
     <div className="pt-[2.8rem] min-h-screen bg-black text-white flex flex-col">
