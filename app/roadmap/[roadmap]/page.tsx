@@ -30,11 +30,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         setRoadmapData(data);
         console.log("this is rootid :" + data.notionLink)
         // Extract the Notion page ID from the notionLink
-        const notionIdMatch = data.notionLink.match(/([a-zA-Z0-9]{32})$/);
-        if (notionIdMatch) {
-          const extractedId = notionIdMatch[0];
-          setRootPageId(extractedId);
-        }
+        setRootPageId(data.notionLink);
         console.log("this is rootid :" + rootPageId)
         setIsLoading(false);
       } catch (error) {
