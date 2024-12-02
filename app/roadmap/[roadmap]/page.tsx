@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import ButtonGradient from '@/components/assets/svg/ButtonGradient';
@@ -16,6 +17,34 @@ interface RoadmapData {
   steps: string[];
 }
 
+// Function to extract Notion page ID from a URL
+function extractNotionPageId(url: string): string | null {
+  // Regex to match 32-character hexadecimal/alphanumeric ID at the end of the URL
+  const idRegex = /([a-f0-9]{32})$/i;
+  
+  try {
+    // Try parsing as a URL first
+    const parsedUrl = new URL(url);
+    const matchedId = parsedUrl.pathname.match(idRegex);
+    
+    if (matchedId) {
+      return matchedId[1];
+    }
+    
+    // Fallback to direct string matching if URL parsing fails
+    const directMatch = url.match(idRegex);
+    return directMatch ? directMatch[1] : null;
+  } catch {
+    // If URL parsing fails, try direct regex matching
+    const directMatch = url.match(idRegex);
+    return directMatch ? directMatch[1] : null;
+  }
+}
+
+async function getData(rootPageId: string) {
+  return await notion.getPage(rootPageId);
+}
+
 export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
@@ -23,41 +52,42 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
   const [rootPageId, setRootPageId] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRoadmap = async () => {
+    async function fetchRoadmapData() {
       try {
         const response = await fetch(`/api/roadmap?id=${params.roadmap}`);
+        
         if (!response.ok) {
           throw new Error('Failed to fetch roadmap data');
         }
-        const data: RoadmapData = await response.json();
-        setRoadmapData(data);
+        
+        const rdata: RoadmapData = await response.json();
+        setRoadmapData(rdata);
 
         // Extract the Notion page ID from the notionLink
-        const notionIdMatch = data.notionLink.match(/([a-zA-Z0-9]{32})$/);
-        if (notionIdMatch) {
-          const extractedId = notionIdMatch[0];
+        const extractedId = extractNotionPageId(rdata.notionLink);
+        
+        if (extractedId) {
           setRootPageId(extractedId);
-
+          
           // Fetch Notion data for the page ID
-          const notionPageData = await notion.getPage(extractedId);
+          const notionPageData = await getData(extractedId);
           setNotionData(notionPageData);
         }
+        
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
-      } finally {
         setIsLoading(false);
       }
-    };
+    }
 
-    fetchRoadmap();
-    document.body.style.cursor = 'default';
-    window.scrollTo(0, 0);
+    fetchRoadmapData();
   }, [params.roadmap]);
 
   return (
     <div className="pt-[2.8rem] min-h-screen bg-black text-white flex flex-col">
       <Header />
-
+      
       <main className="flex-grow container px-1 md:px-4 py-8">
         {isLoading ? (
           <RoadmapSkeleton />
@@ -68,7 +98,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
                 <NotionPage recordMap={notionData} rootPageId={rootPageId} />
               </div>
             )}
-
+            
             <div className="text-white">
               <ul className="space-y-2">
                 {roadmapData.steps && roadmapData.steps.map((step, index) => (
@@ -84,11 +114,13 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
           <p className="text-center text-muted-foreground">No roadmap data available.</p>
         )}
       </main>
-
+      
       <Footer />
+      
       <AnimatePresence mode="wait">
         {!isLoading && <Chatbot />}
       </AnimatePresence>
+      
       <ButtonGradient />
     </div>
   );
