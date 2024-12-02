@@ -37,7 +37,7 @@ export default async function RoadmapPage({ params }: { params: { roadmap: strin
   return (
     <div className="lg:pt-[0.8rem] overflow-hidden bg-black">
     <Header />
-    <div className="pt-[3.8rem]">
+    <div className="pt-[4.8rem] md:pt-[3.8rem]">
           <NotionRoadmap rootPageid={rootPageId} />
       <AnimatePresence mode='wait'>
         {<Chatbot />}
