@@ -7,6 +7,7 @@ import { ExtendedRecordMap } from "notion-types";
 import '@/lib/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
+import Image from "next/image";
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
@@ -45,10 +46,12 @@ export const NotionPage = ({
         recordMap={recordMap}
         fullPage={true}
         darkMode={true}
+        disableHeader={true}
         rootPageId={rootPageId}
         previewImages
         components={{
           nextLink: Link,
+          nextImage:Image,
            Code,
            Collection,
            Equation,

@@ -30,28 +30,21 @@ const fetchRoadmap = async (id: string): Promise<string | null> => {
 // Default root page ID
 const defaultRootPageId = "6b6c2a9f1282499aba4782b88bf7e204";
 
-export default async function RoadmapPage({ params }: { params: { roadmapId: string } }) {
-  const notionLink = await fetchRoadmap(params.roadmapId);
+export default async function RoadmapPage({ params }: { params: { roadmap: string } }) {
+  console.log("this is : "+params.roadmap)
+  const notionLink = await fetchRoadmap(params.roadmap);
   const rootPageId = notionLink || defaultRootPageId;
   return (
-    <div className="pt-[2.8rem] min-h-screen bg-black text-white flex flex-col">
-      <Header />
-      <main className="flex-grow container px-1 md:px-4 py-8">
-          <div className="w-full h-full">
-              <div className="mb-6">
-                <div className="w-full overflow-hidden rounded-lg">
-                  <div className="relative w-full h-[87vh]"> {/* 4:3 Aspect Ratio */}
-                      <NotionRoadmap rootPageid={rootPageId} />
-                  </div>
-                </div>
-              </div>
-          </div>
-      </main>
-      <Footer />
+    <div className="lg:pt-[0.8rem] overflow-hidden bg-black">
+    <Header />
+    <div className="pt-[3.8rem]">
+          <NotionRoadmap rootPageid={rootPageId} />
       <AnimatePresence mode='wait'>
         {<Chatbot />}
       </AnimatePresence>
       <ButtonGradient />
+    </div>
+    <Footer />
     </div>
   )
 }
