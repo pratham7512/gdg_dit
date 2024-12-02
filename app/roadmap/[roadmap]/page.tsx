@@ -2,8 +2,13 @@ import Footer from '@/components/components/Footer';
 import Header from '@/components/components/Header';
 import NotionRoadmap from '@/components/components/NotionRoadmap';
 import { CheckCircle2 } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 import { fetchRoadmapData } from '@/lib/fetchRoadmapData';
-import { Skeleton } from "@/components/ui/skeleton";
+
+interface RoadmapData {
+  notionLink: string;
+  steps: string[];
+}
 
 interface RoadmapPageProps {
   params: { roadmap: string };
@@ -11,7 +16,7 @@ interface RoadmapPageProps {
 
 export default async function RoadmapPage({ params }: RoadmapPageProps) {
   // Fetch the roadmap data server-side
-  const roadmapData = await fetchRoadmapData(params.roadmap);
+  const roadmapData: RoadmapData | null = await fetchRoadmapData(params.roadmap);
 
   return (
     <>
@@ -22,7 +27,7 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
             {roadmapData.notionLink && (
               <NotionRoadmap rootPageid={roadmapData.notionLink} />
             )}
-            {roadmapData.steps.map((step, index) => (
+            {roadmapData.steps.map((step: string, index: number) => (
               <div key={index} className="step-item">
                 <CheckCircle2 className="icon" />
                 {step}
@@ -30,13 +35,14 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
             ))}
           </div>
         ) : (
-          <div>No roadmap data available.</div>
+          <RoadmapSkeleton />
         )}
       </main>
       <Footer />
     </>
   );
 }
+
 function RoadmapSkeleton() {
   return (
     <div className="skeleton-container">
