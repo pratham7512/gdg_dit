@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { CheckCircle2 } from 'lucide-react';
 import { NotionPage } from "@/components/components/NotionPage";
 import { notion } from "@/lib/notion";
+import { type ExtendedRecordMap } from 'notion-types'
 
 interface RoadmapData {
   notionLink: string;
@@ -18,7 +19,7 @@ interface RoadmapData {
 export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
-  const [notionData, setNotionData] = useState<any | null>(null);
+  const [notionData, setNotionData] = useState<ExtendedRecordMap | null>(null);
   const [rootPageId, setRootPageId] = useState<string | null>(null);
 
   useEffect(() => {
