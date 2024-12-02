@@ -28,7 +28,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         }
         const data: RoadmapData = await response.json();
         setRoadmapData(data);
-
+        console.log("this is rootid :" + data)
         // Extract the Notion page ID from the notionLink
         const notionIdMatch = data.notionLink.match(/([a-zA-Z0-9]{32})$/);
         if (notionIdMatch) {
