@@ -67,7 +67,7 @@ export default function AddTeamMembers() {
     });
 
     if (response.ok) {
-      router.push('/admin/dashboard');
+      router.push('/ditgdgadmin/dashboard');
     } else {
       console.error('Failed to add team members');
     }

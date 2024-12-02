@@ -129,7 +129,7 @@ export default function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addEvent();
-    router.push('/admin/dashboard');
+    router.push('/ditgdgadmin/dashboard');
   };
 
   useEffect(() => {
