@@ -1,21 +1,25 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
-import ButtonGradient from '@/components/assets/svg/ButtonGradient'
-import Chatbot from '@/components/Chatbot'
-import Footer from '@/components/components/Footer'
-import Header from '@/components/components/Header'
-import { Skeleton } from "@/components/ui/skeleton"
-import { CheckCircle2 } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import ButtonGradient from '@/components/assets/svg/ButtonGradient';
+import Chatbot from '@/components/Chatbot';
+import Footer from '@/components/components/Footer';
+import Header from '@/components/components/Header';
+import { Skeleton } from "@/components/ui/skeleton";
+import { CheckCircle2 } from 'lucide-react';
+import { NotionPage } from "@/components/components/NotionPage";
+import { notion } from "@/lib/notion";
 
 interface RoadmapData {
-  notionHtmlFileUrl: string;
+  notionLink: string;
   steps: string[];
 }
 
 export default function RoadmapPage({ params }: { params: { roadmap: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [roadmapData, setRoadmapData] = useState<RoadmapData | null>(null);
+  const [notionData, setNotionData] = useState<any | null>(null);
+  const [rootPageId, setRootPageId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchRoadmap = async () => {
@@ -24,8 +28,19 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
         if (!response.ok) {
           throw new Error('Failed to fetch roadmap data');
         }
-        const data = await response.json();
+        const data: RoadmapData = await response.json();
         setRoadmapData(data);
+
+        // Extract the Notion page ID from the notionLink
+        const notionIdMatch = data.notionLink.match(/([a-zA-Z0-9]{32})$/);
+        if (notionIdMatch) {
+          const extractedId = notionIdMatch[0];
+          setRootPageId(extractedId);
+
+          // Fetch Notion data for the page ID
+          const notionPageData = await notion.getPage(extractedId);
+          setNotionData(notionPageData);
+        }
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
@@ -47,18 +62,9 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
           <RoadmapSkeleton />
         ) : roadmapData ? (
           <div className="w-full h-full">
-            {roadmapData.notionHtmlFileUrl && (
+            {rootPageId && notionData && (
               <div className="mb-6">
-                <div className="w-full overflow-hidden rounded-lg">
-                  <div className="relative w-full h-[87vh]"> {/* 4:3 Aspect Ratio */}
-                    <iframe
-                      src={roadmapData.notionHtmlFileUrl}
-                      className="absolute top-0 left-0 w-full h-full border-0 bg-white text-black"
-                      title="Notion Roadmap"
-                      allowFullScreen
-                    />
-                  </div>
-                </div>
+                <NotionPage recordMap={notionData} rootPageId={rootPageId} />
               </div>
             )}
 
@@ -79,12 +85,12 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
       </main>
 
       <Footer />
-      <AnimatePresence mode='wait'>
+      <AnimatePresence mode="wait">
         {!isLoading && <Chatbot />}
       </AnimatePresence>
       <ButtonGradient />
     </div>
-  )
+  );
 }
 
 function RoadmapSkeleton() {
@@ -99,5 +105,5 @@ function RoadmapSkeleton() {
         <Skeleton className="h-4 w-4/6" />
       </div>
     </div>
-  )
+  );
 }
