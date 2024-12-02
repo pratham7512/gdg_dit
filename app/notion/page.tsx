@@ -1,8 +1,7 @@
-
+import { NotionPage } from "@/components/components/NotionPage";
 import { notion } from "@/lib/notion";
 import { ref, get } from 'firebase/database';
 import { database } from "@/app/firebase/config";
-import NotionRoadmap from "@/components/components/NotionRoadmap";
 
 type Roadmap = {
   notionLink: string;
@@ -47,11 +46,18 @@ export default async function Home() {
   // Use the fetched notion link or fallback to the default root page ID
   const rootPageId = notionLink || defaultRootPageId;
 
+  let data;
+  try {
+    data = await getData(rootPageId);
+  } catch (error) {
+    console.error("Error fetching data for Notion page:", error);
+    return <div>Error loading Notion page.</div>; // Handle error gracefully in UI
+  }
 
   return (
     <>
       <div>This is the fetched Notion link: {notionLink || "No link found"}</div>
-      <NotionRoadmap rootPageid={rootPageId} />
+      <NotionPage recordMap={data} rootPageId={rootPageId} />
     </>
   );
 }
