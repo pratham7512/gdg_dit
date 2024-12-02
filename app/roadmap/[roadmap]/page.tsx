@@ -35,6 +35,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
           const extractedId = notionIdMatch[0];
           setRootPageId(extractedId);
         }
+        console.log("this is rootid :" + rootPageId)
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
