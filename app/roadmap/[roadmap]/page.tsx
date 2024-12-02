@@ -36,6 +36,7 @@ export default function RoadmapPage({ params }: { params: { roadmap: string } })
           setRootPageId(extractedId);
         }
         console.log("this is rootid :" + rootPageId)
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching roadmap data:', error);
       } finally {
