@@ -20,12 +20,35 @@ export default function EventPage() {
   const [currentImage, setCurrentImage] = useState(0)
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isExpired, setIsExpired] = useState(false)
+  const [markdownContent, setMarkdownContent] = useState('')
 
   const searchParams = useSearchParams()
   const id = searchParams?.get("id")
   const { events, error, isLoading } = useFetchEvents(id || undefined)
   const event = events?.[0]
 
+  // Fetch Markdown content
+  useEffect(() => {
+    const fetchMarkdownContent = async () => {
+      try {
+        const response = await fetch(
+          'https://firebasestorage.googleapis.com/v0/b/gdg-dit-rlb405.appspot.com/o/events%2Fevent.md?alt=media&token=7bfdc8a4-d77c-49a4-9ca5-416569d70d98'
+        )
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch markdown content')
+        }
+        
+        const text = await response.text()
+        setMarkdownContent(text)
+      } catch (error) {
+        console.error('Error fetching markdown:', error)
+        setMarkdownContent('Error loading content')
+      }
+    }
+
+    fetchMarkdownContent()
+  }, [])
   useEffect(() => {
     if (!event?.dateTime) return
 
@@ -165,13 +188,14 @@ export default function EventPage() {
                 )}
                 
                 {/* Event Details */}
-                {
+                {(event.details || markdownContent) && (
                   <div className="prose prose-lg prose-invert">
-                    <p className="leading-relaxed whitespace-pre-wrap text-justify text-[1rem]">
-                    <MarkdownPreview source={event.details? event.details: 'Loading...'} style={{ backgroundColor: "#000000"}} />
-                    </p>
+                    <MarkdownPreview 
+                      source={event.details || markdownContent || 'Loading...'} 
+                      style={{ backgroundColor: "#000000" }} 
+                    />
                   </div>
-                }
+                )}
                 
                 {/* Items to Bring */}
                 {event.itemsToBring && event.itemsToBring.length > 0 && (
