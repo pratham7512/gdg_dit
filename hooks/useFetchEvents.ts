@@ -18,7 +18,7 @@ type Event = {
     domain: string;
     entryFees: string;
     rsvpLink: string;
-    "faq's": FAQ[];
+    faq: FAQ[];
     imageUrls: string[];
     itemsToBring: string[];
     location: string;
