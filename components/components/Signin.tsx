@@ -227,29 +227,31 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="block text-sm text-[#6E6E8F] font-code">
-                      CONFIRM PASSWORD
-                    </label>
-                    <div className="relative">
-                      <input
-                        type={showConfirmPassword ? "text" : "password"}
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleInputChange}
-                        className="w-full h-10 rounded-lg bg-[#1A1A27] px-4 text-md text-white border border-[#2A2A3C] focus:border-[#5252E5] focus:outline-none transition-colors font-code disabled:opacity-50"
-                        required
-                        disabled={isLoading}
-                      />
-                      <button 
-                        type="button" 
-                        onClick={() => setShowConfirmPassword(prev => !prev)} 
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                      >
-                        {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
-                      </button>
+                  {mode === 'signup' && (
+                    <div className="space-y-2">
+                      <label className="block text-sm text-[#6E6E8F] font-code">
+                        CONFIRM PASSWORD
+                      </label>
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          name="confirmPassword"
+                          value={formData.confirmPassword}
+                          onChange={handleInputChange}
+                          className="w-full h-10 rounded-lg bg-[#1A1A27] px-4 text-md text-white border border-[#2A2A3C] focus:border-[#5252E5] focus:outline-none transition-colors font-code disabled:opacity-50"
+                          required={mode === 'signup'}
+                          disabled={isLoading}
+                        />
+                        <button 
+                          type="button" 
+                          onClick={() => setShowConfirmPassword(prev => !prev)} 
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                        >
+                          {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <button
                     type="submit"
