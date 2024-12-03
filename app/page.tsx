@@ -15,6 +15,7 @@ import Community from '@/components/components/Community';
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  
 
   useEffect(() => {
     (async () => {

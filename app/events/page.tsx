@@ -9,7 +9,8 @@ import {CarouselEventSkeleton} from '@/components/components/CarouselEventSkelet
 import useFetchEvents from '@/hooks/useFetchEvents';
 import { motion } from 'framer-motion';
 import { useSession } from "next-auth/react"
-import { redirect } from 'next/navigation';
+import Button from '@/components/components/Button';
+import { AuthDialog } from '@/components/components/Signin';
 
 
 const Events =  () => {
@@ -24,8 +25,26 @@ const Events =  () => {
       </div>
     )
   }
-  if (status==='unauthenticated') {
-    redirect('/');
+  if (status === 'unauthenticated') {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+        <div className="w-full max-w-md p-8 rounded-lg shadow-2xl bg-black border">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              Please Sign In
+            </h2>
+            <p className="text-gray-300 mb-8">
+              You need to be login to access this content.
+            </p>
+            <AuthDialog initialMode="signin">
+            <Button className='z-20 relative border font-bold border-white rounded-lg hover:bg-gray-300'>
+              Sign In
+            </Button>
+            </AuthDialog>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const renderContent = () => {
