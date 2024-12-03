@@ -49,6 +49,8 @@ export const NotionPage = ({
         disableHeader={true}
         rootPageId={rootPageId}
         previewImages
+        defaultPageCover={"true"}
+        defaultPageIcon={"true"}
         components={{
           nextLink: Link,
           nextImage:Image,
