@@ -14,6 +14,7 @@ type Event = {
     date: string;
     dateTime: string;
     description: string;
+    calendar:string,
     details: string;
     domain: string;
     entryFees: string;

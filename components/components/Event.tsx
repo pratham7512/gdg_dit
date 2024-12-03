@@ -308,9 +308,11 @@ export default function EventPage() {
                   <div className="flex items-center justify-between gap-2 ">
                     <div className="relative">
                       <div className="absolute inset-0 bg-white transform rounded-lg"></div>    
+                      <a href={event.calendar}>
                       <Button variant="outline" className="flex-1 relative z-10 hover:bg-blue-500 hover:text-black hover:-translate-y-1 hover:-translate-x-1">
                         Add to calendar
                       </Button>
+                      </a>
                     </div>
                     <div className="relative">
                       <div className="absolute inset-0 bg-white transform rounded-lg"></div>  
