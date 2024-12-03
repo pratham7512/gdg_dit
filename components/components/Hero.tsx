@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
                 </div>
               </div>
               <div className="p-4 font-mono text-sm h-96 overflow-auto">
-                <pre className="whitespace-pre-wrap text-xl text-white leading-relaxed">
+                <pre className="whitespace-pre-wrap text-sm md:text-xl text-white leading-relaxed">
                 {"Welcome to the Google Developer Group Terminal!\n\n$ ls\nprojects  workshops  events  resources\n\n$ cat about.txt\nJoin us to explore cutting-edge technologies,\nattend workshops, and collaborate on exciting projects.\nLet's innovate together!\n\n"}
                 {displayText}
                   <span className="animate-blink">█</span>
