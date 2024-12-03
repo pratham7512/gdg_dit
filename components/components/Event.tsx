@@ -224,7 +224,7 @@ export default function EventPage() {
                   <div className="prose prose-lg prose-invert">
                     <MarkdownPreview 
                       source={ markdownContent || event.details ||'Loading...'} 
-                      style={{ backgroundColor: "#000000", fontSize: '1rem' }} 
+                      style={{ backgroundColor: "#000000", fontSize: '0.80rem' }} 
                     />
                   </div>
                 )}
@@ -371,7 +371,7 @@ export default function EventPage() {
                 <Accordion type="single" collapsible className="w-full">
                   {event.faq.map((fa, index) => (
                     <AccordionItem key={index} value={`item-${index}`}>
-                      <AccordionTrigger className="text-xl font-medium">{fa?.question}</AccordionTrigger>
+                      <AccordionTrigger className="text-lg md:text-xl font-medium">{fa?.question}</AccordionTrigger>
                       <AccordionContent className="text-lg">
                         {fa?.ans}
                       </AccordionContent>
