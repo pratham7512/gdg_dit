@@ -22,9 +22,7 @@ const Event = () => {
       </div>
     )
   }
-  if (status==='unauthenticated') {
-    redirect('/');
-  }
+
   return (
     <>
       <AnimatePresence mode="wait">
