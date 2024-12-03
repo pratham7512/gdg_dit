@@ -27,19 +27,20 @@ export default function EventPage() {
   const { events, error, isLoading } = useFetchEvents(id || undefined)
   const event = events?.[0]
 
-  // Fetch Markdown content
   useEffect(() => {
     const fetchMarkdownContent = async () => {
       try {
+        // Modified fetch URL to ensure direct file download
         const response = await fetch(
-          'https://firebasestorage.googleapis.com/v0/b/gdg-dit-rlb405.appspot.com/o/events%2Fevent.md?alt=media&token=7bfdc8a4-d77c-49a4-9ca5-416569d70d98'
+          'https://firebasestorage.googleapis.com/v0/b/gdg-dit-rlb405.appspot.com/o/events%2Fevent.md?alt=media'
         )
         
         if (!response.ok) {
           throw new Error('Failed to fetch markdown content')
         }
         
-        const text = await response.text()
+        const blob = await response.blob()
+        const text = await blob.text()
         setMarkdownContent(text)
       } catch (error) {
         console.error('Error fetching markdown:', error)
