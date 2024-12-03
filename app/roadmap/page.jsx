@@ -16,6 +16,19 @@ const Page = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const {status} =  useSession();
+    useEffect(() => {
+        (async () => {
+            // const LocomotiveScroll = (await import('locomotive-scroll')).default;
+            // const locomotiveScroll = new LocomotiveScroll();
+
+            setTimeout(() => {
+                setIsLoading(false);
+                document.body.style.cursor = 'default';
+                window.scrollTo(0, 0);
+            }, 2000);
+        })();
+    }, []);
+    
     if (status === 'unauthenticated') {
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
@@ -36,20 +49,7 @@ const Page = () => {
             </div>
           </div>
         );
-      }
-    useEffect(() => {
-        (async () => {
-            // const LocomotiveScroll = (await import('locomotive-scroll')).default;
-            // const locomotiveScroll = new LocomotiveScroll();
-
-            setTimeout(() => {
-                setIsLoading(false);
-                document.body.style.cursor = 'default';
-                window.scrollTo(0, 0);
-            }, 2000);
-        })();
-    }, []);
-
+    }
     return (
         <div className="bg-grid-white/[0.090] bg-black">
             <AnimatePresence mode='wait'>
