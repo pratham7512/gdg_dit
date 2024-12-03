@@ -17,8 +17,7 @@ import {
 import EventSkeleton from "./EventSkeleton"
 
 // Default Markdown Content
-const DEFAULT_MARKDOWN = `# That's what C said 
-Join us for an exciting *C Programming Quiz Competition* and showcase your skills while earning amazing rewards!  
+const DEFAULT_MARKDOWN = `Join us for an exciting *C Programming Quiz Competition* and showcase your skills while earning amazing rewards!  
 ---
 ## 🎯 Prizes  
 - *Participation Reward*: 5 GDG Coins  
@@ -225,7 +224,7 @@ export default function EventPage() {
                   <div className="prose prose-lg prose-invert">
                     <MarkdownPreview 
                       source={ markdownContent || event.details ||'Loading...'} 
-                      style={{ backgroundColor: "#000000" }} 
+                      style={{ backgroundColor: "#000000", fontSize: '1rem' }} 
                     />
                   </div>
                 )}
