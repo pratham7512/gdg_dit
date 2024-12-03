@@ -224,7 +224,7 @@ export default function EventPage() {
                   <div className="prose prose-lg prose-invert">
                     <MarkdownPreview 
                       source={ markdownContent || event.details ||'Loading...'} 
-                      style={{ backgroundColor: "#000000", fontSize: '0.80rem' }} 
+                      style={{ backgroundColor: "#000000", fontSize: '0.95rem' }} 
                     />
                   </div>
                 )}
