@@ -22,7 +22,7 @@ const Benefits = () => {
     <Section id="features" ref={ref}>
       <div className="container relative z-2">
         <Heading
-          className="md:max-w-md lg:max-w-2xl"
+          className="md:max-w-md lg:max-w-2xl text-lg md:text-4xl"
           title="Elevate Your Skills with GDG"
         />
 
