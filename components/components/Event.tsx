@@ -168,7 +168,7 @@ export default function EventPage() {
                 {
                   <div className="prose prose-lg prose-invert">
                     <p className="leading-relaxed whitespace-pre-wrap text-justify text-[1rem]">
-                    <MarkdownPreview source={event.details? event.details: 'Loading...'} style={{ backgroundColor: "#000000",fontSize: '0.95rem'}} />
+                    <MarkdownPreview source={event.details? event.details: 'Loading...'} style={{ backgroundColor: "#000000"}} />
                     </p>
                   </div>
                 }
