@@ -16,17 +16,48 @@ import {
 } from "@/components/ui/accordion"
 import EventSkeleton from "./EventSkeleton"
 
+// Default Markdown Content
+const DEFAULT_MARKDOWN = `# That's what C said 
+Join us for an exciting *C Programming Quiz Competition* and showcase your skills while earning amazing rewards!  
+---
+## 🎯 Prizes  
+- *Participation Reward*: 5 GDG Coins  
+- 🥇 *Winner*: 50 GDG Coins  
+- 🥈 *2nd Place*: 40 GDG Coins  
+- 🥉 *3rd Place*: 30 GDG Coins  
+---
+## 📅 Event Schedule  
+- *Date*: 5th December 2024  
+- *Time*: 8:00 PM  
+- *Mode*: Online  
+---
+## 🔥 Leaderboard  
+Compete with your peers! A real-time leaderboard will be maintained and updated throughout the competition.  
+---
+## 🎟️ Entry Fee  
+- *FREE*  
+---
+The participation link will be shared soon on our official website:  
+[*gdgdit.tech*](https://gdgdit.tech)  
+---
+### Don't miss this chance to learn, compete, and win!  
+*Get ready to code and conquer!*  
+---
+### Organized by  
+*Google Developer Group - DIT, Pimpri*`
+
 export default function EventPage() {
   const [currentImage, setCurrentImage] = useState(0)
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isExpired, setIsExpired] = useState(false)
-  const [markdownContent, setMarkdownContent] = useState('')
+  const [markdownContent, setMarkdownContent] = useState(DEFAULT_MARKDOWN)
 
   const searchParams = useSearchParams()
   const id = searchParams?.get("id")
   const { events, error, isLoading } = useFetchEvents(id || undefined)
   const event = events?.[0]
 
+  // Fetch Markdown content
   useEffect(() => {
     const fetchMarkdownContent = async () => {
       try {
@@ -44,7 +75,8 @@ export default function EventPage() {
         setMarkdownContent(text)
       } catch (error) {
         console.error('Error fetching markdown:', error)
-        setMarkdownContent('Error loading content')
+        // Will use DEFAULT_MARKDOWN if fetch fails
+        setMarkdownContent(DEFAULT_MARKDOWN)
       }
     }
 
