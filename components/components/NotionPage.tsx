@@ -62,7 +62,6 @@ export const NotionPage = ({
         rootPageId={rootPageId}
         previewImages
         defaultPageCover={getRandomImageLink()}
-        defaultPageIcon={"📒"}
         components={{
           nextLink: Link,
           nextImage:Image,
