@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, MapPin, Calendar, Clock, Link2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import MarkdownPreview from '@uiw/react-markdown-preview';
 import {
   Accordion,
   AccordionContent,
@@ -164,13 +165,13 @@ export default function EventPage() {
                 )}
                 
                 {/* Event Details */}
-                {event.details && (
+                {
                   <div className="prose prose-lg prose-invert">
                     <p className="leading-relaxed whitespace-pre-wrap text-justify text-[1rem]">
-                      {event.details}
+                    <MarkdownPreview source={event.details? event.details: 'Loading...'} style={{ backgroundColor: "#000000",fontSize: '0.95rem'}} />
                     </p>
                   </div>
-                )}
+                }
                 
                 {/* Items to Bring */}
                 {event.itemsToBring && event.itemsToBring.length > 0 && (
