@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { X, Loader2 } from 'lucide-react';
+import { X, Loader2, EyeIcon, EyeOffIcon } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -25,10 +25,13 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
     name: '',
     surname: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -43,7 +46,8 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
       name: '',
       surname: '',
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     });
     setError(null);
   };
@@ -70,6 +74,11 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
         onSuccess?.();
         router.push("/");
       } else {
+        if (formData.password !== formData.confirmPassword) {
+          setError("Passwords do not match");
+          return;
+        }
+
         const response = await fetch("https://gdg-cfw.prathameshdesai679.workers.dev/cr-acc", {
           method: 'POST',
           headers: {
@@ -198,15 +207,48 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
                     <label className="block text-sm text-[#6E6E8F] font-code">
                       PASSWORD
                     </label>
-                    <input
-                      type="password"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      className="w-full h-10 rounded-lg bg-[#1A1A27] px-4 text-md text-white border border-[#2A2A3C] focus:border-[#5252E5] focus:outline-none transition-colors font-code disabled:opacity-50"
-                      required
-                      disabled={isLoading}
-                    />
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        className="w-full h-10 rounded-lg bg-[#1A1A27] px-4 text-md text-white border border-[#2A2A3C] focus:border-[#5252E5] focus:outline-none transition-colors font-code disabled:opacity-50"
+                        required
+                        disabled={isLoading}
+                      />
+                      <button 
+                        type="button" 
+                        onClick={() => setShowPassword(prev => !prev)} 
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                      >
+                        {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm text-[#6E6E8F] font-code">
+                      CONFIRM PASSWORD
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
+                        className="w-full h-10 rounded-lg bg-[#1A1A27] px-4 text-md text-white border border-[#2A2A3C] focus:border-[#5252E5] focus:outline-none transition-colors font-code disabled:opacity-50"
+                        required
+                        disabled={isLoading}
+                      />
+                      <button 
+                        type="button" 
+                        onClick={() => setShowConfirmPassword(prev => !prev)} 
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                      >
+                        {showConfirmPassword ? <EyeOffIcon /> : <EyeIcon />}
+                      </button>
+                    </div>
                   </div>
 
                   <button
