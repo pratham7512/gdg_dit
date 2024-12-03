@@ -292,12 +292,15 @@ export default function EventPage() {
                 {/* RSVP Button */}
                 <div className="relative">
                   <div className="absolute inset-0 bg-white transform rounded-lg"></div>
+                  <a href={event.rsvpLink}>
                   <Button 
                     className="font-code text-md w-full bg-black text-white hover:bg-green-500 hover:text-black relative z-10 transform hover:-translate-y-1 hover:-translate-x-1 transition-all border duration-200"
                     disabled={isExpired}
+                    
                   >
                     {isExpired ? 'Applications Closed' : 'RSVP NOW'}
                   </Button>
+                  </a>
                 </div>
 
                 {/* Additional Buttons */}
