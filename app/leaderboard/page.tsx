@@ -23,6 +23,8 @@ const Ranking =() => {
   }
   if (status === 'unauthenticated') {
     return (
+      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+      <Header />
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
         <div className="w-full max-w-md p-8 rounded-lg shadow-2xl bg-black border">
           <div className="text-center">
@@ -39,6 +41,7 @@ const Ranking =() => {
             </AuthDialog>
           </div>
         </div>
+      </div>
       </div>
     );
   }
