@@ -49,8 +49,8 @@ export const NotionPage = ({
         disableHeader={true}
         rootPageId={rootPageId}
         previewImages
-        defaultPageCover={"true"}
-        defaultPageIcon={"true"}
+        defaultPageCover={"https://unsplash.com/photos/a-painting-on-the-ceiling-of-a-building-1rBg5YSi00c"}
+        defaultPageIcon={"📒"}
         components={{
           nextLink: Link,
           nextImage:Image,
