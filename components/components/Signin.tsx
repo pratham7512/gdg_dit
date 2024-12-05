@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { X, Loader2, EyeIcon, EyeOffIcon } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 interface AuthDialogProps {
   children: React.ReactNode;
@@ -29,7 +28,6 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
     confirmPassword: ''
   });
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -72,7 +70,6 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({
 
         setIsOpen(false);
         onSuccess?.();
-        router.push("/");
       } else {
         if (formData.password !== formData.confirmPassword) {
           setError("Passwords do not match");
