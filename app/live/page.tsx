@@ -34,8 +34,8 @@ export default function QuizLandingPage() {
 
   if (status === 'unauthenticated') {
     return (
-      <div className="pt-16 sm:pt-20 overflow-hidden">
-        <Header />
+      <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden bg-black">
+      <Header />
         <div className="mt-8 min-h-screen flex items-center justify-center bg-black bg-opacity-90">
           <div className="w-full max-w-md p-8 rounded-lg shadow-2xl bg-black border mx-4">
             <div className="text-center">
