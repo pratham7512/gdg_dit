@@ -107,8 +107,8 @@ export default function QuizLandingPage() {
               </div>
             </div>
             <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 px-2 mx-2 py-1 mt-6">
-              <span className="text-xs md:text-sm text-muted-foreground">
-                Ended
+              <span className="text-xs md:text-sm text-white">
+                {isLive ? 'Ended' : 'Ended'}
               </span>
             </div>
           </div>
