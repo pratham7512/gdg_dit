@@ -11,7 +11,7 @@ interface Player {
   name: string;
   email: string;
   amount_of_coins: number;
-  rank: number; // New field to store global rank
+  rank: number;
 }
 
 export default function Leaderboard() {
@@ -34,6 +34,8 @@ export default function Leaderboard() {
           .map((player: Player, index: number) => ({ ...player, rank: index + 1 }));
         setPlayers(rankedPlayers);
         setIsLoading(false);
+        // Reset to first page when players are loaded or search changes
+        setCurrentPage(1);
       })
       .catch((error) => {
         console.error("Error fetching leaderboard data:", error);
@@ -65,6 +67,7 @@ export default function Leaderboard() {
 
     fetchCoins();
   }, []);
+
   // Filter players by search query (global filtering)
   const filteredPlayers = players.filter(
     (player) =>
@@ -78,6 +81,11 @@ export default function Leaderboard() {
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+
+  // Reset current page when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const userRank = session?.user?.email
     ? players.find((player) => player.email === session.user.email)?.rank || 0
@@ -187,11 +195,19 @@ export default function Leaderboard() {
             Next
           </button>
         </div>
+
+        {/* No results message */}
+        {filteredPlayers.length === 0 && (
+          <div className="text-center text-[#666666] mt-8">
+            No players found matching your search.
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
+// TopPlayerCard component remains the same as in the original code
 function TopPlayerCard({ player, position }: { player: Player; position: number }) {
   return (
     <div className={`bg-[#111111] border ${position === 1 ? 'border-[#0066FF]' : 'border-[#222222]'} p-4 flex flex-col items-center justify-between h-full`}>
@@ -215,4 +231,3 @@ function TopPlayerCard({ player, position }: { player: Player; position: number 
     </div>
   )
 }
-
