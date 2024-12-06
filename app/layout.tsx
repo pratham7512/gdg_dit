@@ -35,14 +35,7 @@ export default function RootLayout({
         <Analytics/>
         </Providers>
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b9e716f7fd4f40d5ad8530acc42f9c9a"}'></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RNM0KRQE1D"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RNM0KRQE1D');
-</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RNM0KRQE1D"></script>
       </body>
     </html>
   );
