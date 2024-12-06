@@ -8,9 +8,10 @@ import Header from "@/components/components/Header";
 import Footer from "@/components/components/Footer";
 
 interface Player {
-  name: string
-  email: string
-  amount_of_coins: number
+  name: string;
+  email: string;
+  amount_of_coins: number;
+  rank: number; // New field to store global rank
 }
 
 export default function Leaderboard() {
@@ -24,17 +25,21 @@ export default function Leaderboard() {
   const ITEMS_PER_PAGE = 10
 
   useEffect(() => {
-    fetch('https://gdg-cfw.prathameshdesai679.workers.dev/users')
-      .then(response => response.json())
-      .then(data => {
-        setPlayers(data)
-        setIsLoading(false)
+    fetch("https://gdg-cfw.prathameshdesai679.workers.dev/users")
+      .then((response) => response.json())
+      .then((data) => {
+        // Sort players by coins and assign ranks
+        const rankedPlayers = data
+          .sort((a: Player, b: Player) => b.amount_of_coins - a.amount_of_coins)
+          .map((player: Player, index: number) => ({ ...player, rank: index + 1 }));
+        setPlayers(rankedPlayers);
+        setIsLoading(false);
       })
-      .catch(error => {
-        console.error('Error fetching leaderboard data:', error)
-        setIsLoading(false)
-      })
-  }, [])
+      .catch((error) => {
+        console.error("Error fetching leaderboard data:", error);
+        setIsLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     const fetchCoins = async () => {
@@ -60,20 +65,23 @@ export default function Leaderboard() {
 
     fetchCoins();
   }, []);
-  const filteredPlayers = players.filter(player => 
-    player.name.toLowerCase().includes(search.toLowerCase()) ||
-    player.email.toLowerCase().includes(search.toLowerCase())
-  )
+  // Filter players by search query (global filtering)
+  const filteredPlayers = players.filter(
+    (player) =>
+      player.name.toLowerCase().includes(search.toLowerCase()) ||
+      player.email.toLowerCase().includes(search.toLowerCase())
+  );
 
-  const totalPages = Math.ceil(filteredPlayers.length / ITEMS_PER_PAGE)
+  // Paginate filtered results
+  const totalPages = Math.ceil(filteredPlayers.length / ITEMS_PER_PAGE);
   const paginatedPlayers = filteredPlayers.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
-  )
+  );
 
   const userRank = session?.user?.email
-    ? players.findIndex(player => player.email === session.user.email) + 1
-    : 0
+    ? players.find((player) => player.email === session.user.email)?.rank || 0
+    : 0;
 
   if (isLoading) {
     return(
@@ -140,9 +148,9 @@ export default function Leaderboard() {
                 <tr key={player.email} className="border-b border-[#222222]">
                   <td className="p-4">
                     {index + 1 === 1 ? (
-                      <span className="text-[#0066FF]">[{index + 1}]</span>
+                      <span className="text-[#0066FF]">[{player.rank}]</span>
                     ) : (
-                      <span className="text-[#666666]">[{index + 1}]</span>
+                      <span className="text-[#666666]">[{player.rank}]</span>
                     )}
                   </td>
                   <td className="p-4">{player.name}</td>
