@@ -140,7 +140,7 @@ export default function Leaderboard() {
                 <td className="p-4">
                   <div className="flex items-center gap-2">
                     <span className="text-[#FFD700] text-xl">●</span>
-                    {error?<span className="text-red">error</span>:<span>{amountOfCoins}</span>}
+                    {error?<span className="text-red">error</span>:<span>{amountOfCoins.toFixed(2)}</span>}
                   </div>
                 </td>
               </tr>
