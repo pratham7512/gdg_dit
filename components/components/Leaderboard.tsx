@@ -1,181 +1,210 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Search, ChevronLeft, ChevronRight } from 'lucide-react'
-import { ref, get } from 'firebase/database'
-import { database } from '@/app/firebase/config'
-import Image from 'next/image'
-import { Skeleton } from "@/components/ui/skeleton"
+import { useState, useEffect } from "react"
+import { Search } from 'lucide-react'
+import { signOut, useSession } from "next-auth/react"
+import {LeaderboardSkeleton } from "./LeaderboardSkeleton"
+import Header from "@/components/components/Header";
+import Footer from "@/components/components/Footer";
 
-type Player = {
-  rank: number
+interface Player {
   name: string
-  sept: number
-  oct: number
-  nov: number
-  total: number
-}
-
-// Custom hook for data fetching
-const useLeaderboardData = () => {
-  const [players, setPlayers] = useState<Player[]>()
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const dbRef = ref(database, "leaderboard/DevChef2024/scores")
-        const snapshot = await get(dbRef)
-        if (snapshot.exists()) {
-          const p1 = snapshot.val().sort((a: Player, b: Player) => b.total - a.total)
-            .map((player: Player, index: number) => ({ ...player, rank: index + 1 }))
-          setPlayers(p1)
-        }
-      } catch (error) {
-        console.error("Error fetching leaderboard data:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  return { players, loading }
+  email: string
+  amount_of_coins: number
 }
 
 export default function Leaderboard() {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [players, setPlayers] = useState<Player[]>([])
+  const [search, setSearch] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
-  const playersPerPage = 10
-  const { players, loading } = useLeaderboardData()
+  const [isLoading, setIsLoading] = useState(true)
+  const { data: session } = useSession()
+  const [amountOfCoins, setAmountOfCoins] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
+  const ITEMS_PER_PAGE = 10
 
-  const filteredPlayers = players ? players.filter(player =>
-    player.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ) : []
+  useEffect(() => {
+    fetch('https://gdg-cfw.prathameshdesai679.workers.dev/users')
+      .then(response => response.json())
+      .then(data => {
+        setPlayers(data)
+        setIsLoading(false)
+      })
+      .catch(error => {
+        console.error('Error fetching leaderboard data:', error)
+        setIsLoading(false)
+      })
+  }, [])
 
-  const indexOfLastPlayer = currentPage * playersPerPage
-  const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage
-  const currentPlayers = filteredPlayers.slice(indexOfFirstPlayer, indexOfLastPlayer)
+  useEffect(() => {
+    const fetchCoins = async () => {
+      try {
+        const response = await fetch("/api/coins", {
+          method: "GET",
+        });
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+        if (!response.ok) {
+          if (response.status === 403) {
+            signOut(); 
+          }
+          throw new Error("Network response was not ok");
+        }
 
-  const getBadge = (rank: number) => {
-    if (rank === 1) return "🥇"
-    if (rank === 2) return "🥈"
-    if (rank === 3) return "🥉"
-    return null
-  }
+        const data = await response.json();
+        setAmountOfCoins(data.amount_of_coins || 0);
+      } catch (error) {
+        setError("Could not fetch coins");
+        console.error("Error fetching coins:", error);
+      }
+    };
 
-  const getBorderColor = (rank: number) => {
-    if (rank === 1) return "border-yellow-400"
-    if (rank === 2) return "border-gray-400"
-    if (rank === 3) return "border-amber-900"
-    return "border-gray-800"
-  }
-
-  const LoadingSkeleton = () => (
-    <>
-      {[...Array(10)].map((_, index) => (
-        <TableRow key={index} className="border-b border-gray-800 animate-pulse">
-          <TableCell><Skeleton className="h-6 w-8" /></TableCell>
-          <TableCell>
-            <div className="flex items-center space-x-3">
-              <Skeleton className="h-12 w-12 rounded-full" />
-              <Skeleton className="h-6 w-32" />
-            </div>
-          </TableCell>
-          <TableCell><Skeleton className="h-6 w-12 ml-auto" /></TableCell>
-          <TableCell><Skeleton className="h-6 w-12 ml-auto" /></TableCell>
-          <TableCell><Skeleton className="h-6 w-12 ml-auto" /></TableCell>
-          <TableCell><Skeleton className="h-6 w-16 ml-auto" /></TableCell>
-        </TableRow>
-      ))}
-    </>
+    fetchCoins();
+  }, []);
+  const filteredPlayers = players.filter(player => 
+    player.name.toLowerCase().includes(search.toLowerCase()) ||
+    player.email.toLowerCase().includes(search.toLowerCase())
   )
 
+  const totalPages = Math.ceil(filteredPlayers.length / ITEMS_PER_PAGE)
+  const paginatedPlayers = filteredPlayers.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  )
+
+  const userRank = session?.user?.email
+    ? players.findIndex(player => player.email === session.user.email) + 1
+    : 0
+
+  if (isLoading) {
+    return(
+      <div className="pt-[4rem] bg-black lg:pt-[2.8rem] overflow-hidden">
+      <Header />
+        <LeaderboardSkeleton/>
+      <Footer /> 
+      </div>)
+  }
+
   return (
-    <div className="min-h-screen bg-background text-foreground md:py-[5%] max-sm:py-[5%]">
-      <div className="container mx-auto p-4 font-sans">
-        <h1 className="text-3xl mb-4 font-code">CP Leaderboard</h1>
-        <div className="mb-4 relative">
-          <Input
+    <div className=" mt-[4rem] min-h-screen text-white p-4 sm:p-8 font-mono">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-16">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-2">LEADERBOARD</h1>
+          <p className="text-[#666666] text-base sm:text-lg">
+            Compete with other players and earn coins to climb the leaderboard.
+          </p>
+        </div>
+
+        {/* Top 3 Players Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
+          {players.slice(0, 3).map((player, index) => (
+            <TopPlayerCard key={player.email} player={player} position={index + 1} />
+          ))}
+        </div>
+
+        {/* Search Bar */}
+        <div className="relative mb-8">
+          <input
             type="text"
             placeholder="Search players..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-n-7 text-foreground border-border"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full bg-[#111111] border border-[#222222] p-4 pr-12 text-white placeholder:text-[#666666] focus:outline-none focus:border-[#0066FF]"
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
+          <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-[#666666] w-5 h-5" />
         </div>
-        <div className="border border-gray-800 rounded-lg overflow-hidden">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-n-8 hover:bg-n-7">
-                <TableHead className="w-16 text-muted-foreground">Rank</TableHead>
-                <TableHead className="text-muted-foreground">Name</TableHead>
-                <TableHead className="text-right text-muted-foreground">sept</TableHead>
-                <TableHead className="text-right text-muted-foreground">oct</TableHead>
-                <TableHead className="text-right text-muted-foreground">nov</TableHead>
-                <TableHead className="text-right text-muted-foreground">Total</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {loading ? (
-                <LoadingSkeleton />
-              ) : (
-                currentPlayers.map((player) => (
-                  <TableRow key={player.rank} className={`border-b ${getBorderColor(player.rank)} transition-all duration-200`}>
-                    <TableCell className="font-mono">
-                      {player.rank}.
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center space-x-3">
-                        <Image src={`https://robohash.org/${player.name}?bgset=bg2`} alt={player.name} width={48} height={48} className="rounded-full" />
-                        <div>
-                          <div className="font-mono text-md">{player.name} {getBadge(player.rank)}</div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-right font-mono">{player.sept > 0 ? `+${player.sept}` : player.sept}</TableCell>
-                    <TableCell className="text-right font-mono">{player.oct > 0 ? `+${player.oct}` : player.oct}</TableCell>
-                    <TableCell className="text-right font-mono">{player.nov > 0 ? `+${player.nov}` : player.nov}</TableCell>
-                    <TableCell className="text-right font-mono font-bold">{player.total > 0 ? `+${player.total}` : player.total}</TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
+
+        {/* Table Section */}
+        <div className="overflow-x-auto -mx-4 sm:mx-0 mb-8 bg-black">
+          <table className="w-full border-collapse min-w-[640px] border border-[#222222]">
+            <thead>
+              <tr className="border-b border-[#222222]">
+                <th className="p-4 text-left font-normal text-[#666666]">RANK</th>
+                <th className="p-4 text-left font-normal text-[#666666]">PLAYER</th>
+                <th className="p-4 text-left font-normal text-[#666666]">EMAIL</th>
+                <th className="p-4 text-left font-normal text-[#666666]">COINS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-[#222222] bg-[#111111]">
+                <td className="p-4 text-[#666666]">{userRank > 0 ? userRank : 'UNRANKED'}</td>
+                <td className="p-4 text-[#FF3B00]">You</td>
+                <td className="p-4 text-[#FF3B00]">{session?.user?.email || 'N/A'}</td>
+                <td className="p-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#FFD700] text-xl">●</span>
+                    {error?<span className="text-red">error</span>:<span>{amountOfCoins}</span>}
+                  </div>
+                </td>
+              </tr>
+              {paginatedPlayers.map((player, index) => (
+                <tr key={player.email} className="border-b border-[#222222]">
+                  <td className="p-4">
+                    {index + 1 === 1 ? (
+                      <span className="text-[#0066FF]">[{index + 1}]</span>
+                    ) : (
+                      <span className="text-[#666666]">[{index + 1}]</span>
+                    )}
+                  </td>
+                  <td className="p-4">{player.name}</td>
+                  <td className="p-4">{player.email}</td>
+                  <td className="p-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#FFD700] text-xl">●</span>
+                      <span>{player.amount_of_coins.toFixed(2)}</span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div className="mt-4 flex justify-between items-center">
-          <Button
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1 || loading}
-            variant="outline"
-            className="bg-n-7 text-white border-gray-800 hover:bg-n-6"
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-4">
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-[#111111] border border-[#222222] disabled:opacity-50"
           >
-            <ChevronLeft className="mr-2 h-4 w-4" /> Previous
-          </Button>
-          <span className="text-gray-500">
-            {loading ? (
-              <Skeleton className="h-6 w-32 inline-block" />
-            ) : (
-              `Page ${currentPage} of ${Math.ceil(filteredPlayers.length / playersPerPage)}`
-            )}
+            Previous
+          </button>
+          <span className="text-[#666666]">
+            Page {currentPage} of {totalPages}
           </span>
-          <Button
-            onClick={() => paginate(currentPage + 1)}
-            disabled={indexOfLastPlayer >= filteredPlayers.length || loading}
-            variant="outline"
-            className="bg-n-7 text-white border-gray-800 hover:bg-n-6"
+          <button
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 bg-[#111111] border border-[#222222] disabled:opacity-50"
           >
-            Next <ChevronRight className="ml-2 h-4 w-4" />
-          </Button>
+            Next
+          </button>
         </div>
       </div>
     </div>
   )
 }
+
+function TopPlayerCard({ player, position }: { player: Player; position: number }) {
+  return (
+    <div className={`bg-[#111111] border ${position === 1 ? 'border-[#0066FF]' : 'border-[#222222]'} p-4 flex flex-col items-center justify-between h-full`}>
+      <div className="relative w-full aspect-square mb-4 bg-[#0066FF]/10 overflow-hidden">
+        <div className="absolute inset-0 grid grid-cols-[repeat(20,1fr)] grid-rows-[repeat(20,1fr)]">
+          {[...Array(400)].map((_, i) => (
+            <div key={i} className={`${Math.random() > 0.5 ? 'bg-[#0066FF]/20' : 'bg-transparent'} transition-colors duration-300 ease-in-out`} />
+          ))}
+        </div>
+      </div>
+      <div className="space-y-2 text-center w-full">
+        <p className={`text-base sm:text-lg ${position === 1 ? 'text-[#0066FF]' : 'text-[#666666]'} truncate w-full`}>
+          [{position}] {player.name}
+        </p>
+        <div className="flex items-center justify-center gap-2 text-xl sm:text-2xl">
+          <span className="text-[#FFD700] text-2xl">●</span>
+          <span>{player.amount_of_coins.toFixed(2)}</span>
+        </div>
+        <p className="text-[#444444] text-sm">COINS</p>
+      </div>
+    </div>
+  )
+}
+

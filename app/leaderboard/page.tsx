@@ -6,7 +6,7 @@ import Footer from "@/components/components/Footer";
 import ButtonGradient from "@/components/assets/svg/ButtonGradient";
 import Leaderboard from '@/components/components/Leaderboard';
 import { useSession } from "next-auth/react";
-import LeaderboardSkeleton from '@/components/components/LeaderboardSkeleton';
+import {LeaderboardSkeleton} from '@/components/components/LeaderboardSkeleton';
 import { AuthDialog } from '@/components/components/Signin';
 import Button from '@/components/components/Button';
 
@@ -15,7 +15,7 @@ const Ranking =() => {
   const {status} =  useSession();
   if(status==="loading"){
     return(
-    <div className="pt-[4rem] lg:pt-[2.8rem] overflow-hidden">
+    <div className="pt-[4rem] bg-black lg:pt-[2.8rem] overflow-hidden">
     <Header />
       <LeaderboardSkeleton/>
     <Footer /> 
@@ -51,7 +51,7 @@ const Ranking =() => {
         {<Chatbot />}
       </AnimatePresence>
 
-      <div className="lg:pt-[0.8rem] overflow-hidden bg-black">
+      <div className="lg:pt-[0.8rem] overflow-hidden bg-black bg-grid-white/[0.090]">
         <Header />
         <AnimatePresence mode='wait'>
         <Leaderboard/>
