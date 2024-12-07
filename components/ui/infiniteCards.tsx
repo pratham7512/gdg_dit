@@ -82,7 +82,7 @@ export const InfiniteMovingCards: React.FC<InfiniteMovingCardsProps> = ({
 
   const renderImages = (images: string[]) => {
     const filledImages = [...images];
-    while (filledImages.length < 4) {
+    while (filledImages.length < 3) {
       filledImages.push(images[filledImages.length % images.length]);
     }
 
