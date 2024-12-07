@@ -6,8 +6,8 @@ import Chatbot from "@/components/Chatbot";
 import Benefits from "@/components/components/Benefits";
 import Header from "@/components/components/Header";
 import Hero from "@/components/components/Hero";
-// import Collaboration from "@/components/components/Collaboration";
-import Roadmap from "@/components/components/Roadmap";
+import Collaboration from "@/components/components/Collaboration";
+// import Roadmap from "@/components/components/Roadmap";
 import Footer from "@/components/components/Footer";
 import ButtonGradient from "../components/assets/svg/ButtonGradient";
 import Community from '@/components/components/Community';
@@ -40,8 +40,8 @@ export default function Home() {
         <Header />
         <Hero />
         <Benefits />
-        {/* <Collaboration /> */}
-        <Roadmap />
+        <Collaboration />
+        {/* <Roadmap /> */}
         <Community />
         <Footer />
       </div>
