@@ -51,7 +51,7 @@ export default function Component() {
       name: "Cloud Computing",
       message: "Join our cloud computing discussions!",
       time: "Now",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfZtWD6rC11TPy0gP1hGCQAjAYPizxyMRZA&s",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnL3qROcyzuS2O5R1o6-xv09yLhOoyMKO0DSYLIOpFwrPDQZqihj-ieJO0WFV9_hVYjFk&usqp=CAU",
       link: "https://chat.whatsapp.com/KRjmxF7C4ScH192QSXeeiF"
     },
     {
