@@ -7,7 +7,7 @@ import Benefits from "@/components/components/Benefits";
 import Header from "@/components/components/Header";
 import Hero from "@/components/components/Hero";
 // import Collaboration from "@/components/components/Collaboration";
-// import Roadmap from "@/components/components/Roadmap";
+import Roadmap from "@/components/components/Roadmap";
 import Footer from "@/components/components/Footer";
 import ButtonGradient from "../components/assets/svg/ButtonGradient";
 import Community from '@/components/components/Community';
@@ -41,7 +41,7 @@ export default function Home() {
         <Hero />
         <Benefits />
         {/* <Collaboration /> */}
-        {/* <Roadmap /> */}
+        <Roadmap />
         <Community />
         <Footer />
       </div>
