@@ -27,7 +27,7 @@ const fetchRoadmap = async (id: string): Promise<string | null> => {
 };
 
 // Default root page ID
-const defaultRootPageId = "6b6c2a9f1282499aba4782b88bf7e204";
+const defaultRootPageId = "f7e28aec52b8431a9bcd511238f21ade";
 
 // Fetch the Notion page data based on the provided rootPageId
 async function getData(rootPageId: string) {
@@ -44,7 +44,7 @@ export default async function Home() {
   const notionLink = await fetchRoadmap(roadmapId);
 
   // Use the fetched notion link or fallback to the default root page ID
-  const rootPageId = notionLink || defaultRootPageId;
+  const rootPageId = defaultRootPageId;
 
   let data;
   try {
