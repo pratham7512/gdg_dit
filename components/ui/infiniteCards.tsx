@@ -124,9 +124,9 @@ export const InfiniteMovingCards: React.FC<InfiniteMovingCardsProps> = ({
         {[...events, ...events].map((event, eventIndex) => (
           <li
             key={`${event.id}-${eventIndex}`}
-            className="w-[100px] md:w-[400px] lg:w-[500px] flex-shrink-0"
+            className="w-[280px] md:w-[400px] lg:w-[500px] flex-shrink-0"
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 p-2 bg-black rounded-lg shadow-md">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 p-2 bg-black rounded-lg shadow-md">
               {renderImages(event.imageUrls)}
             </div>
             <div className="mt-2 p-2 bg-black rounded-lg shadow-md">
