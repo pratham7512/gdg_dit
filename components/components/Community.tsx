@@ -96,7 +96,7 @@ export default function Component() {
   )
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-start gap-8 p-4 lg:p-8 min-h-screen bg-background">
+    <div className="flex flex-col lg:flex-row justify-center items-start gap-8 p-4 lg:p-8 min-h-screen">
       <Card className="w-full lg:w-[500px] bg-card">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-2xl font-bold">Communities</CardTitle>
@@ -127,7 +127,8 @@ export default function Component() {
                 <Button
                   key={filter}
                   variant={index === 0 ? "default" : "outline"}
-                  className="rounded-full px-4 py-1 h-auto text-sm"
+                  className={`rounded-full px-4 py-1 h-auto text-sm font-medium ${
+    index === 0 ? "bg-green-900/60 text-green-500" : "text-muted-foreground"}`}
                 >
                   {filter}
                 </Button>
@@ -170,7 +171,7 @@ export default function Component() {
           <p className="text-xl text-muted-foreground mb-6">
             Connect with fellow developers, share knowledge, and stay updated on the latest in tech. Our GDSC communities are the perfect place to grow your skills and network with like-minded individuals.
           </p>
-          <Button size="lg" className="w-full sm:w-auto" onClick={() => window.open("https://chat.whatsapp.com/Jt2uFQ1vQf249FHpFCnPGh", "_blank")}>
+          <Button size="lg" className="w-full sm:w-auto text-white font-medium bg-green-500 hover:bg-green-600" onClick={() => window.open("https://chat.whatsapp.com/Jt2uFQ1vQf249FHpFCnPGh", "_blank")}>
             Explore All Communities
           </Button>
         </CardContent>
