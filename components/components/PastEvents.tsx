@@ -78,7 +78,7 @@ export default function PastEvents() {
 
   return (
     <section className="py-12 px-1 md:px-6 lg:px-8">
-      <div className="container mx-auto">
+      <div className="container md:mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight max-w-4/5 italic underline">Past Events</h2>
         <br />
         <div className="space-y-16 mb-16">
