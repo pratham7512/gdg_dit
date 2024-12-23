@@ -18,7 +18,7 @@ import EventSkeleton from "./EventSkeleton"
 
 // Default Markdown Content
 const DEFAULT_MARKDOWN = `
-*Join us for an enriching learning experience this winter break!*
+##Join us for an enriching learning experience this winter break!
 ## 🏢 Organized By
 **Google Developer Groups**  
 *On Campus • DPU - DIT*
@@ -39,7 +39,6 @@ A dynamic 3 days workshop focusing on cutting-edge technologies
 
 ## 🏆 Rewards
 - Win GDG Coins
-- Professional certification
 - Hands-on experience
 
 ## 🎨 Theme
