@@ -155,7 +155,7 @@ export default function EventPage() {
       <div className="max-w-5xl mx-auto border bg-black">
         {/* Image Carousel Section */}
         {event.imageUrls && event.imageUrls.length > 0 && (
-          <div className="relative h-[400px]">
+          <div className="relative h-[400px] sm:h-[300px] xs:h-[200px]">
             <Image
               src={event.imageUrls[currentImage]}
               alt={`${event.name} banner`}
@@ -164,14 +164,22 @@ export default function EventPage() {
             {event.imageUrls.length > 1 && (
               <>
                 <div className="absolute inset-0 flex items-center justify-between px-4">
-                  <button 
-                    onClick={() => setCurrentImage(prev => prev === 0 ? event.imageUrls.length - 1 : prev - 1)}
+                  <button
+                    onClick={() =>
+                      setCurrentImage((prev) =>
+                        prev === 0 ? event.imageUrls.length - 1 : prev - 1
+                      )
+                    }
                     className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </button>
-                  <button 
-                    onClick={() => setCurrentImage(prev => prev === event.imageUrls.length - 1 ? 0 : prev + 1)}
+                  <button
+                    onClick={() =>
+                      setCurrentImage((prev) =>
+                        prev === event.imageUrls.length - 1 ? 0 : prev + 1
+                      )
+                    }
                     className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
                   >
                     <ChevronRight className="w-6 h-6" />
@@ -179,9 +187,11 @@ export default function EventPage() {
                 </div>
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                   {event.imageUrls.map((_, i) => (
-                    <div 
+                    <div
                       key={i}
-                      className={`w-2 h-2 rounded-full ${i === currentImage ? 'bg-white' : 'bg-white/50'}`}
+                      className={`w-2 h-2 rounded-full ${
+                        i === currentImage ? "bg-white" : "bg-white/50"
+                      }`}
                     />
                   ))}
                 </div>
@@ -189,6 +199,7 @@ export default function EventPage() {
             )}
           </div>
         )}
+
         
         <div>
           <div className="grid grid-cols-1 md:grid-cols-[1fr,350px]">
