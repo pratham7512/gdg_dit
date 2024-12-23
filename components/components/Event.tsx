@@ -155,7 +155,7 @@ export default function EventPage() {
       <div className="max-w-5xl mx-auto border bg-black">
         {/* Image Carousel Section */}
         {event.imageUrls && event.imageUrls.length > 0 && (
-          <div className="relative h-[400px] sm:h-[300px] xs:h-[200px]">
+          <div className="relative h-[400px] sm:h-[300px] xs:h-1/5">
             <Image
               src={event.imageUrls[currentImage]}
               alt={`${event.name} banner`}
