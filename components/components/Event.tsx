@@ -17,33 +17,37 @@ import {
 import EventSkeleton from "./EventSkeleton"
 
 // Default Markdown Content
-const DEFAULT_MARKDOWN = `Join us for an exciting *C Programming Quiz Competition* and showcase your skills while earning amazing rewards!  
+const DEFAULT_MARKDOWN = `
+*Join us for an enriching learning experience this winter break!*
+## 🏢 Organized By
+**Google Developer Groups**  
+*On Campus • DPU - DIT*
+
+## 📋 Event Description
+A dynamic 3 days workshop focusing on cutting-edge technologies
+
+## 💻 Workshop Tracks
+- **Web Dev**: Web Development fundamentals and advanced concepts
+- **Flutter**: Mobile app development with Flutter framework
+- **AI/ML**: Artificial Intelligence and Machine Learning basics
+
+## 📅 Event Details
+- **Dates**: 24th, 26th and 27th December
+- **Time**: 6 pm onwards
+- **Mode**: Online
+- **Duration**: 3 Days
+
+## 🏆 Rewards
+- Win GDG Coins
+- Professional certification
+- Hands-on experience
+
+## 🎨 Theme
+Set against a winter wonderland backdrop with snowflakes and pine trees, this tech workshop brings warmth to your winter break with exciting learning opportunities.
+
 ---
-## 🎯 Prizes  
-- *Participation Reward*: 5 GDG Coins  
-- 🥇 *Winner*: 50 GDG Coins  
-- 🥈 *2nd Place*: 40 GDG Coins  
-- 🥉 *3rd Place*: 30 GDG Coins  
----
-## 📅 Event Schedule  
-- *Date*: 5th December 2024  
-- *Time*: 8:00 PM  
-- *Mode*: Online  
----
-## 🔥 Leaderboard  
-Compete with your peers! A real-time leaderboard will be maintained and updated throughout the competition.  
----
-## 🎟️ Entry Fee  
-- *FREE*  
----
-The participation link will be shared soon on our official website:  
-[*gdgdit.tech*](https://gdgdit.tech)  
----
-### Don't miss this chance to learn, compete, and win!  
-*Get ready to code and conquer!*  
----
-### Organized by  
-*Google Developer Group - DIT, Pimpri*`
+
+`
 
 export default function EventPage() {
   const [currentImage, setCurrentImage] = useState(0)
