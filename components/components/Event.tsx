@@ -18,7 +18,8 @@ import EventSkeleton from "./EventSkeleton"
 
 // Default Markdown Content
 const DEFAULT_MARKDOWN = `
-##Join us for an enriching learning experience this winter break!
+## Join us for an enriching learning experience this winter break!
+
 ## 🏢 Organized By
 **Google Developer Groups**  
 *On Campus • DPU - DIT*
@@ -227,7 +228,7 @@ export default function EventPage() {
                   <div className="prose prose-lg prose-invert">
                     <MarkdownPreview 
                       source={ markdownContent || event.details ||'Loading...'} 
-                      style={{ backgroundColor: "#000000", fontSize: '0.95rem' }} 
+                      style={{ backgroundColor: "#000000", fontSize: '1.15rem' }} 
                     />
                   </div>
                 )}
