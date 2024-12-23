@@ -151,7 +151,7 @@ export default function EventPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white bg-grid-white/[0.090] mt-[2rem]">
+    <div className="min-h-screen bg-black text-white bg-grid-white/[0.090] mt-[4rem] sm-mt-[4rem]">
       <div className="max-w-5xl mx-auto border bg-black">
         {/* Image Carousel Section */}
         {event.imageUrls && event.imageUrls.length > 0 && (
@@ -239,7 +239,7 @@ export default function EventPage() {
                   <div className="prose prose-lg prose-invert">
                     <MarkdownPreview 
                       source={ markdownContent || event.details ||'Loading...'} 
-                      style={{ backgroundColor: "#000000", fontSize: '1.15rem' }} 
+                      style={{ backgroundColor: "#000000", fontSize: '1rem' }} 
                     />
                   </div>
                 )}
