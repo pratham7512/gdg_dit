@@ -14,12 +14,22 @@ export default function Contest(){
     <>
     <div className="bg-black">
         <Navigation/>
-        <Hero/>
+        <div id="overview">
+            <Hero/>
+        </div>
         <MaskedVideoDemo/>
-        <Schedule/>
-        <PrizePool/>
-        <Sponsors/>
-        <FAQ/>
+        <div id="schedule">
+            <Schedule/>
+        </div>
+        <div id="prizes">
+            <PrizePool/>
+        </div>
+        <div id="sponsors">
+            <Sponsors/>
+        </div>
+        <div id="faq">
+            <FAQ/>
+        </div>
         <Footer/>
     </div>
     </>

@@ -56,7 +56,7 @@ export default function Hero(){
                 </p>
             </span>
             </div>
-            <h1 className="text-2xl md:text-6xl lg:text-7xl font-sans mb-4">
+            <h1 className="text-3xl font-semibold md:text-6xl lg:text-7xl font-sans mb-4">
                 CodeMaster Challenge
                 <span className="block text-primary mt-2">2025</span>
             </h1>

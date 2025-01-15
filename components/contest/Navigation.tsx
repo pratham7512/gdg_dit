@@ -22,10 +22,18 @@ const Navigation = () => {
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false)
     const element = document.getElementById(id)
-    element?.scrollIntoView({ behavior: "smooth" })
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
   }
 
-  const navItems = ["overview", "rounds", "prizes", "schedule", "sponsors"]
+  const navItems = ["overview", "schedule", "prizes", "sponsors", "faq"]
 
   return (
     <motion.nav 
