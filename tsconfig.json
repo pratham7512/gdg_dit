@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/components/CarouselEvent.jsx", "components/components/CreateRoadmap.jsx", "components/components/AppSidebar.jsx", "components/components/HeroDashboard.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/components/CarouselEvent.jsx", "components/components/CreateRoadmap.jsx", "components/components/AppSidebar.jsx", "components/components/HeroDashboard.jsx", "hooks/fluidCursor.js"],
   "exclude": ["node_modules"]
 }

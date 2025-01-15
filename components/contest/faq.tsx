@@ -1,0 +1,120 @@
+"use client"
+
+import { useState, useRef } from "react"
+import { ChevronDown } from 'lucide-react'
+import Image from "next/image"
+import { motion, useScroll, useTransform } from "framer-motion"
+import faq from "@/public/images/maskImage3.jpg"
+
+export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const stickyRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  })
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1,1])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.85, 0.95])
+
+  const faqs = [
+    {
+      question: "What is CodeMaster Challenge?",
+      answer: "CodeMaster Challenge is a virtual coding competition that tests participants' skills through multiple rounds including MCQs, debugging, and algorithmic problem-solving."
+    },
+    {
+      question: "How can I participate?",
+      answer: "Register through our website and you'll receive detailed instructions via email about accessing the virtual platform on the day of the event."
+    },
+    {
+      question: "What are the technical requirements?",
+      answer: "You'll need a stable internet connection, a modern web browser, and your preferred code editor installed on your computer."
+    },
+    {
+      question: "How will I be evaluated?",
+      answer: "Each round has specific evaluation criteria. MCQs are automatically graded, debug challenges are evaluated based on correctness and optimization, and DSA problems consider both solution correctness and time complexity."
+    }
+  ]
+
+  return (
+    <div ref={containerRef} className="relative w-full h-[200vh]">
+      <section 
+        ref={stickyRef}
+        className="sticky top-0 bg-black text-white font-geist min-h-screen flex items-between"
+      >
+        <div className="w-full flex flex-col lg:flex-row justify-between ">
+          <motion.div 
+            className="w-full flex flex-col justify-center"
+            style={{ opacity, scale }}
+          >
+            <motion.h2 
+              initial={{ opacity: 0.5, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-normal mb-8 sm:mb-12 mx-4"
+            >
+              FAQ's
+            </motion.h2>
+            <div className="max-w-3xl mx-auto space-y-4 w-full mx-3">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className="border border-white/10 rounded-lg overflow-hidden hover:border-white/20 transition-all duration-300"
+                >
+                  <button
+                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                    className="w-full flex items-center justify-between p-4 sm:p-6 text-left hover:bg-white/5 transition-colors duration-300"
+                  >
+                    <span className="text-sm sm:text-base md:text-lg font-normal">{faq.question}</span>
+                    <motion.div
+                      animate={{ rotate: openIndex === index ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="w-5 h-5" />
+                    </motion.div>
+                  </button>
+                  <motion.div 
+                    initial={false}
+                    animate={{ 
+                      height: openIndex === index ? "auto" : 0,
+                      opacity: openIndex === index ? 1 : 0
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-4 sm:p-6 text-sm sm:text-base text-white/70">
+                      {faq.answer}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+          
+          {/* Image only shows on larger screens */}
+          <div className="hidden lg:block w-full h-screen">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="h-full relative"
+            >
+              <Image 
+                src={faq} 
+                alt="FAQ illustration" 
+                className="object-cover object-center"
+                fill
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
