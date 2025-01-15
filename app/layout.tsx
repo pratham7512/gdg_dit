@@ -21,6 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet" />
+        <meta property="og:image" content="/images/og/image" />
+        <meta property="twitter:image" content="/images/og/image" />
       </head>
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
