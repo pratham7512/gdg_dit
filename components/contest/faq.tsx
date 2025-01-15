@@ -46,14 +46,14 @@ export default function FAQ() {
       >
         <div className="w-full flex flex-col lg:flex-row justify-between ">
           <motion.div 
-            className="w-full flex flex-col justify-center"
+            className="w-full flex flex-col justify-center mt-24 md:mt-4"
             style={{ opacity, scale }}
           >
             <motion.h2 
               initial={{ opacity: 0.5, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-normal mb-8 sm:mb-12 mx-4"
+              className="text-5xl font-normal mb-8 sm:mb-12 mx-4"
             >
               FAQ&apos;s
             </motion.h2>
@@ -70,7 +70,7 @@ export default function FAQ() {
                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                     className="w-full flex items-center justify-between p-4 sm:p-6 text-left hover:bg-white/5 transition-colors duration-300"
                   >
-                    <span className="text-sm sm:text-base md:text-lg font-normal">{faq.question}</span>
+                    <span className="text-lg  font-normal">{faq.question}</span>
                     <motion.div
                       animate={{ rotate: openIndex === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
@@ -87,7 +87,7 @@ export default function FAQ() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 sm:p-6 text-sm sm:text-base text-white/70">
+                    <div className="p-4 sm:p-6 text-md text-white/70">
                       {faq.answer}
                     </div>
                   </motion.div>
