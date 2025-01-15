@@ -44,7 +44,7 @@ const Navigation = () => {
         isScrolled ? "bg-background/10 shadow-lg" : ""
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container md:mx-8 px-4 sm:px-6">
         <div className="flex items-center justify-between sm:h-16 h-20">
           <motion.div 
             initial={{ opacity: 0 }}

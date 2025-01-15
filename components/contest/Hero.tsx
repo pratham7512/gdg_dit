@@ -6,6 +6,7 @@ import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import logo from "@/components/assets/GDSC-logo.svg"
+import maskImg from "@/public/images/maskImage1.jpg"
 
 export default function Hero() {
     const [onHover, setOnHover] = useState(false)
@@ -37,15 +38,13 @@ export default function Hero() {
         <div 
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black" 
             onMouseMove={handleInteraction}
-            onTouchStart={handleInteraction}
-            onTouchMove={handleInteraction}
         >
             <div 
                 className={`absolute inset-0 bg-cover bg-center transition-all ease-in-out ${
                     onHover ? 'opacity-0 scale-90 duration-10' : 'opacity-60 scale-105 duration-1000'
                 }`}
                 style={{ 
-                    backgroundImage: `url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-YitBnJrr81FrIbkG62TzKN3Cj3HWX8.png)`,
+                    backgroundImage: `url(${maskImg.src})`,
                     willChange: 'opacity, transform',
                 }}
             />
