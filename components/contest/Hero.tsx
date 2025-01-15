@@ -76,8 +76,7 @@ export default function Hero() {
                     className="space-y-6"
                 >
                     <h1 className="text-3xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent">
-                        Hack-a-bit Challenge
-                        <span className="block text-primary mt-2 font-extrabold">2025</span>
+                        Hack-a-bit 2025
                     </h1>
 
                     <p className="text-lg md:text-2xl mb-8 font-mono text-foreground/80 tracking-tight leading-relaxed">
