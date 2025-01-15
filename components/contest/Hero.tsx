@@ -51,16 +51,16 @@ export default function Hero(){
             <div className="flex justify-center">
             <span className="flex items-center justify-center backdrop-blur-xl bg-background/10 rounded-full w-6/12 md:w-2/12 p-2 px-3 mb-8">
                 <Image src={logo} alt="" width={50} className="mr-2"/>
-                <p className="text-2xl font-medium font-geist md:text-2xl text-primary/90 text-center">
+                <p className="text-xl font-medium font-geist md:text-2xl text-primary/90 text-center">
                     GDG DIT
                 </p>
             </span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-sans mb-4">
+            <h1 className="text-2xl md:text-6xl lg:text-7xl font-sans mb-4">
                 CodeMaster Challenge
                 <span className="block text-primary mt-2">2025</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-6 font-mono text-foreground/80">
+            <p className="text-md md:text-2xl mb-6 font-mono text-foreground/80">
                 February 1, 2025 • DIT Pimpri, Pune . 20k+ prizepool
             </p>
             <Button
