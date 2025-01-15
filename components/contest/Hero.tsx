@@ -75,7 +75,7 @@ export default function Hero() {
                     transition={{ delay: 0.4, duration: 0.8 }}
                     className="space-y-6"
                 >
-                    <h1 className="text-3xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent">
+                    <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent">
                         Hack-a-bit 2025
                     </h1>
 
