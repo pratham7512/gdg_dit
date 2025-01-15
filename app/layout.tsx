@@ -21,8 +21,23 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet" />
-        <meta property="og:image" content="/images/og/image" />
-        <meta property="twitter:image" content="/images/og/image" />
+
+        <title>GDG-DIT</title>
+        <meta name="description" content="Google Developers Group DIT"/>
+
+        <meta property="og:url" content="https://gdgdit.tech"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="GDG-DIT"/>
+        <meta property="og:description" content="Google Developers Group DIT"/>
+        <meta property="og:image" content="https://opengraph.b-cdn.net/production/images/632dc987-2c3b-4717-831b-41d46ef4f2e7.png?token=KnTi8TsMuVtycoOhBn4o1HTKwwM4BVwAEXv-cWM93tc&height=610&width=1200&expires=33272938647"/>
+
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta property="twitter:domain" content="gdgdit.tech"/>
+        <meta property="twitter:url" content="https://gdgdit.tech"/>
+        <meta name="twitter:title" content="GDG-DIT"/>
+        <meta name="twitter:description" content="Google Developers Group DIT"/>
+        <meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/632dc987-2c3b-4717-831b-41d46ef4f2e7.png?token=KnTi8TsMuVtycoOhBn4o1HTKwwM4BVwAEXv-cWM93tc&height=610&width=1200&expires=33272938647"/>
+
       </head>
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
