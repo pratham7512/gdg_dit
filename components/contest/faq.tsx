@@ -55,7 +55,7 @@ export default function FAQ() {
               transition={{ duration: 0.6 }}
               className="text-3xl sm:text-4xl md:text-5xl font-normal mb-8 sm:mb-12 mx-4"
             >
-              FAQ's
+              FAQ&apos;s
             </motion.h2>
             <div className="max-w-3xl mx-auto space-y-4 w-full mx-3">
               {faqs.map((faq, index) => (

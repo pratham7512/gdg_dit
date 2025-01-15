@@ -47,9 +47,9 @@ export default function Hero(){
         
         <div className="container mx-auto px-4 text-center z-10">  
             <div className="flex justify-center">
-            <span className="flex items-center justify-center backdrop-blur-xl bg-background/10 rounded-full w-2/12 p-2 mb-8">
-                <Image src={logo} alt="" width={60} className="mr-2"/>
-                <p className="text-2xl font-medium font-geist md:text-3xl text-primary/90 text-center">
+            <span className="flex items-center justify-center backdrop-blur-xl bg-background/10 rounded-full w-2/12 p-2 px-3 mb-8">
+                <Image src={logo} alt="" width={50} className="mr-2"/>
+                <p className="text-2xl font-medium font-geist md:text-2xl text-primary/90 text-center">
                     GDG DIT
                 </p>
             </span>
