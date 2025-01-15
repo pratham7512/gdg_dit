@@ -1,77 +1,123 @@
-import { Button } from "../ui/button";
-import FluidCursor from "./fluid-cursor";
-import maskImg2 from "@/public/images/maskImage1.jpg"
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+"use client"
+
+import { Button } from "../ui/button"
+import FluidCursor from "./fluid-cursor"
+import { useState, useEffect, useCallback } from "react"
+import Image from "next/image"
+import { motion } from "framer-motion"
 import logo from "@/components/assets/GDSC-logo.svg"
-export default function Hero(){
-    const [onHover, setOnHover] = useState(false);
-    const [mouseTimer, setMouseTimer] = useState<NodeJS.Timeout | null>(null);
+
+export default function Hero() {
+    const [onHover, setOnHover] = useState(false)
+    const [mouseTimer, setMouseTimer] = useState<NodeJS.Timeout | null>(null)
 
     const handleInteraction = useCallback(() => {
         if (mouseTimer) {
-            clearTimeout(mouseTimer);
+            clearTimeout(mouseTimer)
         }
         
-        setOnHover(true);
+        setOnHover(true)
         
         const timer = setTimeout(() => {
-            setOnHover(false);
-        }, 1000); 
+            setOnHover(false)
+        }, 1000)
         
-        setMouseTimer(timer);
-    }, [mouseTimer]);
+        setMouseTimer(timer)
+    }, [mouseTimer])
 
-    // Cleanup timer on component unmount
     useEffect(() => {
         return () => {
             if (mouseTimer) {
-                clearTimeout(mouseTimer);
+                clearTimeout(mouseTimer)
             }
-        };
-    }, [mouseTimer]);
+        }
+    }, [mouseTimer])
 
     return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden" 
-        onMouseMove={handleInteraction}
-        onTouchStart={handleInteraction}
-        onTouchMove={handleInteraction}
-    >
         <div 
-            className={`absolute inset-0 bg-cover bg-center transition-all  ease-in-out ${
-                onHover ? 'opacity-0 scale-90 duration-10' : 'opacity-60 scale-105 duration-1000'
-            }`}
-            style={{ 
-                backgroundImage: `url(${maskImg2.src})`,
-                willChange: 'opacity, transform',
-            }}
-        />
-        
-        <div className="container mx-auto px-4 text-center z-10">  
-            <div className="flex justify-center">
-            <span className="flex items-center justify-center backdrop-blur-xl bg-background/10 rounded-full w-6/12 md:w-2/12 p-2 px-3 mb-8">
-                <Image src={logo} alt="" width={50} className="mr-2"/>
-                <p className="text-xl font-medium font-geist md:text-2xl text-primary/90 text-center">
-                    GDG DIT
-                </p>
-            </span>
-            </div>
-            <h1 className="text-3xl font-semibold md:text-6xl lg:text-7xl font-sans mb-4">
-                CodeMaster Challenge
-                <span className="block text-primary mt-2">2025</span>
-            </h1>
-            <p className="text-md md:text-2xl mb-6 font-mono text-foreground/80">
-                February 1, 2025 • DIT Pimpri, Pune . 20k+ prizepool
-            </p>
-            <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/80 text-background text-lg px-8 py-6 font-mono animate-float"
-            >
-                Register Now
-            </Button>
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black" 
+            onMouseMove={handleInteraction}
+            onTouchStart={handleInteraction}
+            onTouchMove={handleInteraction}
+        >
+            <div 
+                className={`absolute inset-0 bg-cover bg-center transition-all ease-in-out ${
+                    onHover ? 'opacity-0 scale-90 duration-10' : 'opacity-60 scale-105 duration-1000'
+                }`}
+                style={{ 
+                    backgroundImage: `url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-YitBnJrr81FrIbkG62TzKN3Cj3HWX8.png)`,
+                    willChange: 'opacity, transform',
+                }}
+            />
+            
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="container mx-auto px-4 text-center z-10"
+            >  
+                <motion.div 
+                    className="flex justify-center"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                    <span className="flex items-center justify-center backdrop-blur-xl bg-background/10 rounded-full w-auto px-6 py-3 mb-12 border border-white/10 shadow-glow">
+                        <Image src={logo || "/placeholder.svg"} alt="" width={40} height={40} className="mr-3 w-auto h-8 md:h-10"/>
+                        <p className="text-lg md:text-2xl font-medium tracking-tight text-primary/90">
+                            GDG DIT
+                        </p>
+                    </span>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
+                    className="space-y-6"
+                >
+                    <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent">
+                        CodeMaster Challenge
+                        <span className="block text-primary mt-2 font-extrabold">2025</span>
+                    </h1>
+
+                    <p className="text-lg md:text-2xl mb-8 font-mono text-foreground/80 tracking-tight leading-relaxed">
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6, duration: 0.8 }}
+                        >
+                            February 1, 2025 • DIT Pimpri, Pune
+                        </motion.span>
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.8, duration: 0.8 }}
+                            className="inline-block ml-2"
+                        >
+                            <span className="text-primary font-semibold">20k+</span> prizepool
+                        </motion.span>
+                    </p>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1, duration: 0.5 }}
+                    >
+                        <Button
+                            size="lg"
+                            className="bg-primary hover:bg-primary/80 text-background text-lg px-8 py-6 font-mono 
+                                     transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary/20
+                                     border border-primary/20"
+                        >
+                            Register Now
+                        </Button>
+                    </motion.div>
+                </motion.div>
+            </motion.div>
+
             <FluidCursor />
         </div>
-
-    </div>
     )
 }
+
