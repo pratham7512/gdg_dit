@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: "https://gdgdit.tech",
     type: "website",
     images: [{
-      url: "https://opengraph.b-cdn.net/production/images/e78d7a0a-5b29-430f-a3da-70bd6513b29f.png?token=XDvGmyCg0JaeZ7TVSowZgpWu-iU-wtPRGDSL8-dbgNg&height=611&width=1200&expires=33272939018",
+      url: "https://opengraph.b-cdn.net/production/images/7a2c19cd-6d73-4fae-8059-7c19e6daba53.png?token=K63QRdfVskyv82u_oRFcb7pUQsfOsUr_F7o6FofXKr4&height=608&width=1200&expires=33272956430",
       width: 1200,
       height: 611,
     }],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "GDG-DIT-CONTEST",
     description: "Google Developers Group DIT",
-    images: ["https://opengraph.b-cdn.net/production/images/e78d7a0a-5b29-430f-a3da-70bd6513b29f.png?token=XDvGmyCg0JaeZ7TVSowZgpWu-iU-wtPRGDSL8-dbgNg&height=611&width=1200&expires=33272939018"],
+    images: ["https://opengraph.b-cdn.net/production/images/7a2c19cd-6d73-4fae-8059-7c19e6daba53.png?token=K63QRdfVskyv82u_oRFcb7pUQsfOsUr_F7o6FofXKr4&height=608&width=1200&expires=33272956430"],
   },
 };
 
