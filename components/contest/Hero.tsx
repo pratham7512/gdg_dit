@@ -8,7 +8,7 @@ export default function Hero(){
     const [onHover, setOnHover] = useState(false);
     const [mouseTimer, setMouseTimer] = useState<NodeJS.Timeout | null>(null);
 
-    const handleMouseMove = useCallback(() => {
+    const handleInteraction = useCallback(() => {
         if (mouseTimer) {
             clearTimeout(mouseTimer);
         }
@@ -33,7 +33,9 @@ export default function Hero(){
 
     return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden" 
-        onMouseMove={handleMouseMove}
+        onMouseMove={handleInteraction}
+        onTouchStart={handleInteraction}
+        onTouchMove={handleInteraction}
     >
         <div 
             className={`absolute inset-0 bg-cover bg-center transition-all  ease-in-out ${
@@ -47,7 +49,7 @@ export default function Hero(){
         
         <div className="container mx-auto px-4 text-center z-10">  
             <div className="flex justify-center">
-            <span className="flex items-center justify-center backdrop-blur-xl bg-background/10 rounded-full w-2/12 p-2 px-3 mb-8">
+            <span className="flex items-center justify-center backdrop-blur-xl bg-background/10 rounded-full w-6/12 md:w-2/12 p-2 px-3 mb-8">
                 <Image src={logo} alt="" width={50} className="mr-2"/>
                 <p className="text-2xl font-medium font-geist md:text-2xl text-primary/90 text-center">
                     GDG DIT
