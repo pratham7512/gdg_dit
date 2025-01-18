@@ -30,6 +30,8 @@ export default function PrizePool() {
             >
               <h3 className="text-lg sm:text-xl font-normal mb-4 font-mono">{prize.place}</h3>
               <p className="text-2xl sm:text-3xl md:text-4xl">{prize.prize}</p>
+              <p className="text-lg sm:text-xl font-normal font-mono">+</p>
+              <p className="text-lg sm:text-xl font-normal mb-4 font-mono">Scrimba Pro Subscription</p>
             </motion.div>
           ))}
         </div>

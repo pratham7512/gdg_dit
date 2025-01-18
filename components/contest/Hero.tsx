@@ -93,7 +93,7 @@ export default function Hero() {
                             transition={{ delay: 0.8, duration: 0.8 }}
                             className="inline-block ml-2"
                         >
-                            <span className="text-primary font-semibold">20k+</span> prizepool
+                            <span className="text-primary font-semibold">50k+</span> prizepool
                         </motion.span>
                     </p>
 
