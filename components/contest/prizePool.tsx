@@ -16,9 +16,9 @@ export default function PrizePool() {
         </motion.h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
           {[
-            { place: "1st Place", prize: "10,000", delay: 0 },
-            { place: "2nd Place", prize: "5,000", delay: 0.1 },
-            { place: "3rd Place", prize: "4,000", delay: 0.2 },
+            { place: "1st Place", prize: "₹10,000", delay: 0 },
+            { place: "2nd Place", prize: "₹5,000", delay: 0.1 },
+            { place: "3rd Place", prize: "₹4,000", delay: 0.2 },
           ].map((prize, index) => (
             <motion.div
               key={index}
@@ -30,6 +30,8 @@ export default function PrizePool() {
             >
               <h3 className="text-lg sm:text-xl font-normal mb-4 font-mono">{prize.place}</h3>
               <p className="text-2xl sm:text-3xl md:text-4xl">{prize.prize}</p>
+              <p className="text-lg sm:text-xl font-normal font-mono">+</p>
+              <p className="text-lg sm:text-xl font-normal mb-4 font-mono">Scrimba Pro Subscription</p>
             </motion.div>
           ))}
         </div>

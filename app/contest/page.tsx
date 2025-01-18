@@ -8,6 +8,7 @@ import PrizePool from "@/components/contest/prizePool"
 import Schedule from "@/components/contest/schedule"
 import Sponsors from "@/components/contest/sponsors"
 import Footer from "@/components/components/Footer";
+import EventFeeAndRegistration from "@/components/contest/feeAndRegistration"
 
 export default function Contest(){
     return (
@@ -23,6 +24,9 @@ export default function Contest(){
         </div>
         <div id="prizes">
             <PrizePool/>
+        </div>
+        <div id="feeAndRegistration">
+          <EventFeeAndRegistration/>
         </div>
         <div id="sponsors">
             <Sponsors/>
