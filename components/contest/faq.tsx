@@ -21,8 +21,8 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: "What is CodeMaster Challenge?",
-      answer: "CodeMaster Challenge is a virtual coding competition that tests participants' skills through multiple rounds including MCQs, debugging, and algorithmic problem-solving."
+      question: "What is Hack-a-bit Challenge?",
+      answer: "Hack-a-bit Challenge is a virtual coding competition that tests participants' skills through multiple rounds including MCQs, debugging, and algorithmic problem-solving."
     },
     {
       question: "How can I participate?",
