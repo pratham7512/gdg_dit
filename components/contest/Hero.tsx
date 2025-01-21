@@ -102,6 +102,7 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1, duration: 0.5 }}
                     >
+                        <a href="https://forms.gle/ejJ8hfMXfLjpwVh38">
                         <Button
                             size="lg"
                             className="bg-primary hover:bg-primary/80 text-background text-lg px-8 py-6 font-mono 
@@ -110,6 +111,7 @@ export default function Hero() {
                         >
                             Register Now
                         </Button>
+                        </a>
                     </motion.div>
                 </motion.div>
             </motion.div>

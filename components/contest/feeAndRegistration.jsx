@@ -38,7 +38,7 @@ export default function EventFeeAndRegistration() {
             <p className="text-2xl sm:text-3xl md:text-4xl">₹100</p>
           </motion.div>
           <motion.a
-            href=""
+            href="https://forms.gle/ejJ8hfMXfLjpwVh38"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
