@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown } from 'lucide-react'
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import faq from "@/public/images/maskImage3.jpg"
@@ -16,11 +16,8 @@ export default function FAQ() {
     offset: ["start start", "end start"],
   })
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1,1])
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.85, 0.95])
-  const imageOpacity = useTransform(scrollYProgress, [0, 0.5], [0.5, 1])
-  const imageScale = useTransform(scrollYProgress, [0, 0.5], [0.7, 1])
-  const imageTranslateY = useTransform(scrollYProgress, [0, 1], [0, -100])
 
   const faqs = [
     {
@@ -47,16 +44,16 @@ export default function FAQ() {
 
   return (
     <div ref={containerRef} className="relative w-full h-[200vh]">
-      <section
+      <section 
         ref={stickyRef}
         className="sticky top-0 bg-black text-white font-geist min-h-screen flex items-between"
       >
-        <div className="w-full flex flex-col lg:flex-row justify-between">
-          <motion.div
+        <div className="w-full flex flex-col lg:flex-row justify-between ">
+          <motion.div 
             className="w-full flex flex-col justify-center mt-24 md:mt-4"
             style={{ opacity, scale }}
           >
-            <motion.h2
+            <motion.h2 
               initial={{ opacity: 0.5, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -74,12 +71,10 @@ export default function FAQ() {
                   className="border border-white/10 rounded-lg overflow-hidden hover:border-white/20 transition-all duration-300"
                 >
                   <button
-                    onClick={() =>
-                      setOpenIndex(openIndex === index ? null : index)
-                    }
+                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
                     className="w-full flex items-center justify-between p-4 sm:p-6 text-left hover:bg-white/5 transition-colors duration-300"
                   >
-                    <span className="text-lg font-normal">{faq.question}</span>
+                    <span className="text-lg  font-normal">{faq.question}</span>
                     <motion.div
                       animate={{ rotate: openIndex === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
@@ -87,11 +82,11 @@ export default function FAQ() {
                       <ChevronDown className="w-5 h-5" />
                     </motion.div>
                   </button>
-                  <motion.div
+                  <motion.div 
                     initial={false}
-                    animate={{
+                    animate={{ 
                       height: openIndex === index ? "auto" : 0,
-                      opacity: openIndex === index ? 1 : 0,
+                      opacity: openIndex === index ? 1 : 0
                     }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
@@ -104,31 +99,20 @@ export default function FAQ() {
               ))}
             </div>
           </motion.div>
-
-          {/* Enhanced Image Section for Larger Screens */}
+          
+          {/* Image only shows on larger screens */}
           <div className="hidden lg:block w-full h-screen">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.7 }}
-              whileInView={{ opacity: 1, scale: 0.7 }}
-              style={{
-                opacity: imageOpacity,
-                scale: imageScale,
-                translateY: imageTranslateY,
-              }}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="h-full relative overflow-hidden rounded-xl border border-white/10 shadow-lg"
+              className="h-full relative"
             >
-              <Image
-                src={faq}
-                alt="FAQ illustration"
+              <Image 
+                src={faq} 
+                alt="FAQ illustration" 
                 className="object-cover object-center"
                 fill
-              />
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-                className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
               />
             </motion.div>
           </div>
@@ -137,3 +121,4 @@ export default function FAQ() {
     </div>
   )
 }
+
