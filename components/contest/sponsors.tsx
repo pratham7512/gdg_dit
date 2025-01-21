@@ -1,5 +1,4 @@
 import scrimba from "@/public/images/scrimba.jpg"
-import aecc from "@/public/images/aecc.png"
 import Image from "next/image"
 export default function Sponsors() {
     const sponsors=[
