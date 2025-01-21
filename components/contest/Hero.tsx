@@ -105,7 +105,7 @@ export default function Hero() {
                         <a href="https://forms.gle/ejJ8hfMXfLjpwVh38">
                         <Button
                             size="lg"
-                            className="bg-primary hover:bg-primary/80 text-background text-lg px-8 py-6 font-mono 
+                            className="bg-primary hover:bg-primary/80 text-background text-lg px-8 py-6
                                      transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary/20
                                      border border-primary/20"
                         >
