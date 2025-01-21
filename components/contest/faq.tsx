@@ -23,17 +23,17 @@ export default function FAQ() {
     {
       question: "What is Hack-a-bit Challenge?",
       answer:
-        "Hack-a-bit Challenge is a virtual coding competition that tests participants' skills through multiple rounds including MCQs, debugging, and algorithmic problem-solving.",
+        "Hack-a-bit Challenge is an offline coding competition held at the DIT campus that tests participants' skills through multiple rounds including MCQs, debugging, and algorithmic problem-solving.",
     },
     {
       question: "How can I participate?",
       answer:
-        "Register through our website and you'll receive detailed instructions via email about accessing the virtual platform on the day of the event.",
+        "Register through our website and you'll receive detailed instructions via email about attending the event on the day of the competition.",
     },
     {
-      question: "What are the technical requirements?",
+      question: "What other information should I know before participating?",
       answer:
-        "You'll need a stable internet connection, a modern web browser, and your preferred code editor installed on your computer.",
+        "In addition to the technical requirements, make sure to review the event schedule, familiarize yourself with the competition format, and prepare any necessary materials or tools you may need during the event.",
     },
     {
       question: "How will I be evaluated?",
