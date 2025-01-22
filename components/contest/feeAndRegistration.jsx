@@ -18,8 +18,9 @@ export default function EventFeeAndRegistration() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="border border-white/10 rounded-lg p-6 sm:p-8 mb-8 backdrop-blur-sm"
+            transition={{  duration: 0.5 }}
+            whileHover={{ scale: 1.02 }}
+            className="border border-white/10 rounded-lg p-6 sm:p-8 mb-8 hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
           >
             <h3 className="text-lg sm:text-xl font-normal mb-4 font-mono">
               Event Fee Solo
@@ -29,8 +30,9 @@ export default function EventFeeAndRegistration() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="border border-white/10 rounded-lg p-6 sm:p-8 mb-8 backdrop-blur-sm"
+            transition={{  duration: 0.5 }}
+            whileHover={{ scale: 1.02 }}
+            className="border border-white/10 rounded-lg p-6 sm:p-8 mb-8 hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
           >
             <h3 className="text-lg sm:text-xl font-normal mb-4 font-mono">
               Event Fee team
@@ -38,7 +40,7 @@ export default function EventFeeAndRegistration() {
             <p className="text-2xl sm:text-3xl md:text-4xl">₹100</p>
           </motion.div>
           <motion.a
-            href=""
+            href="https://forms.gle/ejJ8hfMXfLjpwVh38"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}

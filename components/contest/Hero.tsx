@@ -75,7 +75,7 @@ export default function Hero() {
                     transition={{ delay: 0.4, duration: 0.8 }}
                     className="space-y-6"
                 >
-                    <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent">
                         Hack-a-bit 2025
                     </h1>
 
@@ -102,14 +102,16 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1, duration: 0.5 }}
                     >
+                        <a href="https://forms.gle/ejJ8hfMXfLjpwVh38">
                         <Button
                             size="lg"
-                            className="bg-primary hover:bg-primary/80 text-background text-lg px-8 py-6 font-mono 
+                            className="bg-primary hover:bg-primary/80 text-background text-lg px-8 py-6
                                      transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary/20
                                      border border-primary/20"
                         >
                             Register Now
                         </Button>
+                        </a>
                     </motion.div>
                 </motion.div>
             </motion.div>
