@@ -46,6 +46,7 @@ const Navigation = () => {
     >
       <div className="container  px-4 sm:px-6">
         <div className="flex items-center justify-between sm:h-16 h-20">
+          <a href="/">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -54,7 +55,7 @@ const Navigation = () => {
           >
             <Image src={gdg} width={50} height={50} alt="GDG Logo" />
           </motion.div>
-
+          </a>
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item, index) => (
@@ -88,12 +89,14 @@ const Navigation = () => {
             transition={{ delay: 0.5 }}
             className="hidden md:block"
           >
+          <a href="https://forms.gle/ejJ8hfMXfLjpwVh38">
             <Button
               onClick={() => scrollToSection("register")}
               className="bg-primary hover:bg-primary/80 text-black"
             >
               Register Now
             </Button>
+          </a>
           </motion.div>
         </div>
 
