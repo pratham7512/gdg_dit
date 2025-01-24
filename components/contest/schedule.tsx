@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { ChevronDown } from "lucide-react"
-import maskImg2 from "@/public/images/maskImage2.jpg"
+import maskImg2 from "@/public/images/maskImage2.png"
 
 export default function Schedule() {
   const containerRef = useRef<HTMLDivElement>(null)
