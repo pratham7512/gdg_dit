@@ -64,7 +64,7 @@ export default function EventListPage() {
             </div>
           ) : (
             data.map((item) => (
-              <Link key={item.id} href={`/viewer/${encodeURIComponent(item.htmlContentUrl)}`}>
+              <Link key={item.id} href={item.htmlContentUrl}>
                 <Card className="bg-gray-900 border-gray-800 hover:bg-gray-800 transition-colors cursor-pointer">
                   <CardContent className="p-4 flex items-center justify-between">
                     <div>
