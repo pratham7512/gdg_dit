@@ -24,7 +24,7 @@ export default function Sponsors() {
                 />
                 </a>
                 {/* <p className="text-2xl sm:text-3xl md:text-4xl">{sponsor.name}</p> */}
-                </div>
+                </div>  
               </div>
               
             ))}
