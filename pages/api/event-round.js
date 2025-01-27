@@ -4,9 +4,10 @@ import Cors from 'cors'; // Add this import
 
 // Initialize CORS middleware
 const cors = Cors({
-  methods: ['POST', 'GET', 'DELETE', 'HEAD', 'OPTIONS'], // Specify allowed methods
-  origin: '*', // Allow all origins
-  credentials: true, // Enable credentials
+  methods: ['POST', 'GET', 'DELETE', 'HEAD', 'OPTIONS'],
+  origin: '*',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200
 });
 
 // Helper method to run middleware
@@ -41,8 +42,11 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  // Run the CORS middleware
   await runMiddleware(req, res, cors);
+  
+  // Add these headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Vary', 'Origin');
 
   if (req.method === 'POST') {
     try {
