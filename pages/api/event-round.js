@@ -23,19 +23,18 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     // Submit a new event round entry
     try {
-      const { participantName, email, eventName, htmlContent } = req.body;
+      const { email, teamid, htmlContentUrl } = req.body;
 
-      if (!participantName || !email || !eventName || !htmlContent) {
+      if ( !email || !teamid || !htmlContentUrl) {
         return res.status(400).json({ message: 'Missing required fields' });
       }
 
       const entryId = uuidv4();
       const entryData = {
         id: entryId,
-        participantName,
         email,
-        eventName,
-        htmlContent, // Store HTML content as string
+        teamid,
+        htmlContentUrl, // Store HTML content as string
         createdAt: admin.database.ServerValue.TIMESTAMP,
       };
 
