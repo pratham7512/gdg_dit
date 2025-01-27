@@ -1,5 +1,26 @@
 import * as admin from 'firebase-admin';
 import { v4 as uuidv4 } from 'uuid';
+import Cors from 'cors'; // Add this import
+
+// Initialize CORS middleware
+const cors = Cors({
+  methods: ['POST', 'GET', 'DELETE', 'HEAD', 'OPTIONS'], // Specify allowed methods
+  origin: '*', // Allow all origins
+  credentials: true, // Enable credentials
+});
+
+// Helper method to run middleware
+const runMiddleware = (req, res, fn) => {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
+};
+
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_KEY);
 
 if (!admin.apps.length) {
@@ -9,23 +30,25 @@ if (!admin.apps.length) {
   });
 }
 
-const database = admin.database(); 
+const database = admin.database();
 
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '10mb', // Adjust as needed for file uploads
+      sizeLimit: '10mb',
     },
   },
 };
 
 export default async function handler(req, res) {
+  // Run the CORS middleware
+  await runMiddleware(req, res, cors);
+
   if (req.method === 'POST') {
-    // Submit a new event round entry
     try {
       const { email, teamid, htmlContentUrl } = req.body;
 
-      if ( !email || !teamid || !htmlContentUrl) {
+      if (!email || !teamid || !htmlContentUrl) {
         return res.status(400).json({ message: 'Missing required fields' });
       }
 
@@ -34,11 +57,10 @@ export default async function handler(req, res) {
         id: entryId,
         email,
         teamid,
-        htmlContentUrl, // Store HTML content as string
+        htmlContentUrl,
         createdAt: admin.database.ServerValue.TIMESTAMP,
       };
 
-      // Save entry to "event-round" collection
       await database.ref('event-round').child(entryId).set(entryData);
 
       return res.status(200).json({ message: 'Entry submitted successfully', entry: entryData });
@@ -47,7 +69,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ message: 'Internal Server Error', error });
     }
   } else if (req.method === 'GET') {
-    // Retrieve event round entries
     try {
       const { id } = req.query;
 
@@ -72,7 +93,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ message: 'Internal Server Error', error });
     }
   } else if (req.method === 'DELETE') {
-    // Delete an event round entry
     try {
       const { id } = req.query;
 
