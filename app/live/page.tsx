@@ -117,7 +117,7 @@ export default function QuizLandingPage() {
               </AnimatePresence>
             </nav>
             <p className="text-gray-300 mb-5">
-              2024 has been a big year for programming. Test your knowledge with our comprehensive quiz.
+              Join us in exploring the latest trends in programming with our exciting quiz! Test your knowledge with our comprehensive quiz.
             </p>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSc87Jt8MZLLAQugW4GXcqXp6K0s0KTNee1ysOTzE1IfZCTcog/viewform?embedded=true">
               <Button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 mt-10 rounded-none">
