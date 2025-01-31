@@ -106,7 +106,7 @@ export default function QuizLandingPage() {
                       animate={{ opacity: index <= visibleLines ? 1 : 0, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       onClick={() => setActiveSection(section.id)}
-                      className={`block text-left py-2 w-full ${
+                      className={`block text-left py-2 w-full hover:text-blue-500 ${
                         activeSection === section.id ? "text-blue-500" : "text-gray-400"
                       }`}
                     >
@@ -139,11 +139,11 @@ export default function QuizLandingPage() {
               <p className="text-sm md:text-base lg:text-lg">Event: Hack-a-bit</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <div className="hover:bg-blue-700 border border-dashed border-white px-4 py-2 text-white">
+              <div className="hover:bg-blue-700 border border-dashed border-white/70 px-4 py-2 text-white">
                 <p className="font-semibold">45 Questions</p>
                 <p className="text-xs md:text-sm">Covering all aspects of programming</p>
               </div>
-              <div className="hover:bg-blue-700 border border-dashed border-white px-4 py-2 text-white">
+              <div className="hover:bg-blue-700 border border-dashed border-white/70 px-4 py-2 text-white">
                 <p className="font-semibold">30 Minutes</p>
                 <p className="text-xs md:text-sm">Time to complete</p>
               </div>
