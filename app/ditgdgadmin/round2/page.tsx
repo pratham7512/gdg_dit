@@ -88,13 +88,16 @@ export default function EventListPage() {
               <TableBody>
                 {filteredData.map((item, index) => (
                   <TableRow key={item.id} className="border-zinc-800">
+                    <Link href={item.htmlContentUrl} className="hover:text-zinc-100">
                     <TableCell className="text-zinc-300">{index + 1}</TableCell>
                     <TableCell className="text-zinc-300">{item.teamid}</TableCell>
-                    <TableCell className="text-zinc-300 font-mono">
-                      <Link href={item.htmlContentUrl} className="hover:text-zinc-100">
-                        {item.email}
-                      </Link>
+                    <TableCell className="text-zinc-300 font-mono">{item.email}</TableCell>
+                    <TableCell>  {(
+                        (new Date("2025-02-01T04:30:00Z").getTime() - item.createdAt) /
+                        60000
+                      ).toFixed(2)}
                     </TableCell>
+                    </Link>
                   </TableRow>
                 ))}
               </TableBody>
