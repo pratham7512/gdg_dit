@@ -93,7 +93,7 @@ export default function EventListPage() {
                     <TableCell className="text-zinc-300">{item.teamid}</TableCell>
                     <TableCell className="text-zinc-300 font-mono">{item.email}</TableCell>
                     <TableCell>  {(
-                        (new Date("2025-01-31T19:27:13.141Z").getTime() - item.createdAt) /
+                        (item.createdAt-new Date("2025-02-01T04:30:00Z").getTime()) /
                         60000
                       ).toFixed(2)}
                     </TableCell>
