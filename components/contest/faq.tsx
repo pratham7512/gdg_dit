@@ -40,6 +40,11 @@ export default function FAQ() {
       answer:
         "Each round has specific evaluation criteria. MCQs are automatically graded, debug challenges are evaluated based on correctness and optimization, and DSA problems consider both solution correctness and time complexity.",
     },
+    {
+      question: "On which languages will the MCQs be based?",
+      answer:
+        "The MCQs will cover basic programming concepts in C++, Python, and JavaScript.",
+    }
   ]
 
   return (
